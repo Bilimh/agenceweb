@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serena Delacroix — Avocat | Droit de la famille & des affaires</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --deep-ink: #0A0C12;
+  --court-gold: #AD8E5A;
+  --ivory: #F5F2EB;
+  --dust-rose: #C7B6B0;
+  --graphite: #1E1E24;
+  --parchment: #EAE5DD;
+  --gold-light: #D4B87A;
+  --text-dark: #1A1C20;
+  --text-light: #E8E4DD;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--deep-ink);
+  color: var(--text-light);
+  overflow: hidden;
+}
+
+/* SNAP SCROLL */
+.snap-container {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+section {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: start;
+  overflow: hidden;
+  padding: 0 2rem;
+}
+
+h1, h2, h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+}
+
+.section-content {
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--court-gold);
+  margin-bottom: 1.2rem;
+}
+
+.line-gold {
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--court-gold), transparent);
+  margin-top: 2rem;
+}
+
+/* NAVIGATION */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  padding: 1.5rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+}
+
+.nav span {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+/* DOTS NAVIGATION */
+.nav-dots {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.nav-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-dot.active {
+  background: var(--court-gold);
+  transform: scale(1.6);
+  box-shadow: 0 0 12px rgba(173, 142, 90, 0.5);
+}
+
+/* HERO SECTION */
+.hero {
+  padding: 0;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5) contrast(1.1);
+}
+
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(10, 12, 18, 0.88) 0%, rgba(10, 12, 18, 0.55) 50%, rgba(10, 12, 18, 0.88) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.hero-title {
+  font-size: clamp(3.5rem, 11vw, 7rem);
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  font-weight: 600;
+  max-width: 900px;
+}
+
+.hero-title span {
+  color: var(--court-gold);
+  font-weight: 500;
+}
+
+.hero-sub {
+  max-width: 580px;
+  margin-top: 2rem;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #E0DAD3;
+  font-weight: 300;
+}
+
+.hero-meta {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  border: 0.5px solid rgba(173, 142, 90, 0.5);
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(10, 12, 18, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+/* SCALES - SYMBOL OF JUSTICE */
+.scales {
+  position: absolute;
+  right: 5%;
+  bottom: 12%;
+  opacity: 0.15;
+  width: 140px;
+  pointer-events: none;
+}
+
+/* ABOUT SECTION */
+.about {
+  background: var(--parchment);
+  color: var(--text-dark);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about-image {
+  height: 550px;
+  overflow: hidden;
+  border-radius: 0 120px 0 0;
+  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.15);
+}
+
+.about-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.08);
+}
+
+.about-title {
+  font-size: clamp(3rem, 7vw, 5rem);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  margin-bottom: 1.5rem;
+}
+
+.about-title span {
+  color: var(--court-gold);
+}
+
+.about-text {
+  color: #4A4F5E;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-style: italic;
+  border-left: 2px solid var(--court-gold);
+  padding-left: 1.5rem;
+  margin: 1.8rem 0;
+  color: #2C2F36;
+}
+
+/* DOMAINS SECTION */
+.domains {
+  background: var(--deep-ink);
+}
+
+.domains-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.domains-title {
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.domains-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.domain-card {
+  padding: 2rem;
+  border: 0.5px solid rgba(173, 142, 90, 0.25);
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.4s ease;
+}
+
+.domain-card:hover {
+  border-color: rgba(173, 142, 90, 0.6);
+  background: rgba(173, 142, 90, 0.05);
+  transform: translateY(-5px);
+}
+
+.domain-card .number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  color: var(--court-gold);
+  opacity: 0.5;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.domain-card h3 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.domain-card p {
+  font-size: 0.85rem;
+  color: #C5C0B5;
+  line-height: 1.7;
+}
+
+/* PHILOSOPHY SECTION */
+.philosophy {
+  background: linear-gradient(135deg, #12151E 0%, #0A0C12 100%);
+  text-align: center;
+}
+
+.philosophy-quote {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.philosophy-quote h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--ivory);
+}
+
+.philosophy-quote h2 span {
+  color: var(--court-gold);
+  font-style: normal;
+}
+
+/* CONTACT SECTION */
+.contact {
+  background: var(--graphite);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.contact-info h2 {
+  font-size: clamp(3rem, 7vw, 5rem);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  margin-bottom: 1.5rem;
+}
+
+.contact-details {
+  margin: 2rem 0;
+  space-y: 1rem;
+}
+
+.contact-details p {
+  margin: 0.8rem 0;
+  font-size: 0.9rem;
+  color: #C5C0B5;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.contact-details strong {
+  color: var(--court-gold);
+  font-weight: 500;
+  min-width: 100px;
+}
+
+.btn {
+  display: inline-flex;
+  margin-top: 1.5rem;
+  padding: 0.9rem 2rem;
+  border: 0.5px solid var(--court-gold);
+  color: var(--ivory);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.7rem;
+  transition: all 0.4s ease;
+  background: transparent;
+}
+
+.btn:hover {
+  background: var(--court-gold);
+  color: var(--deep-ink);
+  border-color: var(--court-gold);
+}
+
+.contact-image {
+  height: 450px;
+  overflow: hidden;
+  border-radius: 120px 0 120px 0;
+}
+
+.contact-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* FLOATING ANIMATION */
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  section {
+    padding: 0 1.2rem;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .about-grid,
+  .domains-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .about-image,
+  .contact-image {
+    height: 380px;
+  }
+
+  .domains-grid {
+    gap: 1rem;
+  }
+
+  .domain-card {
+    padding: 1.2rem;
+  }
+
+  .domain-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .nav-dots {
+    display: none;
+  }
+
+  .scales {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .domains-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero-title {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+  }
+}
+
+/* FORMULAIRE DE CONTACT STYLE LUXE */
+.contact-form {
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-group {
+  width: 100%;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 0.5px solid rgba(173, 142, 90, 0.3);
+  color: var(--text-light);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--court-gold);
+  background: rgba(173, 142, 90, 0.05);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(200, 195, 185, 0.5);
+  font-weight: 300;
+}
+
+.form-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23AD8E5A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.btn-submit {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.9rem 2rem;
+  background: transparent;
+  border: 0.5px solid var(--court-gold);
+  color: var(--court-gold);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 500;
+}
+
+.btn-submit:hover {
+  background: var(--court-gold);
+  color: var(--deep-ink);
+}
+
+.form-note {
+  font-size: 0.65rem;
+  color: rgba(200, 195, 185, 0.5);
+  text-align: center;
+  margin-top: 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.8rem 1rem;
+  }
+}
+/* Ajustement spécifique pour cette image */
+.hero-bg img {
+  object-position: center 30%; /* Recadre légèrement vers le haut pour cadrer le visage/profil */
+}
+
+/* Overlay plus sophistiqué pour cette photo plus claire */
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, 
+    rgba(10, 12, 18, 0.85) 0%, 
+    rgba(10, 12, 18, 0.5) 40%, 
+    rgba(10, 12, 18, 0.85) 100%);
+}
+/* LOCATION SECTION - GOOGLE MAPS */
+.location {
+  background: var(--deep-ink);
+  padding: 0 2rem;
+}
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.location-info {
+  padding-right: 1rem;
+}
+
+.location-info h2 {
+  font-size: clamp(3rem, 7vw, 5rem);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  margin-bottom: 1.5rem;
+}
+
+.location-info h2 span {
+  color: var(--court-gold);
+}
+
+.location-description {
+  color: #C5C0B5;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+
+.address-card {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 0.5px solid rgba(173, 142, 90, 0.25);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.address-line {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: #D8D0C7;
+}
+
+.address-line svg {
+  flex-shrink: 0;
+}
+
+.metro-info {
+  display: flex;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--court-gold);
+  opacity: 0.8;
+}
+
+.btn-map {
+  display: inline-flex;
+  padding: 0.8rem 1.8rem;
+  border: 0.5px solid var(--court-gold);
+  color: var(--court-gold);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.7rem;
+  transition: all 0.4s ease;
+  background: transparent;
+  margin-top: 1rem;
+}
+
+.btn-map:hover {
+  background: var(--court-gold);
+  color: var(--deep-ink);
+}
+
+.map-container {
+  position: relative;
+  height: 450px;
+  border-radius: 0 90px 0 90px;
+  overflow: hidden;
+  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.25);
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  filter: grayscale(0.3) contrast(0.9) brightness(0.85);
+  transition: filter 0.5s ease;
+}
+
+.map-container:hover iframe {
+  filter: grayscale(0) contrast(1) brightness(1);
+}
+
+.map-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(173, 142, 90, 0.1) 0%, transparent 50%);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .location-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  
+  .location-info {
+    padding-right: 0;
+  }
+  
+  .map-container {
+    height: 350px;
+  }
+  
+  .metro-info {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="logo">Serena Delacroix</div>
+  <span>Avocat — Barreau de Paris</span>
+</div>
+
+<div class="nav-dots">
+  <div class="nav-dot active" data-index="0"></div>
+  <div class="nav-dot" data-index="1"></div>
+  <div class="nav-dot" data-index="2"></div>
+  <div class="nav-dot" data-index="3"></div>
+  <div class="nav-dot" data-index="4"></div>
+</div>
+
+<div class="snap-container">
+
+  <!-- HERO -->
+<!-- HERO - VERSION LUXE SILENCIEUX -->
+<section class="hero">
+    <div class="hero-bg">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1800&auto=format&fit=crop" alt="Maître Serena Delacroix">
+    </div>
+    <div class="hero-content">
+      <div class="kicker">Cabinet d'avocat — Paris</div>
+      <h1 class="hero-title">
+        Le droit<br>
+        avec une<span> présence rare.</span>
+      </h1>
+      <p class="hero-sub">
+        Serena Delacroix accompagne ses clients avec exigence, discrétion et humanité. 
+        Droit de la famille, droit des affaires : une écoute précise, une stratégie sur mesure.
+      </p>
+      <div class="hero-meta">
+        <div class="meta-pill">Famille</div>
+        <div class="meta-pill">Affaires</div>
+        <div class="meta-pill">Médiation</div>
+      </div>
+      <div class="line-gold"></div>
+    </div>
+    <div class="scales floating">
+      <svg viewBox="0 0 100 100" fill="none" stroke="var(--court-gold)" stroke-width="0.8">
+        <line x1="50" y1="15" x2="50" y2="85" />
+        <line x1="20" y1="35" x2="80" y2="35" />
+        <path d="M20 35 L30 25 L45 25 L55 35 L70 25 L80 35" fill="none" />
+        <circle cx="50" cy="85" r="5" fill="var(--court-gold)" />
+        <path d="M35 50 L45 50 M55 50 L65 50" stroke-width="0.6" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="section-content about-grid">
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&auto=format&fit=crop" alt="Maître Serena Delacroix">
+      </div>
+      <div>
+        <div class="kicker">Qui suis-je</div>
+        <h2 class="about-title">
+          Une voix<br>
+          <span>juste et claire.</span>
+        </h2>
+        <p class="about-text">
+          Après dix ans au sein d'un cabinet d'affaires international, j'ai fondé mon propre cabinet 
+          pour offrir une approche plus humaine, plus proche de ceux que j'accompagne. 
+          Chaque dossier porte ma signature : rigueur, transparence et engagement total.
+        </p>
+        <div class="quote">
+          "Le droit n'est pas une fin, c'est un chemin. Mon rôle : le rendre juste, compréhensible et à votre service."
+        </div>
+        <p class="about-text" style="margin-bottom: 0;">
+          Barreau de Paris — Médiation familiale certifiée — Master en droit des affaires (Assas)
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOMAINS -->
+  <section class="domains">
+    <div class="section-content">
+      <div class="domains-header">
+        <div class="kicker">Compétences exclusives</div>
+        <h2 class="domains-title">
+          Un double<br>
+          <span>savoir-faire.</span>
+        </h2>
+      </div>
+      <div class="domains-grid">
+        <div class="domain-card">
+          <span class="number">01</span>
+          <h3>Droit de la famille</h3>
+          <p>Divorces, médiation familiale, garde d'enfants, prestations compensatoires. Une approche humaine pour des décisions justes et apaisées.</p>
+        </div>
+        <div class="domain-card">
+          <span class="number">02</span>
+          <h3>Droit commercial</h3>
+          <p>Contrats, contentieux, conseil aux entreprises. Protéger vos intérêts avec anticipation et stratégie.</p>
+        </div>
+        <div class="domain-card">
+          <span class="number">03</span>
+          <h3>Médiation & arbitrage</h3>
+          <p>Résoudre avant de plaider. Une alternative élégante et efficace pour préserver l'essentiel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="philosophy">
+    <div class="section-content">
+      <div class="philosophy-quote">
+        <div class="kicker">Ma philosophie</div>
+        <h2>
+          « La force du droit<br>
+          ne se mesure pas<br>
+          au bruit qu'il fait,<br>
+          mais à la <span>clarté</span> qu'il apporte. »
+        </h2>
+        <div class="line-gold" style="margin: 2rem auto 0;"></div>
+      </div>
+    </div>
+  </section>
+  <section class="location">
+    <div class="section-content location-grid">
+      <div class="location-info">
+        <div class="kicker">Notre écrin</div>
+        <h2>
+          Un lieu,<br>
+          <span>une éthique.</span>
+        </h2>
+        <p class="location-description">
+          Au cœur du triangle d'or parisien, mon cabinet vous accueille dans un cadre 
+          préservé, propice à la confidentialité et à l'échange.
+        </p>
+        <div class="address-card">
+          <p class="address-line">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--court-gold)" stroke-width="1.5">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            24 rue de la Paix, 75002 Paris
+          </p>
+          <p class="address-line">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--court-gold)" stroke-width="1.5">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-10 7L2 7"/>
+            </svg>
+            contact@serenadelacroix.avocat
+          </p>
+          <p class="address-line">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--court-gold)" stroke-width="1.5">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            +33 1 42 96 58 00
+          </p>
+        </div>
+        <div class="metro-info">
+          <span>Métro Opéra (lignes 3, 7, 8)</span>
+          <span>RER A — Auber</span>
+        </div>
+        <a href="https://maps.google.com/?q=24+Rue+de+la+Paix+75002+Paris" target="_blank" class="btn-map">
+          Itinéraire →
+        </a>
+      </div>
+  
+      <div class="map-container">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.246885542432!2d2.331573!3d48.868856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e3c3b6b8b9b%3A0x5b8b9b9b9b9b9b9b!2s24%20Rue%20de%20la%20Paix%2C%2075002%20Paris!5e0!3m2!1sfr!2sfr!4v1700000000000!5m2!1sfr!2sfr" 
+          width="100%" 
+          height="100%" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        <div class="map-overlay"></div>
+      </div>
+    </div>
+  </section>
+
+<!-- CONTACT SECTION AVEC FORMULAIRE -->
+<section class="contact">
+    <div class="section-content contact-grid">
+      <div class="contact-info">
+        <div class="kicker">Prendre contact</div>
+        <h2>
+          Une écoute,<br>
+          <span>un échange.</span>
+        </h2>
+        <div class="contact-details">
+          <p><strong>Cabinet</strong> 24 rue de la Paix, 75002 Paris</p>
+          <p><strong>Téléphone</strong> +33 1 42 96 58 00</p>
+          <p><strong>Email</strong> contact@serenadelacroix.avocat</p>
+          <p><strong>Secrétariat</strong> Lundi - Vendredi, 9h - 18h</p>
+        </div>
+        <div class="line-gold" style="margin-top: 2rem;"></div>
+      </div>
+  
+      <!-- FORMULAIRE DE CONTACT -->
+      <div class="contact-form">
+        <form action="#" method="POST" class="form">
+          <div class="form-group">
+            <input type="text" name="nom" id="nom" placeholder="Nom & prénom" required>
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" id="email" placeholder="Email" required>
+          </div>
+          <div class="form-group">
+            <input type="tel" name="telephone" id="telephone" placeholder="Téléphone">
+          </div>
+          <div class="form-group">
+            <select name="motif" id="motif">
+              <option value="" disabled selected>Motif de votre message</option>
+              <option value="famille">Droit de la famille</option>
+              <option value="commercial">Droit commercial</option>
+              <option value="mediation">Médiation</option>
+              <option value="autre">Autre demande</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <textarea name="message" id="message" rows="4" placeholder="Votre message..." required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Envoyer →</button>
+          <p class="form-note">Vos informations sont confidentielles. Réponse sous 48h.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+  <!-- ADRESSE & GOOGLE MAPS SECTION -->
+
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+// Navigation dots
+const container = document.querySelector('.snap-container');
+const sections = document.querySelectorAll('section');
+const dots = document.querySelectorAll('.nav-dot');
+
+function updateActiveDot() {
+  const scrollPos = container.scrollTop;
+  const sectionHeight = container.clientHeight;
+  const activeIndex = Math.round(scrollPos / sectionHeight);
+  
+  dots.forEach((dot, i) => {
+    if (i === activeIndex) dot.classList.add('active');
+    else dot.classList.remove('active');
+  });
+}
+
+dots.forEach((dot, i) => {
+  dot.addEventListener('click', () => {
+    container.scrollTo({ top: i * container.clientHeight, behavior: 'smooth' });
+  });
+});
+
+container.addEventListener('scroll', () => requestAnimationFrame(updateActiveDot));
+updateActiveDot();
+
+// Parallax hero
+gsap.to(".hero-bg img", {
+  scale: 1.12,
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top top",
+    end: "bottom top",
+    scrub: 1.2,
+    container: container
+  }
+});
+
+// Parallax images
+document.querySelectorAll(".about-image img, .contact-image img").forEach(img => {
+  gsap.to(img, {
+    y: 60,
+    scale: 1.08,
+    ease: "none",
+    scrollTrigger: {
+      trigger: img.parentElement,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: 1,
+      container: container
+    }
+  });
+});
+
+// Animation floating sur la balance
+gsap.to(".scales", {
+  y: -15,
+  duration: 3,
+  repeat: -1,
+  yoyo: true,
+  ease: "sine.inOut"
+});
+
+// ScrollTrigger refresh
+container.addEventListener('scroll', () => ScrollTrigger.update());
+window.addEventListener('resize', () => ScrollTrigger.refresh());
+</script>
+
+</body>
+</html>
