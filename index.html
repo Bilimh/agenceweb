@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Evana Ferdi — Luxury Fashion Press Book</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --black:#050505;
+  --ink:#111111;
+  --ivory:#F7F1E8;
+  --sand:#D8C7A8;
+  --copper:#B56A36;
+  --orange:#C96B2C;
+  --silver:#D7D7D7;
+  --text:#141414;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--black);
+  color:var(--ivory);
+  overflow:hidden;
+}
+
+/* SNAP SCROLL CONTAINER */
+.snap-container{
+  scroll-snap-type:y mandatory;
+  overflow-y:scroll;
+  height:100vh;
+  width:100%;
+  position:relative;
+}
+
+/* TOUTES LES SECTIONS EN FULL SCREEN */
+section{
+  position:relative;
+  height:100vh;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  scroll-snap-align:start;
+  overflow:hidden;
+  padding:0 2rem;
+}
+
+img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+h1,h2,h3{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:500;
+}
+
+.section-content{
+  width:100%;
+  max-width:1450px;
+  margin:auto;
+  position:relative;
+  z-index:2;
+}
+
+.kicker{
+  text-transform:uppercase;
+  letter-spacing:.28em;
+  font-size:.72rem;
+  font-weight:700;
+  color:var(--orange);
+  margin-bottom:1.2rem;
+}
+
+.grain::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.12) 1px, transparent 1px);
+  background-size:4px 4px;
+  opacity:.09;
+  pointer-events:none;
+  z-index:4;
+}
+
+.line{
+  width:140px;
+  height:1px;
+  background:linear-gradient(90deg,var(--orange),transparent);
+  margin-top:2rem;
+}
+
+/* NAVIGATION */
+.nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:50;
+  padding:1.5rem 2rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  mix-blend-mode:difference;
+  pointer-events:none;
+}
+
+.logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.35rem;
+  letter-spacing:.08em;
+}
+
+.nav span{
+  font-size:.72rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+}
+
+/* NAVIGATION DOTS STYLE YSL */
+.nav-dots{
+  position:fixed;
+  right:2rem;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:100;
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+}
+
+.nav-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.3);
+  cursor:pointer;
+  transition:all 0.3s ease;
+}
+
+.nav-dot.active{
+  background:var(--orange);
+  transform:scale(1.5);
+  box-shadow:0 0 10px rgba(201,107,44,0.5);
+}
+
+.nav-dot:hover{
+  background:var(--orange);
+  opacity:0.7;
+}
+
+/* HERO */
+.hero{
+  padding:0;
+}
+
+.hero-bg{
+  position:absolute;
+  inset:0;
+  transform:scale(1.08);
+}
+
+.hero-bg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 75% 35%, rgba(201,107,44,.28), transparent 28%),
+    linear-gradient(90deg, rgba(5,5,5,.96), rgba(5,5,5,.58), rgba(5,5,5,.92));
+}
+
+.hero-content{
+  width:100%;
+  max-width:1450px;
+  padding:0 2rem;
+  position:relative;
+  z-index:2;
+}
+
+.hero-title{
+  font-size:clamp(5rem,13vw,14rem);
+  line-height:.78;
+  letter-spacing:-.08em;
+  max-width:1150px;
+}
+
+.hero-title span{
+  color:var(--orange);
+}
+
+.hero-sub{
+  max-width:560px;
+  margin-top:2rem;
+  color:#E7DED2;
+  line-height:1.9;
+}
+
+.hero-meta{
+  margin-top:3rem;
+  display:flex;
+  gap:1.5rem;
+  flex-wrap:wrap;
+}
+
+.meta-pill{
+  border:1px solid rgba(201,107,44,.45);
+  padding:.85rem 1.1rem;
+  border-radius:999px;
+  color:#E7DED2;
+  font-size:.78rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  backdrop-filter:blur(12px);
+}
+
+/* ORBIT */
+.orbit{
+  position:absolute;
+  right:8%;
+  top:20%;
+  width:380px;
+  height:380px;
+  border:1px solid rgba(201,107,44,.28);
+  border-radius:50%;
+  z-index:1;
+}
+
+.orbit::before,
+.orbit::after{
+  content:"";
+  position:absolute;
+  border:1px solid rgba(216,199,168,.18);
+  border-radius:50%;
+}
+
+.orbit::before{
+  inset:40px;
+}
+
+.orbit::after{
+  inset:95px;
+}
+
+.orbit-dot{
+  position:absolute;
+  top:18px;
+  left:50%;
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:var(--orange);
+  box-shadow:0 0 30px rgba(201,107,44,.8);
+}
+
+/* SPLIT */
+.split{
+  background:var(--ivory);
+  color:var(--text);
+}
+
+.split-grid{
+  display:grid;
+  grid-template-columns:.95fr 1.05fr;
+  gap:5rem;
+  align-items:center;
+}
+
+.image-frame{
+  height:600px;
+  overflow:hidden;
+  position:relative;
+  border-radius:0 90px 0 0;
+  box-shadow:0 40px 100px rgba(0,0,0,.18);
+}
+
+.image-frame img{
+  transform:scale(1.12);
+}
+
+.editorial-title{
+  font-size:clamp(4.5rem,8vw,9rem);
+  line-height:.82;
+  letter-spacing:-.07em;
+}
+
+.editorial-title span{
+  color:var(--orange);
+}
+
+.editorial-text{
+  margin-top:2rem;
+  max-width:560px;
+  color:#4B5563;
+  line-height:1.9;
+}
+
+.signature-list{
+  margin-top:3rem;
+  display:grid;
+  gap:1rem;
+  max-width:620px;
+}
+
+.signature-item{
+  border-top:1px solid rgba(17,17,17,.16);
+  padding-top:1rem;
+  display:flex;
+  justify-content:space-between;
+  gap:2rem;
+}
+
+.signature-item strong{
+  color:var(--orange);
+}
+
+/* GLASS SECTION */
+.glass-section{
+  background:
+    radial-gradient(circle at 50% 20%, rgba(201,107,44,.18), transparent 30%),
+    linear-gradient(180deg,#050505,#0C0C0C);
+}
+
+.glass-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4rem;
+  align-items:center;
+}
+
+.glass-card{
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(216,199,168,.16);
+  backdrop-filter:blur(24px);
+  padding:3rem;
+}
+
+.glass-card h2{
+  font-size:clamp(4rem,8vw,8rem);
+  line-height:.82;
+  letter-spacing:-.07em;
+}
+
+.glass-card p{
+  margin-top:2rem;
+  color:#D9D2C8;
+  line-height:1.9;
+}
+
+.material-collage{
+  position:relative;
+  min-height:620px;
+}
+
+.material-img{
+  position:absolute;
+  overflow:hidden;
+  box-shadow:0 30px 90px rgba(0,0,0,.35);
+}
+
+.material-1{
+  width:390px;
+  height:520px;
+  left:4%;
+  top:4%;
+}
+
+.material-2{
+  width:290px;
+  height:380px;
+  right:2%;
+  bottom:8%;
+}
+
+.material-3{
+  width:230px;
+  height:300px;
+  right:18%;
+  top:14%;
+  border:1px solid rgba(201,107,44,.55);
+}
+
+/* FUTURE */
+.future{
+  background:var(--black);
+  color:var(--ivory);
+  text-align:center;
+}
+
+.future h2{
+  font-size:clamp(5rem,13vw,14rem);
+  line-height:.72;
+  letter-spacing:-.09em;
+}
+
+.future h2 span{
+  color:transparent;
+  -webkit-text-stroke:1px var(--orange);
+}
+
+.future p{
+  max-width:650px;
+  margin:3rem auto 0;
+  color:#CFC7BC;
+  line-height:1.9;
+}
+
+/* GALLERY */
+.gallery{
+  background:var(--ivory);
+  color:var(--text);
+  display:block;
+  position:relative;
+}
+
+.gallery .section-content{
+  height:100%;
+  position:relative;
+}
+
+.gallery-title{
+  position:absolute;
+  top:10%;
+  left:7%;
+  max-width:680px;
+  z-index:3;
+}
+
+.gallery-title h2{
+  font-size:clamp(4rem,8vw,8rem);
+  line-height:.82;
+  letter-spacing:-.07em;
+}
+
+.float-img{
+  position:absolute;
+  overflow:hidden;
+  box-shadow:0 35px 100px rgba(0,0,0,.22);
+}
+
+.float-img img{
+  transform:scale(1.08);
+}
+
+.float-1{
+  width:340px;
+  height:470px;
+  right:9%;
+  top:11%;
+}
+
+.float-2{
+  width:440px;
+  height:580px;
+  left:10%;
+  bottom:8%;
+}
+
+.float-3{
+  width:290px;
+  height:380px;
+  right:34%;
+  bottom:14%;
+}
+
+.float-4{
+  width:230px;
+  height:300px;
+  right:8%;
+  bottom:5%;
+}
+
+/* CINEMATIC */
+.cinematic{
+  background:
+    linear-gradient(90deg,rgba(5,5,5,.92),rgba(5,5,5,.45),rgba(5,5,5,.88)),
+    url("https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=1800&auto=format&fit=crop")
+    center/cover;
+  color:white;
+}
+
+.cinematic h2{
+  font-size:clamp(4.5rem,10vw,11rem);
+  line-height:.76;
+  letter-spacing:-.08em;
+  max-width:1000px;
+}
+
+.cinematic p{
+  max-width:560px;
+  margin-top:2rem;
+  color:#E5DED5;
+  line-height:1.9;
+}
+
+/* PRESS */
+.press{
+  background:#0A0A0A;
+}
+
+.press-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3rem;
+}
+
+.press-card{
+  min-height:400px;
+  padding:2.5rem;
+  border:1px solid rgba(216,199,168,.16);
+  background:rgba(255,255,255,.035);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.press-card span{
+  font-family:'Cormorant Garamond',serif;
+  font-size:5rem;
+  color:var(--orange);
+  line-height:.8;
+}
+
+.press-card h3{
+  font-size:2.6rem;
+  line-height:1;
+}
+
+.press-card p{
+  color:#D8D0C7;
+  line-height:1.8;
+}
+
+/* FINAL */
+.final{
+  background:
+    linear-gradient(rgba(5,5,5,.78),rgba(5,5,5,.88)),
+    url("https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1800&auto=format&fit=crop")
+    center/cover;
+  text-align:center;
+}
+
+.final h2{
+  font-size:clamp(5rem,12vw,13rem);
+  line-height:.74;
+  letter-spacing:-.09em;
+}
+
+.final p{
+  max-width:650px;
+  margin:3rem auto 0;
+  color:#E8E0D6;
+  line-height:1.9;
+}
+
+.btn{
+  display:inline-flex;
+  margin-top:2.8rem;
+  padding:1rem 1.9rem;
+  border:1px solid var(--orange);
+  color:var(--ivory);
+  text-decoration:none;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-size:.78rem;
+  transition:.45s ease;
+}
+
+.btn:hover{
+  background:var(--orange);
+  color:white;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  section{
+    padding:0 1.2rem;
+    height:auto;
+    min-height:100vh;
+  }
+
+  .split-grid,
+  .glass-grid,
+  .press-grid{
+    grid-template-columns:1fr;
+    gap:2.5rem;
+  }
+
+  .image-frame{
+    height:480px;
+  }
+
+  .material-collage{
+    min-height:520px;
+  }
+
+  .material-1{
+    width:280px;
+    height:390px;
+  }
+
+  .material-2{
+    width:220px;
+    height:300px;
+  }
+
+  .material-3{
+    width:180px;
+    height:230px;
+  }
+
+  .gallery{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+
+  .gallery-title{
+    position:relative;
+    top:auto;
+    left:auto;
+    margin-bottom:2rem;
+  }
+
+  .float-img{
+    position:relative;
+    width:100% !important;
+    height:360px !important;
+    inset:auto !important;
+    margin-bottom:1rem;
+  }
+
+  .orbit{
+    display:none;
+  }
+
+  .nav-dots{
+    display:none;
+  }
+}
+
+/* PRESS SECTION - VERSION ÉQUILIBRÉE */
+.press {
+  background: #0A0A0A;
+  padding: 0 2rem;
+}
+
+.press-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.press-title {
+  font-size: clamp(3rem, 6vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+  margin-top: 0.5rem;
+}
+
+.press-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.press-card {
+  padding: 1.5rem;
+  border: 1px solid rgba(216, 199, 168, 0.16);
+  background: rgba(255, 255, 255, 0.035);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.press-card:hover {
+  border-color: rgba(201, 107, 44, 0.5);
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-3px);
+}
+
+.press-card span {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  color: var(--orange);
+  line-height: 1;
+}
+
+.press-card h3 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.press-card p {
+  font-size: 0.85rem;
+  color: #D8D0C7;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .press-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .press-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .press-card {
+    padding: 1.25rem;
+  }
+  
+  .press-card h3 {
+    font-size: 1.25rem;
+  }
+  
+  .press-card p {
+    font-size: 0.8rem;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="nav">
+  <div class="logo">Evana Ferdi</div>
+  <span>Luxury Fashion Press Book</span>
+</div>
+
+<!-- NAVIGATION DOTS YSL STYLE -->
+<div class="nav-dots">
+  <div class="nav-dot active" data-index="0"></div>
+  <div class="nav-dot" data-index="1"></div>
+  <div class="nav-dot" data-index="2"></div>
+  <div class="nav-dot" data-index="3"></div>
+  <div class="nav-dot" data-index="4"></div>
+  <div class="nav-dot" data-index="5"></div>
+  <div class="nav-dot" data-index="6"></div>
+  <div class="nav-dot" data-index="7"></div>
+</div>
+
+<!-- SNAP SCROLL CONTAINER -->
+<div class="snap-container">
+
+  <section class="hero grain">
+    <div class="hero-bg parallax-bg">
+      <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1800&auto=format&fit=crop" alt="">
+    </div>
+
+    <div class="orbit floating">
+      <div class="orbit-dot"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="kicker">Luxury fashion identity</div>
+
+      <h1 class="hero-title">
+        Beyond<br>
+        <span>Elegance.</span>
+      </h1>
+
+      <p class="hero-sub">
+        Un press-book digital pensé comme une pièce rare :
+        présence, mode, détail, héritage et vision contemporaine.
+      </p>
+
+      <div class="hero-meta">
+        <div class="meta-pill">Evana Ferdi</div>
+        <div class="meta-pill">Luxury Profile</div>
+        <div class="meta-pill">Editorial Experience</div>
+      </div>
+
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <section class="split grain">
+    <div class="section-content split-grid">
+      <div class="image-frame parallax-img">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1200&auto=format&fit=crop" alt="">
+      </div>
+
+      <div>
+        <div class="kicker">Signature</div>
+
+        <h2 class="editorial-title">
+          Presence<br>
+          shaped by<br>
+          <span>detail.</span>
+        </h2>
+
+        <p class="editorial-text">
+          Dans l'univers du luxe, chaque détail raconte une intention.
+          Ce press-book transforme un parcours professionnel en récit visuel,
+          précis, élégant et mémorable.
+        </p>
+
+        <div class="signature-list">
+          <div class="signature-item">
+            <span>Positionnement</span>
+            <strong>Mode & luxe</strong>
+          </div>
+
+          <div class="signature-item">
+            <span>Format</span>
+            <strong>Digital + PDF</strong>
+          </div>
+
+          <div class="signature-item">
+            <span>Direction</span>
+            <strong>Futur éditorial</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="glass-section grain">
+    <div class="section-content glass-grid">
+      <div class="glass-card">
+        <div class="kicker">Matière & héritage</div>
+
+        <h2>
+          The craft<br>
+          of quiet<br>
+          power.
+        </h2>
+
+        <p>
+          L'expérience visuelle évoque les codes des grandes maisons :
+          précision, matière, lumière, sobriété et force intérieure.
+        </p>
+      </div>
+
+      <div class="material-collage">
+        <div class="material-img material-1 parallax-img">
+          <img src="https://images.unsplash.com/photo-1617114919297-3c8ddb01f599?w=1000&auto=format&fit=crop" alt="">
+        </div>
+
+        <div class="material-img material-2 parallax-img">
+          <img src="https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=900&auto=format&fit=crop" alt="">
+        </div>
+
+        <div class="material-img material-3 floating">
+          <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=700&auto=format&fit=crop" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="future grain">
+    <div class="section-content">
+      <div class="kicker">Future of luxury</div>
+
+      <h2>
+        Silent<br>
+        <span>Future.</span>
+      </h2>
+
+      <p>
+        Le futur du luxe ne crie pas. Il respire, il suggère, il impose
+        une présence silencieuse par la maîtrise du rythme et de l'image.
+      </p>
+    </div>
+  </section>
+
+  <section class="gallery grain">
+    <div class="section-content">
+      <div class="gallery-title">
+        <div class="kicker">Editorial gallery</div>
+
+        <h2>
+          Fashion<br>
+          as a visual<br>
+          language.
+        </h2>
+      </div>
+
+      <div class="float-img float-1 floating parallax-img">
+        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=900&auto=format&fit=crop" alt="">
+      </div>
+
+      <div class="float-img float-2 floating parallax-img">
+        <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1000&auto=format&fit=crop" alt="">
+      </div>
+
+      <div class="float-img float-3 floating parallax-img">
+        <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=900&auto=format&fit=crop" alt="">
+      </div>
+
+      <div class="float-img float-4 floating parallax-img">
+        <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=700&auto=format&fit=crop" alt="">
+      </div>
+    </div>
+  </section>
+
+  <section class="cinematic grain">
+    <div class="section-content">
+      <div class="kicker">Cinematic scrolling</div>
+
+      <h2>
+        Not seen.<br>
+        Remembered.
+      </h2>
+
+      <p>
+        Chaque section agit comme une scène : lente, précise, atmosphérique.
+        Le press-book devient une expérience de marque personnelle.
+      </p>
+    </div>
+  </section>
+
+  <section class="press grain">
+    <div class="section-content">
+      <div class="press-header">
+        <div class="kicker">Press identity</div>
+        <h2 class="press-title">A profile built<br>for distinction.</h2>
+      </div>
+  
+      <div class="press-grid">
+        <div class="press-card">
+          <span>01</span>
+          <h3>Luxury codes</h3>
+          <p>Une image professionnelle alignée avec l'exigence et l'élégance des maisons de luxe.</p>
+        </div>
+  
+        <div class="press-card">
+          <span>02</span>
+          <h3>Editorial storytelling</h3>
+          <p>Une narration visuelle qui valorise le parcours, la posture et l'univers personnel.</p>
+        </div>
+  
+        <div class="press-card">
+          <span>03</span>
+          <h3>Digital prestige</h3>
+          <p>Un format web immersif pensé pour impressionner, présenter et convaincre.</p>
+        </div>
+  
+        <div class="press-card">
+          <span>04</span>
+          <h3>Future-ready</h3>
+          <p>Une expérience compatible avec les codes actuels de la mode, du luxe et du personal branding.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final grain">
+    <div class="section-content">
+      <div class="kicker">Evana Ferdi</div>
+
+      <h2>
+        Luxury is<br>
+        felt before<br>
+        it is seen.
+      </h2>
+
+      <p>
+        Une expérience éditoriale digitale pour faire d'un profil professionnel
+        une présence rare, moderne et inoubliable.
+      </p>
+
+      <a href="#" class="btn">Contact press</a>
+    </div>
+  </section>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+// Sélection des éléments
+const container = document.querySelector('.snap-container');
+const sections = document.querySelectorAll('section');
+const dots = document.querySelectorAll('.nav-dot');
+
+// Mise à jour du dot actif
+function updateActiveDot() {
+  const scrollPosition = container.scrollTop;
+  const sectionHeight = container.clientHeight;
+  const activeIndex = Math.round(scrollPosition / sectionHeight);
+  
+  dots.forEach((dot, index) => {
+    if (index === activeIndex) {
+      dot.classList.add('active');
+    } else {
+      dot.classList.remove('active');
+    }
+  });
+}
+
+// Click sur les dots pour naviguer
+dots.forEach((dot, index) => {
+  dot.addEventListener('click', () => {
+    container.scrollTo({
+      top: index * container.clientHeight,
+      behavior: 'smooth'
+    });
+  });
+});
+
+// Scroll event pour les dots
+container.addEventListener('scroll', () => {
+  requestAnimationFrame(updateActiveDot);
+});
+
+// Initialisation
+updateActiveDot();
+
+// Effet parallax sur les images
+const parallaxImages = document.querySelectorAll('.parallax-img img');
+parallaxImages.forEach((img) => {
+  const parent = img.parentElement;
+  gsap.fromTo(img,
+    { y: -50, scale: 1.1 },
+    {
+      y: 50,
+      scale: 1.05,
+      ease: "none",
+      scrollTrigger: {
+        trigger: parent,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.5,
+        container: container
+      }
+    }
+  );
+});
+
+// Parallax sur hero background
+gsap.to(".hero-bg", {
+  y: 150,
+  scale: 1.05,
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top top",
+    end: "bottom top",
+    scrub: 1.5,
+    container: container
+  }
+});
+
+// Animations flottantes
+const floatingElements = document.querySelectorAll('.floating');
+floatingElements.forEach((el, i) => {
+  gsap.to(el, {
+    y: i % 2 === 0 ? -20 : 20,
+    x: i % 2 === 0 ? 8 : -8,
+    rotation: i % 2 === 0 ? 1 : -1,
+    duration: 4 + i,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut"
+  });
+});
+
+// Rotation de l'orbite
+gsap.to(".orbit", {
+  rotation: 360,
+  duration: 25,
+  repeat: -1,
+  ease: "none"
+});
+
+// Rafraîchir ScrollTrigger quand le container scroll
+container.addEventListener('scroll', () => {
+  ScrollTrigger.update();
+});
+
+// ScrollTrigger refresh au resize
+window.addEventListener('resize', () => {
+  ScrollTrigger.refresh();
+});
+</script>
+
+</body>
+</html>

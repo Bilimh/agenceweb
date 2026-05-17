@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Womaths Studio — Editorial Digital Experiences</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --black:#050505;
+  --ivory:#F7F1E8;
+  --gold:#C6A062;
+  --text:#111111;
+  --muted:#5F5F5F;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+  scroll-snap-type:y mandatory;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--black);
+  color:var(--ivory);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+section{
+  height:100vh;
+  min-height:100vh;
+  width:100%;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:4rem 2rem;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+}
+
+img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+h1,h2,h3{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:500;
+}
+
+.section-content{
+  width:100%;
+  max-width:1400px;
+  margin:auto;
+  position:relative;
+  z-index:3;
+}
+
+.nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:100;
+  padding:1.4rem 2rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  mix-blend-mode:difference;
+  color:white;
+}
+
+.logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.45rem;
+  letter-spacing:.08em;
+}
+
+.nav-links{
+  display:flex;
+  gap:1.4rem;
+}
+
+.nav a{
+  color:white;
+  text-decoration:none;
+  font-size:.68rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+
+.kicker{
+  font-size:.7rem;
+  text-transform:uppercase;
+  letter-spacing:.28em;
+  color:var(--gold);
+  margin-bottom:1rem;
+  font-weight:700;
+}
+
+.grain::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.12) 1px, transparent 1px);
+  background-size:4px 4px;
+  opacity:.06;
+  pointer-events:none;
+  z-index:5;
+}
+
+.reveal{
+  opacity:0;
+  transform:translateY(60px);
+}
+
+.reveal-soft{
+  opacity:0;
+  transform:translateY(35px);
+  filter:blur(12px);
+}
+
+/* BASE SECTIONS */
+
+.dark{
+  background:#050505;
+  color:var(--ivory);
+}
+
+.light{
+  background:var(--ivory);
+  color:var(--text);
+}
+
+.full-bg{
+  padding:0;
+  color:white;
+}
+
+.full-bg img,
+.bg-img{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  transform:scale(1.08);
+}
+
+.full-bg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.92),rgba(0,0,0,.38),rgba(0,0,0,.84)),
+    linear-gradient(to bottom,rgba(0,0,0,.15),rgba(0,0,0,.75));
+  z-index:1;
+}
+
+.big-title{
+  font-size:clamp(5rem,14vw,15rem);
+  line-height:.72;
+  letter-spacing:-.1em;
+  max-width:1100px;
+}
+
+.big-title span{
+  color:var(--gold);
+}
+
+.mid-title{
+  font-size:clamp(4rem,10vw,11rem);
+  line-height:.74;
+  letter-spacing:-.1em;
+  max-width:1050px;
+}
+
+.text{
+  max-width:520px;
+  margin-top:2rem;
+  color:#D8D0C7;
+  line-height:1.9;
+}
+
+.light .text{
+  color:#4B5563;
+}
+
+.split{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4rem;
+  align-items:center;
+}
+
+.image-frame{
+  height:78vh;
+  overflow:hidden;
+}
+
+.image-frame img{
+  transform:scale(1.12);
+}
+
+.service-layout{
+  display:grid;
+  grid-template-columns:.85fr 1.15fr;
+  gap:5rem;
+  align-items:center;
+}
+
+.service-number{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(9rem,20vw,22rem);
+  line-height:.7;
+  color:rgba(198,160,98,.24);
+}
+
+.service-copy h2{
+  font-size:clamp(4rem,10vw,11rem);
+  line-height:.74;
+  letter-spacing:-.1em;
+}
+
+.service-copy p{
+  max-width:520px;
+  margin-top:2rem;
+  line-height:1.9;
+  color:#4B5563;
+}
+
+.dark .service-copy p{
+  color:#D8D0C7;
+}
+
+.project-label{
+  position:absolute;
+  left:2rem;
+  bottom:2rem;
+  z-index:4;
+  background:rgba(5,5,5,.82);
+  color:white;
+  padding:1rem 1.2rem;
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.value-center{
+  text-align:center;
+}
+
+.value-center h2{
+  font-size:clamp(5rem,14vw,15rem);
+  line-height:.72;
+  letter-spacing:-.1em;
+}
+
+.value-center h2 span{
+  color:transparent;
+  -webkit-text-stroke:1px var(--gold);
+}
+
+.value-center p{
+  max-width:620px;
+  margin:2rem auto 0;
+  color:#D8D0C7;
+  line-height:1.9;
+}
+
+.light .value-center p{
+  color:#4B5563;
+}
+
+.step-layout{
+  display:grid;
+  grid-template-columns:.7fr 1.3fr;
+  gap:5rem;
+  align-items:center;
+}
+
+.step-number{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(10rem,22vw,24rem);
+  color:var(--gold);
+  line-height:.75;
+}
+
+.step-copy h2{
+  font-size:clamp(4rem,10vw,11rem);
+  line-height:.74;
+  letter-spacing:-.1em;
+}
+
+.step-copy p{
+  max-width:580px;
+  margin-top:2rem;
+  color:#4B5563;
+  line-height:1.9;
+}
+
+.dark .step-copy p{
+  color:#D8D0C7;
+}
+
+.faq-layout{
+  max-width:1000px;
+}
+
+.faq-layout h2{
+  font-size:clamp(4rem,10vw,11rem);
+  line-height:.74;
+  letter-spacing:-.1em;
+}
+
+.faq-layout p{
+  max-width:720px;
+  margin-top:2rem;
+  color:#D8D0C7;
+  line-height:1.9;
+  font-size:1.05rem;
+}
+
+.contact{
+  text-align:center;
+}
+
+.contact h2{
+  font-size:clamp(5rem,14vw,15rem);
+  line-height:.72;
+  letter-spacing:-.1em;
+}
+
+.contact p{
+  max-width:680px;
+  margin:2rem auto 0;
+  color:#D8D0C7;
+  line-height:1.9;
+}
+
+.contact-actions{
+  margin-top:2.5rem;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:1rem;
+}
+
+.btn{
+  display:inline-flex;
+  padding:1rem 1.8rem;
+  border:1px solid var(--gold);
+  color:var(--ivory);
+  text-decoration:none;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-size:.75rem;
+  transition:.4s ease;
+}
+
+.btn.gold{
+  background:var(--gold);
+  color:var(--black);
+}
+
+.btn:hover{
+  background:var(--ivory);
+  color:var(--black);
+  border-color:var(--ivory);
+}
+
+.footer-info{
+  margin-top:2rem;
+  color:#CFC7BC;
+  font-size:.82rem;
+  line-height:1.8;
+}
+
+@media(max-width:900px){
+  html{
+    scroll-snap-type:none;
+  }
+
+  section{
+    height:auto;
+    min-height:100vh;
+    padding:5rem 1.2rem;
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+  .split,
+  .service-layout,
+  .step-layout{
+    grid-template-columns:1fr;
+    gap:2rem;
+  }
+
+  .image-frame{
+    height:48vh;
+  }
+
+  .service-number,
+  .step-number{
+    font-size:8rem;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="nav">
+  <div class="logo">Womaths Studio</div>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#works">Works</a>
+    <a href="#values">Valeurs</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- 01 HERO -->
+<section class="full-bg grain">
+  <img class="bg-img parallax-single" src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=1800&auto=format&fit=crop" alt="">
+
+  <div class="section-content">
+    <div class="kicker reveal-soft">Editorial Digital Experiences</div>
+
+    <h1 class="big-title reveal">
+      Websites<br>
+      with <span>presence.</span>
+    </h1>
+
+    <p class="text reveal-soft">
+      Womaths Studio crée des expériences digitales éditoriales,
+      immersives et premium.
+    </p>
+  </div>
+</section>
+
+<!-- 02 POSITIONNEMENT -->
+<section class="light grain">
+  <div class="section-content split">
+    <div class="image-frame parallax-img reveal-soft">
+      <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1300&auto=format&fit=crop" alt="">
+    </div>
+
+    <div>
+      <div class="kicker reveal-soft">Positionnement</div>
+
+      <h2 class="mid-title reveal">
+        Not a site.<br>
+        A story.
+      </h2>
+
+      <p class="text reveal-soft">
+        Nous transformons un profil, une marque ou un projet
+        en narration visuelle mémorable.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 SERVICE 01 -->
+<section id="services" class="dark grain">
+  <div class="section-content service-layout">
+    <div class="service-number reveal-soft">01</div>
+
+    <div class="service-copy">
+      <div class="kicker reveal-soft">Service</div>
+
+      <h2 class="reveal">
+        Press-book<br>
+        digital.
+      </h2>
+
+      <p class="reveal-soft">
+        Un dossier de presse interactif, visuel, éditorial,
+        partageable en ligne et exportable en PDF.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 04 SERVICE 02 -->
+<section class="light grain">
+  <div class="section-content service-layout">
+    <div class="service-number reveal-soft">02</div>
+
+    <div class="service-copy">
+      <div class="kicker reveal-soft">Service</div>
+
+      <h2 class="reveal">
+        Site vitrine<br>
+        premium.
+      </h2>
+
+      <p class="reveal-soft">
+        Une présence digitale élégante pour artistes, institutions,
+        marques, profils publics et projets culturels.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 05 SERVICE 03 -->
+<section class="dark grain">
+  <div class="section-content service-layout">
+    <div class="service-number reveal-soft">03</div>
+
+    <div class="service-copy">
+      <div class="kicker reveal-soft">Service</div>
+
+      <h2 class="reveal">
+        Direction<br>
+        artistique.
+      </h2>
+
+      <p class="reveal-soft">
+        Palette, typographie, rythme, composition, hiérarchie
+        et storytelling visuel.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 06 SERVICE 04 -->
+<section class="light grain">
+  <div class="section-content service-layout">
+    <div class="service-number reveal-soft">04</div>
+
+    <div class="service-copy">
+      <div class="kicker reveal-soft">Service</div>
+
+      <h2 class="reveal">
+        Version PDF<br>
+        print.
+      </h2>
+
+      <p class="reveal-soft">
+        Une version imprimable fidèle à l’expérience écran,
+        pensée pour les dossiers officiels.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 07 PROJECT 01 -->
+<section id="works" class="full-bg grain">
+  <img class="bg-img parallax-single" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1800&auto=format&fit=crop" alt="">
+
+  <div class="section-content">
+    <div class="kicker reveal-soft">Selected Work</div>
+
+    <h2 class="big-title reveal">
+      Culture<br>
+      press-book.
+    </h2>
+
+    <p class="text reveal-soft">
+      Une expérience éditoriale pour présenter une voix culturelle
+      avec profondeur et élégance.
+    </p>
+  </div>
+
+  <div class="project-label">Projet 01 · Culture</div>
+</section>
+
+<!-- 08 PROJECT 02 -->
+<section class="full-bg grain">
+  <img class="bg-img parallax-single" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1800&auto=format&fit=crop" alt="">
+
+  <div class="section-content">
+    <div class="kicker reveal-soft">Selected Work</div>
+
+    <h2 class="big-title reveal">
+      NGO<br>
+      presence.
+    </h2>
+
+    <p class="text reveal-soft">
+      Une vitrine institutionnelle pour raconter une mission
+      et renforcer la confiance.
+    </p>
+  </div>
+
+  <div class="project-label">Projet 02 · Institution</div>
+</section>
+
+<!-- 09 PROJECT 03 -->
+<section class="full-bg grain">
+  <img class="bg-img parallax-single" src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1800&auto=format&fit=crop" alt="">
+
+  <div class="section-content">
+    <div class="kicker reveal-soft">Selected Work</div>
+
+    <h2 class="big-title reveal">
+      Luxury<br>
+      profile.
+    </h2>
+
+    <p class="text reveal-soft">
+      Un press-book premium pour transformer un parcours
+      en présence mémorable.
+    </p>
+  </div>
+
+  <div class="project-label">Projet 03 · Luxe</div>
+</section>
+
+<!-- 10 VALUE 01 -->
+<section id="values" class="dark grain">
+  <div class="section-content value-center">
+    <div class="kicker reveal-soft">Valeur 01</div>
+
+    <h2 class="reveal">
+      Less,<br>
+      <span>but better.</span>
+    </h2>
+
+    <p class="reveal-soft">
+      L’élégance vient de ce que l’on choisit de ne pas montrer.
+    </p>
+  </div>
+</section>
+
+<!-- 11 VALUE 02 -->
+<section class="light grain">
+  <div class="section-content value-center">
+    <div class="kicker reveal-soft">Valeur 02</div>
+
+    <h2 class="reveal">
+      Clarity<br>
+      first.
+    </h2>
+
+    <p class="reveal-soft">
+      Chaque section doit porter une idée claire, lisible et forte.
+    </p>
+  </div>
+</section>
+
+<!-- 12 VALUE 03 -->
+<section class="dark grain">
+  <div class="section-content value-center">
+    <div class="kicker reveal-soft">Valeur 03</div>
+
+    <h2 class="reveal">
+      Emotion<br>
+      through rhythm.
+    </h2>
+
+    <p class="reveal-soft">
+      Le scroll devient une séquence. Le site devient une expérience.
+    </p>
+  </div>
+</section>
+
+<!-- 13 PROCESS 01 -->
+<section class="light grain">
+  <div class="section-content step-layout">
+    <div class="step-number reveal-soft">01</div>
+
+    <div class="step-copy">
+      <div class="kicker reveal-soft">Méthode</div>
+
+      <h2 class="reveal">
+        Select.
+      </h2>
+
+      <p class="reveal-soft">
+        Trier les images, supprimer le bruit et garder ce qui raconte
+        vraiment l’histoire.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 14 PROCESS 02 -->
+<section class="dark grain">
+  <div class="section-content step-layout">
+    <div class="step-number reveal-soft">02</div>
+
+    <div class="step-copy">
+      <div class="kicker reveal-soft">Méthode</div>
+
+      <h2 class="reveal">
+        Compose.
+      </h2>
+
+      <p class="reveal-soft">
+        Construire une direction artistique forte :
+        typographie, image, rythme et silence.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 15 PROCESS 03 -->
+<section class="light grain">
+  <div class="section-content step-layout">
+    <div class="step-number reveal-soft">03</div>
+
+    <div class="step-copy">
+      <div class="kicker reveal-soft">Méthode</div>
+
+      <h2 class="reveal">
+        Animate.
+      </h2>
+
+      <p class="reveal-soft">
+        Ajouter du mouvement subtil : reveal, parallaxe,
+        transitions lentes et scroll cinématique.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 16 FAQ 01 -->
+<section class="dark grain">
+  <div class="section-content faq-layout">
+    <div class="kicker reveal-soft">FAQ</div>
+
+    <h2 class="reveal">
+      Est-ce un site<br>
+      ou un press-book ?
+    </h2>
+
+    <p class="reveal-soft">
+      Les deux. Le press-book digital est une expérience web,
+      mais il peut aussi être décliné en PDF professionnel.
+    </p>
+  </div>
+</section>
+
+<!-- 17 FAQ 02 -->
+<section class="light grain">
+  <div class="section-content faq-layout">
+    <div class="kicker reveal-soft">FAQ</div>
+
+    <h2 class="reveal">
+      Combien d’images<br>
+      faut-il ?
+    </h2>
+
+    <p class="reveal-soft" style="color:#4B5563;">
+      Le client peut en envoyer beaucoup. Nous sélectionnons seulement
+      les images nécessaires à une narration forte.
+    </p>
+  </div>
+</section>
+
+<!-- 18 FAQ 03 -->
+<section class="dark grain">
+  <div class="section-content faq-layout">
+    <div class="kicker reveal-soft">FAQ</div>
+
+    <h2 class="reveal">
+      Le PDF garde-t-il<br>
+      le style ?
+    </h2>
+
+    <p class="reveal-soft">
+      Oui. Une version print est pensée pour garder l’esprit
+      de la présentation écran, page par page.
+    </p>
+  </div>
+</section>
+
+<!-- 19 CONTACT -->
+<section id="contact" class="full-bg grain">
+  <img class="bg-img parallax-single" src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=1800&auto=format&fit=crop" alt="">
+
+  <div class="section-content contact">
+    <div class="kicker reveal-soft">Contact</div>
+
+    <h2 class="reveal">
+      Let’s build<br>
+      your presence.
+    </h2>
+
+    <p class="reveal-soft">
+      Womaths Studio transforme vos contenus en expérience digitale
+      éditoriale, premium et mémorable.
+    </p>
+
+    <div class="contact-actions reveal-soft">
+      <a class="btn gold" href="mailto:contact@womathsstudio.com">contact@womathsstudio.com</a>
+      <a class="btn" href="tel:+33768360313">+33 7 68 36 03 13</a>
+    </div>
+
+    <div class="footer-info reveal-soft">
+      SIRET : 99315677700019 · NAF : 8559B<br>
+      45 Rue Malsence, 59000 Lille
+    </div>
+  </div>
+</section>
+
+<script defer src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+<script defer src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+
+<script>
+window.addEventListener("load", () => {
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.utils.toArray(".reveal").forEach((el)=>{
+    gsap.to(el,{
+      opacity:1,
+      y:0,
+      duration:1.35,
+      ease:"power4.out",
+      scrollTrigger:{
+        trigger:el,
+        start:"top 84%",
+        once:true
+      }
+    });
+  });
+
+  gsap.utils.toArray(".reveal-soft").forEach((el)=>{
+    gsap.to(el,{
+      opacity:1,
+      y:0,
+      filter:"blur(0px)",
+      duration:1.55,
+      ease:"power4.out",
+      scrollTrigger:{
+        trigger:el,
+        start:"top 86%",
+        once:true
+      }
+    });
+  });
+
+  gsap.utils.toArray(".parallax-img img").forEach((img)=>{
+    gsap.fromTo(img,
+      { y:-55, scale:1.12 },
+      {
+        y:55,
+        scale:1.06,
+        ease:"none",
+        scrollTrigger:{
+          trigger:img.parentElement,
+          start:"top bottom",
+          end:"bottom top",
+          scrub:true
+        }
+      }
+    );
+  });
+
+  gsap.utils.toArray(".parallax-single").forEach((img)=>{
+    gsap.fromTo(img,
+      { y:-70, scale:1.12 },
+      {
+        y:70,
+        scale:1.06,
+        ease:"none",
+        scrollTrigger:{
+          trigger:img.parentElement,
+          start:"top bottom",
+          end:"bottom top",
+          scrub:true
+        }
+      }
+    );
+  });
+});
+</script>
+
+</body>
+</html>
