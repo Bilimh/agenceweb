@@ -2408,31 +2408,37 @@
               <div class="line-gold reveal" data-animation="fadeIn" class="delay-300" style="margin-top: 1.5rem;"></div>
             </div>
       
-            <form action="#" method="POST" class="form reveal" data-animation="fadeRight" class="delay-100">
-              <div class="form-group">
-                <input type="text" name="nom" placeholder="Nom & prénom" required>
-              </div>
-              <div class="form-group">
-                <input type="email" name="email" placeholder="Email" required>
-              </div>
-              <div class="form-group">
-                <input type="tel" name="telephone" placeholder="Téléphone">
-              </div>
-              <div class="form-group">
-                <select name="projet">
-                  <option value="" disabled selected>Type de projet</option>
-                  <option value="vitrine">Site vitrine</option>
-                  <option value="ecommerce">Site e-commerce</option>
-                  <option value="application">Application web</option>
-                  <option value="autre">Autre</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <textarea name="message" rows="3" placeholder="Votre message..." required></textarea>
-              </div>
-              <button type="submit" class="btn-submit">Envoyer →</button>
-              <p class="form-note">Votre projet est confidentiel. Réponse sous 48h.</p>
-            </form>
+            <form action="https://formsubmit.co/mozar2025@gmail.com" method="POST" class="form">
+                <!-- Champ caché obligatoire -->
+                <input type="hidden" name="_subject" value="Nouveau message Womaths Studio">
+                <input type="hidden" name="_captcha" value="false">
+                
+                <!-- Optionnel : redirection après envoi -->
+                <input type="hidden" name="_next" value="https://bilimh.github.io/agenceweb/pafar">
+                
+                <div class="form-group">
+                  <input type="text" name="nom" placeholder="Nom & prénom" required>
+                </div>
+                <div class="form-group">
+                  <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                  <input type="tel" name="telephone" placeholder="Téléphone">
+                </div>
+                <div class="form-group">
+                  <select name="projet">
+                    <option value="" disabled selected>Type de projet</option>
+                    <option value="vitrine">Site vitrine</option>
+                    <option value="ecommerce">Site e-commerce</option>
+                    <option value="application">Application web</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <textarea name="message" rows="3" placeholder="Votre message..." required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Envoyer →</button>
+                <p class="form-note">Votre message est confidentiel. Réponse sous 48h.</p>
+              </form>
           </div>
         </section>
       
