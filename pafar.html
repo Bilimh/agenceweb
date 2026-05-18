@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Womaths Studio — Création de sites web sur mesure</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* ============================================
+               1. VARIABLES & RESET
+               ============================================ */
+        :root {
+            --deep: #0A0C12;
+            --studio-gold: #C6A45C;
+            --ivory: #F5F2EB;
+            --stone: #D4CFC4;
+            --graphite: #1E1E24;
+            --parchment: #EAE5DD;
+            --text-dark: #1A1C20;
+            --text-light: #E8E4DD;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--deep);
+            color: var(--text-light);
+            overflow: hidden;
+        }
+
+        /* ============================================
+               2. SNAP SCROLL CONTAINER
+               ============================================ */
+        .snap-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+            width: 100%;
+            position: relative;
+        }
+
+        section {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            scroll-snap-align: start;
+            padding: 0 2rem;
+        }
+        /* ============================================
+               3. TYPOGRAPHIE GLOBALE
+               ============================================ */
+        h1,
+        h2,
+        h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+        }
+
+        .section-content {
+            width: 100%;
+            max-width: 1400px;
+            margin: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .kicker {
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--studio-gold);
+            margin-bottom: 1.2rem;
+        }
+
+        .line-gold {
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, var(--studio-gold), transparent);
+            margin-top: 2rem;
+        }
+
+        /* ============================================
+               4. NAVIGATION FIXE & DOTS
+               ============================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            padding: 1.5rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            mix-blend-mode: difference;
+            pointer-events: none;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.15em;
+            font-weight: 500;
+        }
+
+        .nav span {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        .nav-dots {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .nav-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: var(--studio-gold);
+            transform: scale(1.6);
+            box-shadow: 0 0 12px rgba(198, 164, 92, 0.5);
+        }
+
+        /* ============================================
+               5. SECTION HERO
+               ============================================ */
+        .hero {
+            padding: 0;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.55) contrast(1.05);
+        }
+
+        .hero-bg::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(10, 12, 18, 0.88) 0%, rgba(10, 12, 18, 0.55) 50%, rgba(10, 12, 18, 0.88) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-size: clamp(3.5rem, 11vw, 7rem);
+            line-height: 0.85;
+            letter-spacing: -0.05em;
+            font-weight: 600;
+            max-width: 900px;
+        }
+
+        .hero-title span {
+            color: var(--studio-gold);
+        }
+
+        .hero-sub {
+            max-width: 580px;
+            margin-top: 2rem;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #E0DAD3;
+            font-weight: 300;
+        }
+
+        .hero-meta {
+            margin-top: 2.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-pill {
+            border: 0.5px solid rgba(198, 164, 92, 0.5);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background: rgba(10, 12, 18, 0.4);
+            backdrop-filter: blur(8px);
+        }
+
+        /* ============================================
+               6. SECTION SERVICES
+               ============================================ */
+        .services {
+            background: var(--parchment);
+            color: var(--text-dark);
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .services-title {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            padding: 2rem;
+            border: 0.5px solid rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(4px);
+            transition: all 0.4s ease;
+        }
+
+        .service-card:hover {
+            border-color: rgba(198, 164, 92, 0.4);
+            transform: translateY(-5px);
+            background: white;
+        }
+
+        .service-card .number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--studio-gold);
+            opacity: 0.6;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            font-size: 0.85rem;
+            color: #4A4F5E;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+               7. SECTION WE ARE
+               ============================================ */
+        .weare {
+            background: var(--parchment);
+            color: var(--text-dark);
+        }
+
+        .weare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .weare-text h2 {
+            font-size: clamp(3rem, 7vw, 5rem);
+            line-height: 0.9;
+            letter-spacing: -0.05em;
+            margin-bottom: 1.5rem;
+        }
+
+        .weare-text h2 span {
+            color: var(--studio-gold);
+        }
+
+        .weare-description {
+            color: #4A4F5E;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .signature-weare {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border-left: 2px solid var(--studio-gold);
+            background: rgba(198, 164, 92, 0.05);
+        }
+
+        .signature-weare p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .signature-weare span {
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: var(--studio-gold);
+        }
+
+        .weare-image {
+            position: relative;
+            height: 550px;
+            overflow: hidden;
+            border-radius: 0 90px 0 90px;
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.15);
+        }
+
+        .weare-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .floating-badge {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: rgba(10, 12, 18, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 1rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            border-radius: 8px;
+            border-left: 2px solid var(--studio-gold);
+        }
+
+        .floating-badge span {
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: var(--studio-gold);
+        }
+
+        /* ============================================
+        SECTION VALUES
+        ============================================ */
+        .values {
+        background: var(--deep);
+        text-align: center;
+        }
+
+        .values h2 {
+        font-size: clamp(2.8rem, 6vw, 4.5rem);
+        line-height: 1.1;
+        letter-spacing: -0.04em;
+        margin-bottom: 3rem;
+        }
+
+        .values h2 span {
+        color: var(--studio-gold);
+        }
+
+        .values-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        max-width: 1100px;
+        margin: 0 auto;
+        }
+
+        .value-card {
+        padding: 2rem;
+        border: 0.5px solid rgba(198, 164, 92, 0.2);
+        background: rgba(255, 255, 255, 0.02);
+        transition: all 0.4s ease;
+        }
+
+        .value-card:hover {
+        border-color: rgba(198, 164, 92, 0.5);
+        transform: translateY(-5px);
+        }
+
+        .value-icon {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+        color: var(--studio-gold);
+        }
+
+        .value-card h3 {
+        font-size: 1.4rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+        }
+
+        .value-card p {
+        font-size: 0.85rem;
+        color: #C5C0B5;
+        line-height: 1.6;
+        }
+
+
+        /* ============================================
+               9. SECTION KEY NUMBERS
+               ============================================ */
+        .keynumbers {
+            background: var(--deep);
+            text-align: center;
+        }
+
+        .keynumbers h2 {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            margin-bottom: 3rem;
+        }
+
+        .keynumbers h2 span {
+            color: var(--studio-gold);
+        }
+
+        .key-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .key-item {
+            text-align: center;
+            padding: 2rem;
+            border: 0.5px solid rgba(198, 164, 92, 0.2);
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.4s ease;
+        }
+
+        .key-item:hover {
+            border-color: rgba(198, 164, 92, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .key-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: var(--studio-gold);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .key-item p {
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .key-desc {
+            font-size: 0.7rem;
+            color: #C5C0B5;
+            letter-spacing: 0.05em;
+        }
+
+        /* ============================================
+               10. SECTION PROCESS
+               ============================================ */
+        .process {
+            background: var(--deep);
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .process-image {
+            height: 500px;
+            overflow: hidden;
+            border-radius: 0 90px 0 90px;
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.25);
+        }
+
+        .process-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .step {
+            display: flex;
+            gap: 1.2rem;
+            align-items: flex-start;
+            border-bottom: 0.5px solid rgba(198, 164, 92, 0.2);
+            padding-bottom: 1.2rem;
+        }
+
+        .step-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--studio-gold);
+            min-width: 50px;
+        }
+
+        .step h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .step p {
+            font-size: 0.8rem;
+            color: #C5C0B5;
+            line-height: 1.5;
+        }
+
+        /* ============================================
+               11. SECTION PORTFOLIO
+               ============================================ */
+        .portfolio {
+            background: var(--graphite);
+        }
+
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(10, 12, 18, 0.85) 0%, transparent 60%);
+            display: flex;
+            align-items: flex-end;
+            padding: 1.2rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-overlay h4 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: white;
+        }
+
+        /* ============================================
+               12. SECTION TESTIMONIALS
+               ============================================ */
+        .testimonials {
+            background: var(--parchment);
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .testimonials h2 {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            margin-bottom: 3rem;
+        }
+
+        .testimonials h2 span {
+            color: var(--studio-gold);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.8);
+            border: 0.5px solid rgba(0, 0, 0, 0.05);
+            text-align: left;
+            transition: all 0.4s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: var(--studio-gold);
+            line-height: 1;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .testimonial-card p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: #4A4F5E;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author strong {
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: block;
+        }
+
+        .testimonial-author span {
+            font-size: 0.7rem;
+            color: #8A8F9E;
+        }
+
+        /* ============================================
+               13. SECTION LOCATION
+               ============================================ */
+        .location {
+            background: var(--deep);
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .location-info h2 {
+            font-size: clamp(3rem, 7vw, 5rem);
+            line-height: 0.9;
+            letter-spacing: -0.05em;
+            margin-bottom: 1.5rem;
+        }
+
+        .location-info h2 span {
+            color: var(--studio-gold);
+        }
+
+        .location-description {
+            color: #C5C0B5;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .address-card {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border: 0.5px solid rgba(198, 164, 92, 0.25);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .address-line {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #D8D0C7;
+        }
+
+        .btn-map {
+            display: inline-flex;
+            padding: 0.8rem 1.8rem;
+            border: 0.5px solid var(--studio-gold);
+            color: var(--studio-gold);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.7rem;
+            transition: all 0.4s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-map:hover {
+            background: var(--studio-gold);
+            color: var(--deep);
+        }
+
+        .transport-info {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .metro-badge {
+            width: 40px;
+            height: 40px;
+            background: #FFD700;
+            border-radius: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #0A0C12;
+        }
+
+        .transport-detail {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .transport-detail span:first-child {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--studio-gold);
+        }
+
+        .transport-detail span:last-child {
+            font-size: 0.7rem;
+            color: #C5C0B5;
+            letter-spacing: 0.05em;
+        }
+
+        .map-container {
+            position: relative;
+            height: 450px;
+            border-radius: 0 90px 0 90px;
+            overflow: hidden;
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.25);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            filter: grayscale(0.3) contrast(0.9) brightness(0.85);
+            transition: filter 0.5s ease;
+        }
+
+        .map-container:hover iframe {
+            filter: grayscale(0) contrast(1) brightness(1);
+        }
+
+        .map-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 30% 40%, rgba(198, 164, 92, 0.08), transparent 70%);
+        }
+
+        /* ============================================
+               14. SECTION FAQ
+               ============================================ */
+        .faq {
+            background: var(--parchment);
+            color: var(--text-dark);
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .faq-title h2 {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .faq-item {
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 1rem 0;
+        }
+
+        .faq-question h4 {
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            transition: color 0.3s ease;
+        }
+
+        .faq-question:hover h4 {
+            color: var(--studio-gold);
+        }
+
+        .faq-question span {
+            font-size: 1.3rem;
+            color: var(--studio-gold);
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .faq-item.active .faq-question span {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .faq-answer-inner {
+            padding: 0 0 1rem 0;
+            font-size: 0.85rem;
+            color: #4A4F5E;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+               15. SECTION CONTACT
+               ============================================ */
+        .contact {
+            background: var(--deep);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .contact-info h2 {
+            font-size: clamp(3rem, 7vw, 5rem);
+            line-height: 0.9;
+            letter-spacing: -0.05em;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info h2 span {
+            color: var(--studio-gold);
+        }
+
+        .contact-details {
+            margin: 2rem 0;
+        }
+
+        .contact-details p {
+            margin: 0.8rem 0;
+            font-size: 0.9rem;
+            color: #C5C0B5;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-details strong {
+            color: var(--studio-gold);
+            font-weight: 500;
+            min-width: 100px;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 0.5px solid rgba(198, 164, 92, 0.3);
+            color: var(--text-light);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--studio-gold);
+            background: rgba(198, 164, 92, 0.05);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(200, 195, 185, 0.5);
+        }
+
+        .btn-submit {
+            padding: 0.9rem 2rem;
+            background: transparent;
+            border: 0.5px solid var(--studio-gold);
+            color: var(--studio-gold);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .btn-submit:hover {
+            background: var(--studio-gold);
+            color: var(--deep);
+        }
+
+        .form-note {
+            font-size: 0.65rem;
+            color: rgba(200, 195, 185, 0.5);
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        /* ============================================
+               16. SECTION THOUGHTS (BLOG)
+               ============================================ */
+        .thoughts {
+            background: var(--graphite);
+        }
+
+        .thoughts h2 {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            margin-bottom: 3rem;
+        }
+
+        .thoughts h2 span {
+            color: var(--studio-gold);
+        }
+
+        .thoughts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .thought-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+            border-bottom: 0.5px solid rgba(198, 164, 92, 0.15);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .thought-item:hover {
+            padding-left: 1rem;
+        }
+
+        .thought-title {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+
+        .thought-item:hover .thought-title {
+            color: var(--studio-gold);
+        }
+
+        .thought-arrow {
+            font-size: 1.2rem;
+            color: var(--studio-gold);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .thought-item:hover .thought-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .thoughts-more {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            border: 0.5px solid var(--studio-gold);
+            color: var(--studio-gold);
+            text-decoration: none;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+        }
+
+        .btn-outline:hover {
+            background: var(--studio-gold);
+            color: var(--deep);
+        }
+
+        /* ============================================
+               17. SECTION FOOTER
+               ============================================ */
+        .footer {
+            background: #050608;
+            padding: 0 2rem;
+        }
+
+        .footer-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            letter-spacing: 0.15em;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border: 0.5px solid rgba(198, 164, 92, 0.3);
+            border-radius: 50%;
+            color: var(--studio-gold);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            border-color: var(--studio-gold);
+            background: var(--studio-gold);
+            color: var(--deep);
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--stone);
+            text-decoration: none;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--studio-gold);
+        }
+
+        .footer-copyright {
+            font-size: 0.65rem;
+            color: rgba(200, 195, 185, 0.4);
+            margin-top: 1.5rem;
+        }
+
+       /* ============================================
+   18. RESPONSIVE (Mobile, Tablette, Desktop)
+   ============================================ */
+
+/* DESKTOP (> 900px) - Hauteur fixe + snap */
+@media (min-width: 901px) {
+  section {
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .snap-container {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh;
+  }
+  
+  body {
+    overflow: hidden;
+  }
+}
+
+/* TABLETTE LARGE (768px - 900px) - Hauteur min + snap conservé */
+@media (min-width: 769px) and (max-width: 900px) {
+  section {
+    min-height: 100vh;
+    height: auto;
+    overflow: visible;
+    padding: 2rem 1.5rem;
+  }
+  
+  .snap-container {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh;
+  }
+  
+  body {
+    overflow: hidden;
+  }
+  
+  .services-grid,
+  .values-grid,
+  .key-grid,
+  .portfolio-grid,
+  .testimonial-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .process-grid,
+  .weare-grid,
+  .location-grid,
+  .faq-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .process-image,
+  .weare-image,
+  .map-container {
+    height: 380px;
+  }
+}
+
+/* TABLETTE PETITE (601px - 768px) - Hauteur min + snap conservé */
+@media (min-width: 601px) and (max-width: 768px) {
+  section {
+    min-height: 100vh;
+    height: auto;
+    overflow: visible;
+    padding: 2rem 1.2rem;
+  }
+  
+  .snap-container {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh;
+  }
+  
+  body {
+    overflow: hidden;
+  }
+  
+  .nav {
+    padding: 1rem 1.2rem;
+  }
+  
+  .nav-dots {
+    display: none;
+  }
+  
+  .services-grid,
+  .values-grid,
+  .key-grid,
+  .portfolio-grid,
+  .testimonial-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .process-grid,
+  .weare-grid,
+  .location-grid,
+  .faq-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .process-image,
+  .weare-image,
+  .map-container {
+    height: 320px;
+  }
+  
+  .portfolio-item {
+    height: 220px;
+  }
+  
+  .floating-badge {
+    padding: 0.8rem 1.2rem;
+  }
+  
+  .transport-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .footer-links {
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footer-social {
+    gap: 1rem;
+  }
+  
+  .social-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 0.9rem;
+  }
+}
+
+/* MOBILE (< 600px) - Pas de snap, scroll classique */
+@media (max-width: 600px) {
+  body {
+    overflow: auto;
+  }
+  
+  .snap-container {
+    scroll-snap-type: none;
+    overflow-y: auto;
+    height: auto;
+  }
+  
+  section {
+    min-height: auto;
+    height: auto;
+    overflow: visible;
+    padding: 3rem 1.2rem;
+    scroll-snap-align: none;
+  }
+  
+  .nav {
+    padding: 1rem 1.2rem;
+  }
+  
+  .nav-dots {
+    display: none;
+  }
+  
+  .services-grid,
+  .values-grid,
+  .key-grid,
+  .portfolio-grid,
+  .testimonial-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .process-grid,
+  .weare-grid,
+  .location-grid,
+  .faq-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .process-image,
+  .weare-image,
+  .map-container {
+    height: 280px;
+  }
+  
+  .portfolio-item {
+    height: 220px;
+  }
+  
+  .floating-badge {
+    padding: 0.8rem 1.2rem;
+  }
+  
+  .transport-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .footer-links {
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footer-social {
+    gap: 1rem;
+  }
+  
+  .social-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 0.9rem;
+  }
+  
+  /* Petit mobile - typographie réduite */
+  .hero-title {
+    font-size: clamp(2.5rem, 8vw, 3.5rem);
+  }
+  
+  .hero-sub {
+    font-size: 0.85rem;
+  }
+  
+  .kicker {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+  }
+  
+  .service-card h3,
+  .value-card h3 {
+    font-size: 1.2rem;
+  }
+  
+  .service-card p,
+  .value-card p {
+    font-size: 0.75rem;
+  }
+  
+  .testimonial-card {
+    padding: 1.2rem;
+  }
+  
+  .address-line {
+    font-size: 0.75rem;
+    flex-wrap: wrap;
+  }
+  
+  .metro-badge {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+}
+
+/* PETITE HAUTEUR (< 700px) - Desktop uniquement */
+@media (max-height: 700px) and (min-width: 901px) {
+  section {
+    padding: 0 2rem;
+  }
+  
+  .kicker {
+    margin-bottom: 0.5rem;
+    font-size: 0.6rem;
+  }
+  
+  h2, .services-title, .values h2, .weare-text h2, .location-info h2, .contact-info h2 {
+    margin-bottom: 0.75rem !important;
+  }
+  
+  .hero-sub {
+    margin-top: 1rem;
+  }
+  
+  .hero-meta {
+    margin-top: 1.5rem;
+  }
+  
+  .services-header,
+  .portfolio-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .service-card,
+  .value-card,
+  .key-item {
+    padding: 1rem;
+  }
+  
+  .service-card h3,
+  .value-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .service-card p,
+  .value-card p {
+    font-size: 0.75rem;
+  }
+  
+  .process-steps {
+    gap: 0.8rem;
+  }
+  
+  .step {
+    padding-bottom: 0.8rem;
+  }
+  
+  .step h4 {
+    font-size: 0.95rem;
+  }
+  
+  .step p {
+    font-size: 0.7rem;
+  }
+  
+  .address-card {
+    margin: 1rem 0;
+    padding: 1rem;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.6rem 1rem;
+  }
+  
+  .btn-submit,
+  .btn-map {
+    padding: 0.6rem 1.2rem;
+    margin-top: 0.5rem;
+  }
+  
+  .footer-logo {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .footer-social {
+    margin: 0.8rem 0;
+  }
+  
+  .footer-links {
+    margin: 0.8rem 0;
+  }
+}
+
+/* PETITE HAUTEUR EN TABLETTE (< 700px) */
+@media (max-height: 700px) and (min-width: 601px) and (max-width: 900px) {
+  section {
+    padding: 1.5rem 1.2rem;
+  }
+  
+  .kicker {
+    margin-bottom: 0.4rem;
+  }
+  
+  h2 {
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .service-card,
+  .value-card {
+    padding: 0.8rem;
+  }
+  
+  .weare-image,
+  .process-image,
+  .map-container {
+    height: 250px;
+  }
+}
+
+/* PETITE HAUTEUR SUR MOBILE */
+@media (max-height: 700px) and (max-width: 600px) {
+  section {
+    padding: 2rem 1.2rem;
+  }
+  
+  .kicker {
+    margin-bottom: 0.3rem;
+  }
+  
+  h2 {
+    margin-bottom: 0.5rem !important;
+  }
+}
+    </style>
+</head>
+
+<body>
+
+    <div class="nav">
+        <div class="logo">Womaths Studio</div>
+        <span>Création de sites web</span>
+    </div>
+
+    <div class="nav-dots">
+        <div class="nav-dot active" data-index="0"></div>
+        <div class="nav-dot" data-index="1"></div>
+        <div class="nav-dot" data-index="2"></div>
+        <div class="nav-dot" data-index="3"></div>
+        <div class="nav-dot" data-index="4"></div>
+        <div class="nav-dot" data-index="5"></div>
+        <div class="nav-dot" data-index="6"></div>
+        <div class="nav-dot" data-index="7"></div>
+        <div class="nav-dot" data-index="8"></div>
+        <div class="nav-dot" data-index="9"></div>
+        <div class="nav-dot" data-index="10"></div>
+        <div class="nav-dot" data-index="11"></div>
+        <div class="nav-dot" data-index="12"></div>
+    </div>
+
+    <div class="snap-container">
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-bg">
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1800&auto=format&fit=crop"
+                    alt="Womaths Studio - Création web">
+            </div>
+            <div class="hero-content">
+                <div class="kicker">Womaths Studio</div>
+                <h1 class="hero-title">
+                    Le web<br>
+                    comme une<span> présence rare.</span>
+                </h1>
+                <p class="hero-sub">
+                    Nous créons des sites web qui ne crient pas, ils respirent.
+                    Design sur mesure, expérience utilisateur silencieuse, performance discrète.
+                </p>
+                <div class="hero-meta">
+                    <div class="meta-pill">Design sur mesure</div>
+                    <div class="meta-pill">Expérience utilisateur</div>
+                    <div class="meta-pill">Performance rare</div>
+                </div>
+                <div class="line-gold"></div>
+            </div>
+        </section>
+
+
+        <!-- WE ARE SECTION -->
+        <section class="weare">
+            <div class="section-content weare-grid">
+                <div class="weare-text">
+                    <div class="kicker">Who we are</div>
+                    <h2>
+                        Nées du web,<br>
+                        <span>animées par le sens.</span>
+                    </h2>
+                    <p class="weare-description">
+                        Womaths Studio est né d'une conviction : le web mérite plus de silence,
+                        moins de bruit. Nous créons des espaces digitaux où chaque pixel a une raison d'être,
+                        où la performance ne se mesure pas à la vitesse mais à l'émotion qu'elle suscite.
+                    </p>
+                    <div class="signature-weare">
+                        <p>"Nous ne faisons pas que des sites. Nous construisons des présences rares."</p>
+                        <span>— Mozar, Womaths Studio</span>
+                    </div>
+                    <div class="line-gold"></div>
+                </div>
+                <div class="weare-image">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&auto=format&fit=crop"
+                        alt="Notre équipe">
+                </div>
+            </div>
+        </section>
+
+        <!-- VALUES - SECTION -->
+        <section class="values">
+            <div class="section-content">
+            <div class="kicker">Our ethos</div>
+            <h2>
+                Trois engagements,<br>
+                <span>une signature.</span>
+            </h2>
+            <div class="values-grid">
+                <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>Silence technique</h3>
+                <p>Un code propre, une performance discrète. Le site respire, il ne crie pas.</p>
+                </div>
+                <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <h3>Présence rare</h3>
+                <p>Chaque projet a sa raison d'être. Pas de surcharge, que l'essentiel.</p>
+                </div>
+                <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-hand-sparkles"></i>
+                </div>
+                <h3>Humilité exigeante</h3>
+                <p>On ne fait pas tout, on fait bien. La qualité avant le volume.</p>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!-- KEY NUMBERS - SECTION -->
+        <section class="keynumbers">
+            <div class="section-content">
+                <div class="kicker">Our promises</div>
+                <h2>
+                    Des chiffres<br>
+                    <span>qui parlent.</span>
+                </h2>
+                <div class="key-grid">
+                    <div class="key-item">
+                        <span class="key-number">100%</span>
+                        <p>Sur mesure</p>
+                        <span class="key-desc">Aucun template, aucune recopie</span>
+                    </div>
+                    <div class="key-item">
+                        <span class="key-number">∞</span>
+                        <p>Exigence</p>
+                        <span class="key-desc">La qualité n'a pas de limite</span>
+                    </div>
+                    <div class="key-item">
+                        <span class="key-number">24/7</span>
+                        <p>Présence rare</p>
+                        <span class="key-desc">Disponible, mais discrète</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section class="services">
+            <div class="section-content">
+                <div class="services-header">
+                    <div class="kicker">Our expertise</div>
+                    <h2 class="services-title">
+                        Ce que nous<br>
+                        <span>vous offrons.</span>
+                    </h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <span class="number">01</span>
+                        <h3>Stratégie digitale</h3>
+                        <p>Audit, positionnement, arborescence. Une boussole avant la création.</p>
+                    </div>
+                    <div class="service-card">
+                        <span class="number">02</span>
+                        <h3>Design signature</h3>
+                        <p>Une identité visuelle rare, des interfaces qui racontent votre histoire.</p>
+                    </div>
+                    <div class="service-card">
+                        <span class="number">03</span>
+                        <h3>Développement sur mesure</h3>
+                        <p>Code propre, performance optimale, expérience fluide sur tous les écrans.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- PROCESS -->
+        <section class="process">
+            <div class="section-content process-grid">
+                <div class="process-image">
+                    <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=1200&auto=format&fit=crop"
+                        alt="Notre processus">
+                </div>
+                <div>
+                    <div class="kicker">Our method</div>
+                    <h2 class="services-title" style="margin-bottom: 1.5rem;">
+                        Une création<br>
+                        <span>pas à pas.</span>
+                    </h2>
+                    <div class="process-steps">
+                        <div class="step">
+                            <span class="step-number">01</span>
+                            <div>
+                                <h4>Rencontre & écoute</h4>
+                                <p>Comprendre votre univers, vos besoins, votre singularité.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">02</span>
+                            <div>
+                                <h4>Design & conception</h4>
+                                <p>Maquettes sur mesure, validations itératives, précision.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">03</span>
+                            <div>
+                                <h4>Développement & lancement</h4>
+                                <p>Code robuste, tests rigoureux, accompagnement au démarrage.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO -->
+        <section class="portfolio">
+            <div class="section-content">
+                <div class="portfolio-header">
+                    <div class="kicker">Our work</div>
+                    <h2 class="services-title">
+                        Des sites qui<br>
+                        <span>imprègnent.</span>
+                    </h2>
+                </div>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&auto=format&fit=crop"
+                            alt="Projet 1">
+                        <div class="portfolio-overlay">
+                            <h4>Maison de mode</h4>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=800&auto=format&fit=crop"
+                            alt="Projet 2">
+                        <div class="portfolio-overlay">
+                            <h4>Cabinet d'avocat</h4>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&auto=format&fit=crop"
+                            alt="Projet 3">
+                        <div class="portfolio-overlay">
+                            <h4>Agence créative</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS - SECTION -->
+        <section class="testimonials">
+            <div class="section-content">
+                <div class="kicker">They trust us</div>
+                <h2>
+                    Ce qu'ils disent<br>
+                    <span>de nous.</span>
+                </h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">“</div>
+                        <p>Un accompagnement rare, une écoute précise. Womaths a capté mon univers en un échange. Je
+                            recommande sans hésiter.</p>
+                        <div class="testimonial-author">
+                            <strong>— Sophie M.</strong>
+                            <span>Créatrice de marque</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">“</div>
+                        <p>Le site dépasse mes attentes. Chaque détail a été pensé avec soin. Une véritable présence
+                            digitale.</p>
+                        <div class="testimonial-author">
+                            <strong>— Thomas L.</strong>
+                            <span>Artisan d'art</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LOCATION SECTION - LILLE M1 -->
+        <section class="location">
+            <div class="section-content location-grid">
+                <div class="location-info">
+                    <div class="kicker">Our place</div>
+                    <h2>
+                        Un écrin,<br>
+                        <span>une présence.</span>
+                    </h2>
+                    <p class="location-description">
+                        À Lille Fives, notre atelier vous accueille dans un espace
+                        où la création prend le temps qu'elle mérite, au cœur d'un quartier vivant et inspirant.
+                    </p>
+                    <div class="address-card">
+                        <p class="address-line">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--studio-gold)"
+                                stroke-width="1.5">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+
+                            45 Rue Malsence, 59000 Lille
+                        </p>
+                        <p class="address-line">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--studio-gold)"
+                                stroke-width="1.5">
+                                <rect x="2" y="4" width="20" height="16" rx="2" />
+                                <path d="m22 7-10 7L2 7" />
+                            </svg>
+                            hello@womaths.studio
+                        </p>
+                        <p class="address-line">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--studio-gold)"
+                                stroke-width="1.5">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                            </svg>
+                            +33 3 20 00 00 00
+                        </p>
+                    </div>
+
+                    <!-- TRANSPORTS AVEC M1 BADGE SUBTIL -->
+                    <div class="transport-info">
+                        <div class="metro-badge">M1</div>
+                        <div class="transport-detail">
+                            <span>Station Fives</span>
+                            <span>À 5 min à pied</span>
+                        </div>
+                    </div>
+
+                    <div class="transport-note">
+                        <p>Accès facile depuis la station Fives (M1).</p>
+                    </div>
+
+                    <a href="https://maps.google.com/?q=45+Rue+Malsence+59000+Lille" target="_blank" class="btn-map">
+                        Get directions →
+                    </a>
+                </div>
+
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2530.5678901234567!2d3.071234567890123!3d50.623456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c2d5b5b5b5b5b5%3A0x4a4a4a4a4a4a4a4a!2s45%20Rue%20Malsence%2C%2059000%20Lille!5e0!3m2!1sfr!2sfr!4v1700000000000!5m2!1sfr!2sfr"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                    </iframe>
+                    <div class="map-overlay"></div>
+                </div>
+            </div>
+        </section>
+        <!-- FAQ -->
+        <section class="faq">
+            <div class="section-content faq-grid">
+                <div class="faq-title">
+                    <div class="kicker">Common questions</div>
+                    <h2>
+                        Réponses<br>
+                        <span>claires.</span>
+                    </h2>
+                    <div class="line-gold" style="margin-top: 1.5rem;"></div>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Combien coûte un site web ?</h4>
+                            <span>+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner">
+                                Chaque projet est unique. Nos tarifs commencent à 3 500€ pour un site vitrine, jusqu'à
+                                15 000€ pour une plateforme sur mesure. Un devis personnalisé est établi après notre
+                                première rencontre.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Quel est le délai de création ?</h4>
+                            <span>+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner">
+                                Comptez 4 à 8 semaines selon la complexité du projet. Nous privilégions la qualité et
+                                les allers-retours itératifs pour garantir un résultat à votre image.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Proposez-vous un accompagnement après le lancement ?</h4>
+                            <span>+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner">
+                                Oui, nous proposons des forfaits de maintenance et d'évolution. Votre site doit vivre
+                                avec vous.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Est-ce que mon site sera responsive ?</h4>
+                            <span>+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner">
+                                Absolument. Chaque site que nous créons est pensé mobile-first et testé sur tous les
+                                supports.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT + FORMULAIRE -->
+        <section class="contact">
+            <div class="section-content contact-grid">
+                <div class="contact-info">
+                    <div class="kicker">Let's talk</div>
+                    <h2>
+                        Une idée,<br>
+                        <span>un échange.</span>
+                    </h2>
+                    <div class="contact-details">
+                        <p><strong>Email</strong> hello@womaths.studio</p>
+                        <p><strong>Téléphone</strong> +33 1 42 96 58 00</p>
+                        <p><strong>Disponibilité</strong> Lundi - Vendredi, 9h - 18h</p>
+                    </div>
+                    <div class="line-gold" style="margin-top: 1.5rem;"></div>
+                </div>
+
+                <form action="#" method="POST" class="form">
+                    <div class="form-group">
+                        <input type="text" name="nom" placeholder="Nom & prénom" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" name="telephone" placeholder="Téléphone">
+                    </div>
+                    <div class="form-group">
+                        <select name="projet">
+                            <option value="" disabled selected>Type de projet</option>
+                            <option value="vitrine">Site vitrine</option>
+                            <option value="ecommerce">Site e-commerce</option>
+                            <option value="application">Application web</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" rows="3" placeholder="Votre message..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Envoyer →</button>
+                    <p class="form-note">Votre projet est confidentiel. Réponse sous 48h.</p>
+                </form>
+            </div>
+        </section>
+
+        <!-- THOUGHTS - SECTION -->
+        <section class="thoughts">
+            <div class="section-content">
+                <div class="kicker">Notes & thoughts</div>
+                <h2>
+                    Quelques<br>
+                    <span>réflexions.</span>
+                </h2>
+                <div class="thoughts-list">
+                    <a href="#" class="thought-item">
+                        <span class="thought-title">Pourquoi le web a besoin de silence</span>
+                        <span class="thought-arrow">→</span>
+                    </a>
+                    <a href="#" class="thought-item">
+                        <span class="thought-title">3 choses que j'ai apprises en commençant</span>
+                        <span class="thought-arrow">→</span>
+                    </a>
+                    <a href="#" class="thought-item">
+                        <span class="thought-title">Le luxe silencieux : ma philosophie du web</span>
+                        <span class="thought-arrow">→</span>
+                    </a>
+                </div>
+                <div class="thoughts-more">
+                    <a href="#" class="btn-outline">Voir toutes les notes →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER SECTION -->
+        <section class="footer">
+            <div class="section-content footer-content">
+                <div class="footer-logo">Womaths Studio</div>
+
+                <!-- RÉSEAUX SOCIAUX -->
+                <div class="footer-social">
+                    <a href="https://instagram.com/womaths.studio" target="_blank" class="social-icon"
+                        aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://linkedin.com/company/womaths-studio" target="_blank" class="social-icon"
+                        aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://wa.me/33600000000" target="_blank" class="social-icon" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="mailto:hello@womaths.studio" class="social-icon" aria-label="Email">
+                        <i class="far fa-envelope"></i>
+                    </a>
+                </div>
+
+                <div class="footer-links">
+                    <a href="#">Mentions légales</a>
+                    <a href="#">Confidentialité</a>
+                    <a href="#">CGV</a>
+                    <a href="#">hello@womaths.studio</a>
+                </div>
+                <div class="footer-copyright">
+                    © 2026 Womaths Studio — Création de sites web sur mesure
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script>
+        // Navigation dots
+        const container = document.querySelector('.snap-container');
+        const sections = document.querySelectorAll('section');
+        const dots = document.querySelectorAll('.nav-dot');
+
+        function updateActiveDot() {
+            const scrollPos = container.scrollTop;
+            const sectionHeight = container.clientHeight;
+            const activeIndex = Math.round(scrollPos / sectionHeight);
+
+            dots.forEach((dot, i) => {
+                if (i === activeIndex) dot.classList.add('active');
+                else dot.classList.remove('active');
+            });
+        }
+
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                container.scrollTo({ top: i * container.clientHeight, behavior: 'smooth' });
+            });
+        });
+
+        container.addEventListener('scroll', () => requestAnimationFrame(updateActiveDot));
+        updateActiveDot();
+
+        // Parallax hero
+        gsap.to(".hero-bg img", {
+            scale: 1.12,
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: 1.2,
+                container: container
+            }
+        });
+
+        /* ============================================
+           FAQ ACCORDÉON - FLUIDE AVEC FERMETURE AUTO
+           ============================================ */
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        function closeAllFaqItems() {
+            faqItems.forEach((item) => {
+                const answer = item.querySelector('.faq-answer');
+                item.classList.remove('active');
+                if (answer) {
+                    answer.style.maxHeight = null;
+                }
+            });
+        }
+
+        faqItems.forEach((item) => {
+            const question = item.querySelector('.faq-question');
+            const answer = item.querySelector('.faq-answer');
+
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+
+                // Ferme tous les items
+                closeAllFaqItems();
+
+                // Ouvre l'item cliqué s'il n'était pas actif
+                if (!isActive) {
+                    item.classList.add('active');
+                    if (answer) {
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                    }
+                }
+            });
+        });
+
+        // ScrollTrigger refresh
+        container.addEventListener('scroll', () => ScrollTrigger.update());
+        window.addEventListener('resize', () => ScrollTrigger.refresh());
+    </script>
+
+</body>
+
+</html>
