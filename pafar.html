@@ -44,6 +44,322 @@
         }
 
         /* ============================================
+   ANIMATIONS - LUXE SILENCIEUX
+   ============================================ */
+
+/* Animation de base : apparition en fondu + léger déplacement */
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Classes d'animation */
+.animate-fadeUp {
+  animation: fadeUp 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-fadeLeft {
+  animation: fadeLeft 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+}
+
+.animate-fadeRight {
+  animation: fadeRight 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+}
+
+/* Delais (stagger effect) */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* État initial : invisible */
+.reveal {
+  opacity: 0;
+}
+
+/* Désactiver les animations sur mobile pour la performance */
+@media (max-width: 768px) {
+  .reveal {
+    opacity: 1;
+  }
+  
+  .animate-fadeUp, .animate-fadeIn, .animate-fadeLeft, .animate-fadeRight, .animate-scaleIn {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+        /* ============================================
+   HEADER / NAVIGATION MODERNE
+   ============================================ */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 12, 18, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 0.5px solid rgba(198, 164, 92, 0.2);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo a {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            letter-spacing: 0.15em;
+            font-weight: 500;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo a:hover {
+            color: var(--studio-gold);
+        }
+
+        /* Navigation Desktop */
+        .nav-desktop {
+            display: block;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--studio-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--studio-gold);
+        }
+
+        /* Tagline */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .tagline {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 300;
+            color: var(--stone);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+
+        .bar {
+            width: 24px;
+            height: 1.5px;
+            background: var(--studio-gold);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active .bar:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg);
+        }
+
+        .hamburger.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active .bar:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg);
+        }
+
+        /* Navigation Mobile */
+        .nav-mobile {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 320px;
+            height: 100vh;
+            background: rgba(10, 12, 18, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-left: 0.5px solid rgba(198, 164, 92, 0.3);
+        }
+
+        .nav-mobile.active {
+            right: 0;
+        }
+
+        .nav-mobile-menu {
+            list-style: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .nav-mobile-menu li {
+            margin: 2rem 0;
+        }
+
+        .nav-mobile-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+        }
+
+        .nav-mobile-link:hover {
+            color: var(--studio-gold);
+        }
+
+        /* Overlay quand menu mobile ouvert */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0.8rem 1.2rem;
+            }
+
+            .nav-desktop {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .tagline {
+                display: none;
+            }
+
+            .nav-right {
+                gap: 1rem;
+            }
+        }
+
+        /* ============================================
                2. SNAP SCROLL CONTAINER
                ============================================ */
         .snap-container {
@@ -63,6 +379,7 @@
             scroll-snap-align: start;
             padding: 0 2rem;
         }
+
         /* ============================================
                3. TYPOGRAPHIE GLOBALE
                ============================================ */
@@ -378,58 +695,58 @@
         SECTION VALUES
         ============================================ */
         .values {
-        background: var(--deep);
-        text-align: center;
+            background: var(--deep);
+            text-align: center;
         }
 
         .values h2 {
-        font-size: clamp(2.8rem, 6vw, 4.5rem);
-        line-height: 1.1;
-        letter-spacing: -0.04em;
-        margin-bottom: 3rem;
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            margin-bottom: 3rem;
         }
 
         .values h2 span {
-        color: var(--studio-gold);
+            color: var(--studio-gold);
         }
 
         .values-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-        max-width: 1100px;
-        margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
         .value-card {
-        padding: 2rem;
-        border: 0.5px solid rgba(198, 164, 92, 0.2);
-        background: rgba(255, 255, 255, 0.02);
-        transition: all 0.4s ease;
+            padding: 2rem;
+            border: 0.5px solid rgba(198, 164, 92, 0.2);
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.4s ease;
         }
 
         .value-card:hover {
-        border-color: rgba(198, 164, 92, 0.5);
-        transform: translateY(-5px);
+            border-color: rgba(198, 164, 92, 0.5);
+            transform: translateY(-5px);
         }
 
         .value-icon {
-        font-size: 2.2rem;
-        margin-bottom: 1rem;
-        color: var(--studio-gold);
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: var(--studio-gold);
         }
 
         .value-card h3 {
-        font-size: 1.4rem;
-        font-weight: 500;
-        margin-bottom: 1rem;
-        letter-spacing: -0.02em;
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
         }
 
         .value-card p {
-        font-size: 0.85rem;
-        color: #C5C0B5;
-        line-height: 1.6;
+            font-size: 0.85rem;
+            color: #C5C0B5;
+            line-height: 1.6;
         }
 
 
@@ -555,64 +872,148 @@
             color: #C5C0B5;
             line-height: 1.5;
         }
+/* ============================================
+   SECTION PORTFOLIO
+   ============================================ */
+   .portfolio {
+  background: var(--graphite);
+}
 
-        /* ============================================
-               11. SECTION PORTFOLIO
-               ============================================ */
-        .portfolio {
-            background: var(--graphite);
-        }
+.portfolio-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
 
-        .portfolio-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
+.services-title {
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
 
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-        }
+.services-title span {
+  color: var(--studio-gold);
+}
 
-        .portfolio-item {
-            position: relative;
-            height: 280px;
-            overflow: hidden;
-            border-radius: 12px;
-            cursor: pointer;
-        }
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
 
-        .portfolio-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
+.portfolio-item {
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: pointer;
+}
 
-        .portfolio-item:hover img {
-            transform: scale(1.08);
-        }
+/* IMAGE : Noir & blanc au repos, couleur au hover */
+.portfolio-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.6s ease;
+  filter: grayscale(100%);
+}
 
-        .portfolio-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(0deg, rgba(10, 12, 18, 0.85) 0%, transparent 60%);
-            display: flex;
-            align-items: flex-end;
-            padding: 1.2rem;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
+.portfolio-item:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
 
-        .portfolio-item:hover .portfolio-overlay {
-            opacity: 1;
-        }
+/* OVERLAY GENERAL : très léger, juste pour assombrir un peu */
+.portfolio-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(10, 12, 18, 0.3) 0%, rgba(10, 12, 18, 0.1) 60%, transparent 100%);
+  display: flex;
+  align-items: flex-end;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
 
-        .portfolio-overlay h4 {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: white;
-        }
+
+
+/* CONTENU : fond TRÈS FONCÉ pour une lisibilité parfaite */
+.overlay-content {
+  width: 100%;
+  padding: 1.2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+  background: linear-gradient(90deg, rgba(10, 12, 18, 0.55) 0%, rgba(10, 12, 18, 0.35) 100%);
+  backdrop-filter: blur(4px);
+  border-left: 2px solid var(--studio-gold);
+}
+
+.portfolio-item:hover .overlay-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.portfolio-overlay h4 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.portfolio-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--studio-gold);
+  text-decoration: none;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: gap 0.3s ease;
+}
+
+.portfolio-link i {
+  font-size: 0.65rem;
+  transition: transform 0.3s ease;
+}
+
+.portfolio-link:hover {
+  gap: 0.8rem;
+}
+
+.portfolio-link:hover i {
+  transform: translateX(3px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .hero {
+        padding-top: 8rem;
+        padding-bottom: 4rem;
+
+    }
+    .kicker-mobile{
+        display: none;
+    }
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .portfolio-item {
+    height: 220px;
+  }
+
+  .overlay-content {
+    padding: 0.8rem;
+  }
+
+  .portfolio-overlay h4 {
+    font-size: 0.85rem;
+  }
+}
 
         /* ============================================
                12. SECTION TESTIMONIALS
@@ -1150,416 +1551,456 @@
             margin-top: 1.5rem;
         }
 
-       /* ============================================
+        /* ============================================
    18. RESPONSIVE (Mobile, Tablette, Desktop)
    ============================================ */
 
-/* DESKTOP (> 900px) - Hauteur fixe + snap */
-@media (min-width: 901px) {
-  section {
-    height: 100vh;
-    overflow: hidden;
-  }
-  
-  .snap-container {
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-    height: 100vh;
-  }
-  
-  body {
-    overflow: hidden;
-  }
-}
+        /* DESKTOP (> 900px) - Hauteur fixe + snap */
+        @media (min-width: 901px) {
+            section {
+                height: 100vh;
+                overflow: hidden;
+            }
 
-/* TABLETTE LARGE (768px - 900px) - Hauteur min + snap conservé */
-@media (min-width: 769px) and (max-width: 900px) {
-  section {
-    min-height: 100vh;
-    height: auto;
-    overflow: visible;
-    padding: 2rem 1.5rem;
-  }
-  
-  .snap-container {
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-    height: 100vh;
-  }
-  
-  body {
-    overflow: hidden;
-  }
-  
-  .services-grid,
-  .values-grid,
-  .key-grid,
-  .portfolio-grid,
-  .testimonial-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-  
-  .process-grid,
-  .weare-grid,
-  .location-grid,
-  .faq-grid,
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .process-image,
-  .weare-image,
-  .map-container {
-    height: 380px;
-  }
-}
+            .snap-container {
+                scroll-snap-type: y mandatory;
+                overflow-y: scroll;
+                height: 100vh;
+            }
 
-/* TABLETTE PETITE (601px - 768px) - Hauteur min + snap conservé */
-@media (min-width: 601px) and (max-width: 768px) {
-  section {
-    min-height: 100vh;
-    height: auto;
-    overflow: visible;
-    padding: 2rem 1.2rem;
-  }
-  
-  .snap-container {
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-    height: 100vh;
-  }
-  
-  body {
-    overflow: hidden;
-  }
-  
-  .nav {
-    padding: 1rem 1.2rem;
-  }
-  
-  .nav-dots {
-    display: none;
-  }
-  
-  .services-grid,
-  .values-grid,
-  .key-grid,
-  .portfolio-grid,
-  .testimonial-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-  
-  .process-grid,
-  .weare-grid,
-  .location-grid,
-  .faq-grid,
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .process-image,
-  .weare-image,
-  .map-container {
-    height: 320px;
-  }
-  
-  .portfolio-item {
-    height: 220px;
-  }
-  
-  .floating-badge {
-    padding: 0.8rem 1.2rem;
-  }
-  
-  .transport-info {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .footer-links {
-    gap: 1rem;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .footer-social {
-    gap: 1rem;
-  }
-  
-  .social-icon {
-    width: 34px;
-    height: 34px;
-    font-size: 0.9rem;
-  }
-}
+            body {
+                overflow: hidden;
+            }
+        }
 
-/* MOBILE (< 600px) - Pas de snap, scroll classique */
-@media (max-width: 600px) {
-  body {
-    overflow: auto;
-  }
-  
-  .snap-container {
-    scroll-snap-type: none;
-    overflow-y: auto;
-    height: auto;
-  }
-  
-  section {
-    min-height: auto;
-    height: auto;
-    overflow: visible;
-    padding: 3rem 1.2rem;
-    scroll-snap-align: none;
-  }
-  
-  .nav {
-    padding: 1rem 1.2rem;
-  }
-  
-  .nav-dots {
-    display: none;
-  }
-  
-  .services-grid,
-  .values-grid,
-  .key-grid,
-  .portfolio-grid,
-  .testimonial-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .process-grid,
-  .weare-grid,
-  .location-grid,
-  .faq-grid,
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .process-image,
-  .weare-image,
-  .map-container {
-    height: 280px;
-  }
-  
-  .portfolio-item {
-    height: 220px;
-  }
-  
-  .floating-badge {
-    padding: 0.8rem 1.2rem;
-  }
-  
-  .transport-info {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .footer-links {
-    gap: 1rem;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .footer-social {
-    gap: 1rem;
-  }
-  
-  .social-icon {
-    width: 34px;
-    height: 34px;
-    font-size: 0.9rem;
-  }
-  
-  /* Petit mobile - typographie réduite */
-  .hero-title {
-    font-size: clamp(2.5rem, 8vw, 3.5rem);
-  }
-  
-  .hero-sub {
-    font-size: 0.85rem;
-  }
-  
-  .kicker {
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-  }
-  
-  .service-card h3,
-  .value-card h3 {
-    font-size: 1.2rem;
-  }
-  
-  .service-card p,
-  .value-card p {
-    font-size: 0.75rem;
-  }
-  
-  .testimonial-card {
-    padding: 1.2rem;
-  }
-  
-  .address-line {
-    font-size: 0.75rem;
-    flex-wrap: wrap;
-  }
-  
-  .metro-badge {
-    width: 32px;
-    height: 32px;
-    font-size: 0.8rem;
-  }
-}
+        /* TABLETTE LARGE (768px - 900px) - Hauteur min + snap conservé */
+        @media (min-width: 769px) and (max-width: 900px) {
+            section {
+                min-height: 100vh;
+                height: auto;
+                overflow: visible;
+                padding: 2rem 1.5rem;
+            }
 
-/* PETITE HAUTEUR (< 700px) - Desktop uniquement */
-@media (max-height: 700px) and (min-width: 901px) {
-  section {
-    padding: 0 2rem;
-  }
-  
-  .kicker {
-    margin-bottom: 0.5rem;
-    font-size: 0.6rem;
-  }
-  
-  h2, .services-title, .values h2, .weare-text h2, .location-info h2, .contact-info h2 {
-    margin-bottom: 0.75rem !important;
-  }
-  
-  .hero-sub {
-    margin-top: 1rem;
-  }
-  
-  .hero-meta {
-    margin-top: 1.5rem;
-  }
-  
-  .services-header,
-  .portfolio-header {
-    margin-bottom: 1.5rem;
-  }
-  
-  .service-card,
-  .value-card,
-  .key-item {
-    padding: 1rem;
-  }
-  
-  .service-card h3,
-  .value-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .service-card p,
-  .value-card p {
-    font-size: 0.75rem;
-  }
-  
-  .process-steps {
-    gap: 0.8rem;
-  }
-  
-  .step {
-    padding-bottom: 0.8rem;
-  }
-  
-  .step h4 {
-    font-size: 0.95rem;
-  }
-  
-  .step p {
-    font-size: 0.7rem;
-  }
-  
-  .address-card {
-    margin: 1rem 0;
-    padding: 1rem;
-  }
-  
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    padding: 0.6rem 1rem;
-  }
-  
-  .btn-submit,
-  .btn-map {
-    padding: 0.6rem 1.2rem;
-    margin-top: 0.5rem;
-  }
-  
-  .footer-logo {
-    font-size: 1.3rem;
-    margin-bottom: 0.8rem;
-  }
-  
-  .footer-social {
-    margin: 0.8rem 0;
-  }
-  
-  .footer-links {
-    margin: 0.8rem 0;
-  }
-}
+            .snap-container {
+                scroll-snap-type: y mandatory;
+                overflow-y: scroll;
+                height: 100vh;
+            }
 
-/* PETITE HAUTEUR EN TABLETTE (< 700px) */
-@media (max-height: 700px) and (min-width: 601px) and (max-width: 900px) {
-  section {
-    padding: 1.5rem 1.2rem;
-  }
-  
-  .kicker {
-    margin-bottom: 0.4rem;
-  }
-  
-  h2 {
-    margin-bottom: 0.5rem !important;
-  }
-  
-  .service-card,
-  .value-card {
-    padding: 0.8rem;
-  }
-  
-  .weare-image,
-  .process-image,
-  .map-container {
-    height: 250px;
-  }
-}
+            body {
+                overflow: hidden;
+            }
 
-/* PETITE HAUTEUR SUR MOBILE */
-@media (max-height: 700px) and (max-width: 600px) {
-  section {
-    padding: 2rem 1.2rem;
-  }
-  
-  .kicker {
-    margin-bottom: 0.3rem;
-  }
-  
-  h2 {
-    margin-bottom: 0.5rem !important;
-  }
-}
+            .services-grid,
+            .values-grid,
+            .key-grid,
+            .portfolio-grid,
+            .testimonial-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .process-grid,
+            .weare-grid,
+            .location-grid,
+            .faq-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .process-image,
+            .weare-image,
+            .map-container {
+                height: 380px;
+            }
+        }
+
+        /* TABLETTE PETITE (601px - 768px) - Hauteur min + snap conservé */
+        @media (min-width: 601px) and (max-width: 768px) {
+            section {
+                min-height: 100vh;
+                height: auto;
+                overflow: visible;
+                padding: 2rem 1.2rem;
+             
+            }
+
+            .snap-container {
+                scroll-snap-type: y mandatory;
+                overflow-y: scroll;
+                height: 100vh;
+            }
+
+            body {
+                overflow: hidden;
+            }
+
+            .nav {
+                padding: 1rem 1.2rem;
+            }
+
+            .nav-dots {
+                display: none;
+            }
+
+            .services-grid,
+            .values-grid,
+            .key-grid,
+            .portfolio-grid,
+            .testimonial-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .process-grid,
+            .weare-grid,
+            .location-grid,
+            .faq-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .process-image,
+            .weare-image,
+            .map-container {
+                height: 320px;
+            }
+
+            .portfolio-item {
+                height: 220px;
+            }
+
+            .floating-badge {
+                padding: 0.8rem 1.2rem;
+            }
+
+            .transport-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-links {
+                gap: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-social {
+                gap: 1rem;
+            }
+
+            .social-icon {
+                width: 34px;
+                height: 34px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* MOBILE (< 600px) - Pas de snap, scroll classique */
+        @media (max-width: 600px) {
+            body {
+                overflow: auto;
+            }
+
+            .snap-container {
+                scroll-snap-type: none;
+                overflow-y: auto;
+                height: auto;
+            }
+
+            section {
+                min-height: auto;
+                height: auto;
+                overflow: visible;
+                padding: 3rem 1.2rem;
+                scroll-snap-align: none;
+            }
+
+            .nav {
+                padding: 1rem 1.2rem;
+            }
+
+            .nav-dots {
+                display: none;
+            }
+
+            .services-grid,
+            .values-grid,
+            .key-grid,
+            .portfolio-grid,
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .process-grid,
+            .weare-grid,
+            .location-grid,
+            .faq-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .process-image,
+            .weare-image,
+            .map-container {
+                height: 280px;
+            }
+
+            .portfolio-item {
+                height: 220px;
+            }
+
+            .floating-badge {
+                padding: 0.8rem 1.2rem;
+            }
+
+            .transport-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-links {
+                gap: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-social {
+                gap: 1rem;
+            }
+
+            .social-icon {
+                width: 34px;
+                height: 34px;
+                font-size: 0.9rem;
+            }
+
+            /* Petit mobile - typographie réduite */
+            .hero-title {
+                font-size: clamp(2.5rem, 8vw, 3.5rem);
+            }
+
+            .hero-sub {
+                font-size: 0.85rem;
+            }
+
+            .kicker {
+                font-size: 0.6rem;
+                letter-spacing: 0.2em;
+            }
+
+            .service-card h3,
+            .value-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .service-card p,
+            .value-card p {
+                font-size: 0.75rem;
+            }
+
+            .testimonial-card {
+                padding: 1.2rem;
+            }
+
+            .address-line {
+                font-size: 0.75rem;
+                flex-wrap: wrap;
+            }
+
+            .metro-badge {
+                width: 32px;
+                height: 32px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* PETITE HAUTEUR (< 700px) - Desktop uniquement */
+        @media (max-height: 700px) and (min-width: 901px) {
+            section {
+                padding: 0 2rem;
+            }
+
+            .kicker {
+                margin-bottom: 0.5rem;
+                font-size: 0.6rem;
+            }
+
+            h2,
+            .services-title,
+            .values h2,
+            .weare-text h2,
+            .location-info h2,
+            .contact-info h2 {
+                margin-bottom: 0.75rem !important;
+            }
+
+            .hero-sub {
+                margin-top: 1rem;
+            }
+
+            .hero-meta {
+                margin-top: 1.5rem;
+            }
+
+            .services-header,
+            .portfolio-header {
+                margin-bottom: 1.5rem;
+            }
+
+            .service-card,
+            .value-card,
+            .key-item {
+                padding: 1rem;
+            }
+
+            .service-card h3,
+            .value-card h3 {
+                font-size: 1.2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .service-card p,
+            .value-card p {
+                font-size: 0.75rem;
+            }
+
+            .process-steps {
+                gap: 0.8rem;
+            }
+
+            .step {
+                padding-bottom: 0.8rem;
+            }
+
+            .step h4 {
+                font-size: 0.95rem;
+            }
+
+            .step p {
+                font-size: 0.7rem;
+            }
+
+            .address-card {
+                margin: 1rem 0;
+                padding: 1rem;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 0.6rem 1rem;
+            }
+
+            .btn-submit,
+            .btn-map {
+                padding: 0.6rem 1.2rem;
+                margin-top: 0.5rem;
+            }
+
+            .footer-logo {
+                font-size: 1.3rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .footer-social {
+                margin: 0.8rem 0;
+            }
+
+            .footer-links {
+                margin: 0.8rem 0;
+            }
+        }
+
+        /* PETITE HAUTEUR EN TABLETTE (< 700px) */
+        @media (max-height: 700px) and (min-width: 601px) and (max-width: 900px) {
+            section {
+                padding: 1.5rem 1.2rem;
+            }
+
+            .kicker {
+                margin-bottom: 0.4rem;
+            }
+
+            h2 {
+                margin-bottom: 0.5rem !important;
+            }
+
+            .service-card,
+            .value-card {
+                padding: 0.8rem;
+            }
+
+            .weare-image,
+            .process-image,
+            .map-container {
+                height: 250px;
+            }
+        }
+
+        /* PETITE HAUTEUR SUR MOBILE */
+        @media (max-height: 700px) and (max-width: 600px) {
+            section {
+                padding: 2rem 1.2rem;
+            }
+
+            .kicker {
+                margin-bottom: 0.3rem;
+            }
+
+            h2 {
+                margin-bottom: 0.5rem !important;
+            }
+        }
+
     </style>
 </head>
 
 <body>
+    <!-- HEADER / NAVIGATION -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="#">Womaths Studio</a>
+            </div>
 
-    <div class="nav">
-        <div class="logo">Womaths Studio</div>
-        <span>Création de sites web</span>
-    </div>
+            <!-- Navigation Desktop -->
+            <nav class="nav-desktop">
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link">Accueil</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#work" class="nav-link">Réalisations</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
 
+            <div class="nav-right">
+                <span class="tagline">Création de sites web</span>
+
+                <!-- Bouton Hamburger (mobile) -->
+                <button class="hamburger" id="hamburger" aria-label="Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation Mobile -->
+        <div class="nav-mobile" id="navMobile">
+            <ul class="nav-mobile-menu">
+                <li><a href="#home" class="nav-mobile-link">Accueil</a></li>
+                <li><a href="#services" class="nav-mobile-link">Services</a></li>
+                <li><a href="#work" class="nav-mobile-link">Réalisations</a></li>
+                <li><a href="#contact" class="nav-mobile-link">Contact</a></li>
+            </ul>
+        </div>
+    </header>
     <div class="nav-dots">
         <div class="nav-dot active" data-index="0"></div>
         <div class="nav-dot" data-index="1"></div>
@@ -1575,505 +2016,487 @@
         <div class="nav-dot" data-index="11"></div>
         <div class="nav-dot" data-index="12"></div>
     </div>
-
     <div class="snap-container">
-
+   
         <!-- HERO -->
-        <section class="hero">
-            <div class="hero-bg">
-                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1800&auto=format&fit=crop"
-                    alt="Womaths Studio - Création web">
+        <section id="home" class="hero">
+          <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1800&auto=format&fit=crop" alt="Womaths Studio - Création web">
+          </div>
+          <div class="hero-content">
+            <div class="kicker reveal kicker-mobile" data-animation="fadeUp">Womaths Studio</div>
+            <h1 class="hero-title reveal" data-animation="fadeUp" class="delay-100">
+              Le web<br>
+              comme une<span> présence rare.</span>
+            </h1>
+            <p class="hero-sub reveal" data-animation="fadeUp" class="delay-200">
+              Nous créons des sites web qui ne crient pas, ils respirent.
+            </p>
+            <div class="hero-meta reveal" data-animation="fadeUp" class="delay-300">
+              <div class="meta-pill">Design sur mesure</div>
+              <div class="meta-pill">Expérience utilisateur</div>
+              <div class="meta-pill">Performance rare</div>
             </div>
-            <div class="hero-content">
-                <div class="kicker">Womaths Studio</div>
-                <h1 class="hero-title">
-                    Le web<br>
-                    comme une<span> présence rare.</span>
-                </h1>
-                <p class="hero-sub">
-                    Nous créons des sites web qui ne crient pas, ils respirent.
-                    Design sur mesure, expérience utilisateur silencieuse, performance discrète.
-                </p>
-                <div class="hero-meta">
-                    <div class="meta-pill">Design sur mesure</div>
-                    <div class="meta-pill">Expérience utilisateur</div>
-                    <div class="meta-pill">Performance rare</div>
-                </div>
-                <div class="line-gold"></div>
-            </div>
+            <div class="line-gold reveal" data-animation="fadeIn" class="delay-400"></div>
+          </div>
         </section>
-
-
+      
         <!-- WE ARE SECTION -->
         <section class="weare">
-            <div class="section-content weare-grid">
-                <div class="weare-text">
-                    <div class="kicker">Who we are</div>
-                    <h2>
-                        Nées du web,<br>
-                        <span>animées par le sens.</span>
-                    </h2>
-                    <p class="weare-description">
-                        Womaths Studio est né d'une conviction : le web mérite plus de silence,
-                        moins de bruit. Nous créons des espaces digitaux où chaque pixel a une raison d'être,
-                        où la performance ne se mesure pas à la vitesse mais à l'émotion qu'elle suscite.
-                    </p>
-                    <div class="signature-weare">
-                        <p>"Nous ne faisons pas que des sites. Nous construisons des présences rares."</p>
-                        <span>— Mozar, Womaths Studio</span>
-                    </div>
-                    <div class="line-gold"></div>
-                </div>
-                <div class="weare-image">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&auto=format&fit=crop"
-                        alt="Notre équipe">
-                </div>
+          <div class="section-content weare-grid">
+            <div class="weare-text">
+              <div class="kicker reveal" data-animation="fadeUp">Who we are</div>
+              <h2 class="reveal" data-animation="fadeUp" class="delay-100">
+                Nées du web,<br>
+                <span>animées par le sens.</span>
+              </h2>
+              <p class="weare-description reveal" data-animation="fadeUp" class="delay-200">
+                Womaths Studio est né d'une conviction : le web mérite plus de silence,
+                moins de bruit. Nous créons des espaces digitaux où chaque pixel a une raison d'être,
+                où la performance ne se mesure pas à la vitesse mais à l'émotion qu'elle suscite.
+              </p>
+              <div class="signature-weare reveal" data-animation="fadeLeft" class="delay-300">
+                <p>"Nous ne faisons pas que des sites. Nous construisons des présences rares."</p>
+                <span>— Mozar, Womaths Studio</span>
+              </div>
+              <div class="line-gold reveal" data-animation="fadeIn" class="delay-400"></div>
             </div>
+            <div class="weare-image reveal" data-animation="scaleIn" class="delay-200">
+              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&auto=format&fit=crop" alt="Notre équipe">
+            </div>
+          </div>
         </section>
-
+      
         <!-- VALUES - SECTION -->
         <section class="values">
-            <div class="section-content">
-            <div class="kicker">Our ethos</div>
-            <h2>
-                Trois engagements,<br>
-                <span>une signature.</span>
+          <div class="section-content">
+            <div class="kicker reveal" data-animation="fadeUp">Our ethos</div>
+            <h2 class="reveal" data-animation="fadeUp" class="delay-100">
+              Trois engagements,<br>
+              <span>une signature.</span>
             </h2>
             <div class="values-grid">
-                <div class="value-card">
-                <div class="value-icon">
-                    <i class="fas fa-code"></i>
-                </div>
+              <div class="value-card reveal" data-animation="fadeUp" class="delay-100">
+                <div class="value-icon"><i class="fas fa-code"></i></div>
                 <h3>Silence technique</h3>
                 <p>Un code propre, une performance discrète. Le site respire, il ne crie pas.</p>
-                </div>
-                <div class="value-card">
-                <div class="value-icon">
-                    <i class="fas fa-gem"></i>
-                </div>
+              </div>
+              <div class="value-card reveal" data-animation="fadeUp" class="delay-200">
+                <div class="value-icon"><i class="fas fa-gem"></i></div>
                 <h3>Présence rare</h3>
                 <p>Chaque projet a sa raison d'être. Pas de surcharge, que l'essentiel.</p>
-                </div>
-                <div class="value-card">
-                <div class="value-icon">
-                    <i class="fas fa-hand-sparkles"></i>
-                </div>
+              </div>
+              <div class="value-card reveal" data-animation="fadeUp" class="delay-300">
+                <div class="value-icon"><i class="fas fa-hand-sparkles"></i></div>
                 <h3>Humilité exigeante</h3>
                 <p>On ne fait pas tout, on fait bien. La qualité avant le volume.</p>
-                </div>
+              </div>
             </div>
-            </div>
+          </div>
         </section>
+      
         <!-- KEY NUMBERS - SECTION -->
         <section class="keynumbers">
-            <div class="section-content">
-                <div class="kicker">Our promises</div>
-                <h2>
-                    Des chiffres<br>
-                    <span>qui parlent.</span>
-                </h2>
-                <div class="key-grid">
-                    <div class="key-item">
-                        <span class="key-number">100%</span>
-                        <p>Sur mesure</p>
-                        <span class="key-desc">Aucun template, aucune recopie</span>
-                    </div>
-                    <div class="key-item">
-                        <span class="key-number">∞</span>
-                        <p>Exigence</p>
-                        <span class="key-desc">La qualité n'a pas de limite</span>
-                    </div>
-                    <div class="key-item">
-                        <span class="key-number">24/7</span>
-                        <p>Présence rare</p>
-                        <span class="key-desc">Disponible, mais discrète</span>
-                    </div>
-                </div>
+          <div class="section-content">
+            <div class="kicker reveal" data-animation="fadeUp">Our promises</div>
+            <h2 class="reveal" data-animation="fadeUp" class="delay-100">
+              Des chiffres<br>
+              <span>qui parlent.</span>
+            </h2>
+            <div class="key-grid">
+              <div class="key-item reveal" data-animation="scaleIn" class="delay-100">
+                <span class="key-number">100%</span>
+                <p>Sur mesure</p>
+                <span class="key-desc">Aucun template, aucune recopie</span>
+              </div>
+              <div class="key-item reveal" data-animation="scaleIn" class="delay-200">
+                <span class="key-number">∞</span>
+                <p>Exigence</p>
+                <span class="key-desc">La qualité n'a pas de limite</span>
+              </div>
+              <div class="key-item reveal" data-animation="scaleIn" class="delay-300">
+                <span class="key-number">24/7</span>
+                <p>Présence rare</p>
+                <span class="key-desc">Disponible, mais discrète</span>
+              </div>
             </div>
+          </div>
         </section>
-
+      
         <!-- SERVICES -->
         <section class="services">
-            <div class="section-content">
-                <div class="services-header">
-                    <div class="kicker">Our expertise</div>
-                    <h2 class="services-title">
-                        Ce que nous<br>
-                        <span>vous offrons.</span>
-                    </h2>
-                </div>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <span class="number">01</span>
-                        <h3>Stratégie digitale</h3>
-                        <p>Audit, positionnement, arborescence. Une boussole avant la création.</p>
-                    </div>
-                    <div class="service-card">
-                        <span class="number">02</span>
-                        <h3>Design signature</h3>
-                        <p>Une identité visuelle rare, des interfaces qui racontent votre histoire.</p>
-                    </div>
-                    <div class="service-card">
-                        <span class="number">03</span>
-                        <h3>Développement sur mesure</h3>
-                        <p>Code propre, performance optimale, expérience fluide sur tous les écrans.</p>
-                    </div>
-                </div>
+          <div class="section-content">
+            <div class="services-header">
+              <div class="kicker reveal" data-animation="fadeUp">Our expertise</div>
+              <h2 class="services-title reveal" data-animation="fadeUp" class="delay-100">
+                Ce que nous<br>
+                <span>vous offrons.</span>
+              </h2>
             </div>
+            <div class="services-grid">
+              <div class="service-card reveal" data-animation="fadeLeft" class="delay-100">
+                <span class="number">01</span>
+                <h3>Stratégie digitale</h3>
+                <p>Audit, positionnement, arborescence.</p>
+              </div>
+              <div class="service-card reveal" data-animation="scaleIn" class="delay-200">
+                <span class="number">02</span>
+                <h3>Design signature</h3>
+                <p>Une identité visuelle rare.</p>
+              </div>
+              <div class="service-card reveal" data-animation="fadeRight" class="delay-300">
+                <span class="number">03</span>
+                <h3>Développement sur mesure</h3>
+                <p>Code propre, performance optimale.</p>
+              </div>
+            </div>
+          </div>
         </section>
-
-
+      
         <!-- PROCESS -->
         <section class="process">
-            <div class="section-content process-grid">
-                <div class="process-image">
-                    <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=1200&auto=format&fit=crop"
-                        alt="Notre processus">
-                </div>
-                <div>
-                    <div class="kicker">Our method</div>
-                    <h2 class="services-title" style="margin-bottom: 1.5rem;">
-                        Une création<br>
-                        <span>pas à pas.</span>
-                    </h2>
-                    <div class="process-steps">
-                        <div class="step">
-                            <span class="step-number">01</span>
-                            <div>
-                                <h4>Rencontre & écoute</h4>
-                                <p>Comprendre votre univers, vos besoins, votre singularité.</p>
-                            </div>
-                        </div>
-                        <div class="step">
-                            <span class="step-number">02</span>
-                            <div>
-                                <h4>Design & conception</h4>
-                                <p>Maquettes sur mesure, validations itératives, précision.</p>
-                            </div>
-                        </div>
-                        <div class="step">
-                            <span class="step-number">03</span>
-                            <div>
-                                <h4>Développement & lancement</h4>
-                                <p>Code robuste, tests rigoureux, accompagnement au démarrage.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          <div class="section-content process-grid">
+            <div class="process-image reveal" data-animation="fadeLeft" class="delay-100">
+              <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=1200&auto=format&fit=crop" alt="Notre processus">
             </div>
+            <div>
+              <div class="kicker reveal" data-animation="fadeUp">Our method</div>
+              <h2 class="services-title reveal" data-animation="fadeUp" class="delay-100" style="margin-bottom: 1.5rem;">
+                Une création<br>
+                <span>pas à pas.</span>
+              </h2>
+              <div class="process-steps">
+                <div class="step reveal" data-animation="fadeRight" class="delay-100">
+                  <span class="step-number">01</span>
+                  <div>
+                    <h4>Rencontre & écoute</h4>
+                    <p>Comprendre votre univers, vos besoins, votre singularité.</p>
+                  </div>
+                </div>
+                <div class="step reveal" data-animation="fadeRight" class="delay-200">
+                  <span class="step-number">02</span>
+                  <div>
+                    <h4>Design & conception</h4>
+                    <p>Maquettes sur mesure, validations itératives, précision.</p>
+                  </div>
+                </div>
+                <div class="step reveal" data-animation="fadeRight" class="delay-300">
+                  <span class="step-number">03</span>
+                  <div>
+                    <h4>Développement & lancement</h4>
+                    <p>Code robuste, tests rigoureux, accompagnement au démarrage.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
-
+      
         <!-- PORTFOLIO -->
-        <section class="portfolio">
-            <div class="section-content">
-                <div class="portfolio-header">
-                    <div class="kicker">Our work</div>
-                    <h2 class="services-title">
-                        Des sites qui<br>
-                        <span>imprègnent.</span>
-                    </h2>
-                </div>
-                <div class="portfolio-grid">
-                    <div class="portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&auto=format&fit=crop"
-                            alt="Projet 1">
-                        <div class="portfolio-overlay">
-                            <h4>Maison de mode</h4>
-                        </div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=800&auto=format&fit=crop"
-                            alt="Projet 2">
-                        <div class="portfolio-overlay">
-                            <h4>Cabinet d'avocat</h4>
-                        </div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&auto=format&fit=crop"
-                            alt="Projet 3">
-                        <div class="portfolio-overlay">
-                            <h4>Agence créative</h4>
-                        </div>
-                    </div>
-                </div>
+        <section id="work" class="portfolio">
+          <div class="section-content">
+            <div class="portfolio-header">
+              <div class="kicker reveal" data-animation="fadeUp">Our work</div>
+              <h2 class="services-title reveal" data-animation="fadeUp" class="delay-100">
+                Des sites qui<br>
+                <span>imprègnent.</span>
+              </h2>
             </div>
+            <div class="portfolio-grid">
+              <div class="portfolio-item reveal" data-animation="scaleIn" class="delay-100">
+                <img src="./images/ft.png" alt="FatimarTalk">
+                <div class="portfolio-overlay">
+                  <div class="overlay-content">
+                    <h4>FatimarTalk</h4>
+                    <a href="https://fatimartalk.com" target="_blank" class="portfolio-link">
+                      <span>Voir le site</span>
+                      <i class="fas fa-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="portfolio-item reveal" data-animation="scaleIn" class="delay-200">
+                <img src="./images/bhh.png" alt="Blue Hope Humanity">
+                <div class="portfolio-overlay">
+                  <div class="overlay-content">
+                    <h4>Blue Hope Humanity</h4>
+                    <a href="https://bluehopehumanity.org" target="_blank" class="portfolio-link">
+                      <span>Voir le site</span>
+                      <i class="fas fa-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="portfolio-item reveal" data-animation="scaleIn" class="delay-300">
+                <img src="./images/rts.png" alt="Serena Delacroix">
+                <div class="portfolio-overlay">
+                  <div class="overlay-content">
+                    <h4>Mame Ndiawar Diallo</h4>
+                    <a href="https://bilimh.github.io/ndiawardiallo/rts" target="_blank" class="portfolio-link">
+                      <span>Voir le site</span>
+                      <i class="fas fa-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
-
+      
         <!-- TESTIMONIALS - SECTION -->
         <section class="testimonials">
-            <div class="section-content">
-                <div class="kicker">They trust us</div>
-                <h2>
-                    Ce qu'ils disent<br>
-                    <span>de nous.</span>
-                </h2>
-                <div class="testimonial-grid">
-                    <div class="testimonial-card">
-                        <div class="testimonial-quote">“</div>
-                        <p>Un accompagnement rare, une écoute précise. Womaths a capté mon univers en un échange. Je
-                            recommande sans hésiter.</p>
-                        <div class="testimonial-author">
-                            <strong>— Sophie M.</strong>
-                            <span>Créatrice de marque</span>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="testimonial-quote">“</div>
-                        <p>Le site dépasse mes attentes. Chaque détail a été pensé avec soin. Une véritable présence
-                            digitale.</p>
-                        <div class="testimonial-author">
-                            <strong>— Thomas L.</strong>
-                            <span>Artisan d'art</span>
-                        </div>
-
-                    </div>
+          <div class="section-content">
+            <div class="kicker reveal" data-animation="fadeUp">They trust us</div>
+            <h2 class="reveal" data-animation="fadeUp" class="delay-100">
+              Ce qu'ils disent<br>
+              <span>de nous.</span>
+            </h2>
+            <div class="testimonial-grid">
+              <div class="testimonial-card reveal" data-animation="fadeLeft" class="delay-100">
+                <div class="testimonial-quote">“</div>
+                <p>Un accompagnement rare, une écoute précise. Womaths a capté mon univers en un échange. Je recommande sans hésiter.</p>
+                <div class="testimonial-author">
+                  <strong>— Sophie M.</strong>
+                  <span>Créatrice de marque</span>
                 </div>
+              </div>
+              <div class="testimonial-card reveal" data-animation="fadeRight" class="delay-200">
+                <div class="testimonial-quote">“</div>
+                <p>Le site dépasse mes attentes. Chaque détail a été pensé avec soin. Une véritable présence digitale.</p>
+                <div class="testimonial-author">
+                  <strong>— Thomas L.</strong>
+                  <span>Artisan d'art</span>
+                </div>
+              </div>
             </div>
+          </div>
         </section>
-
+      
         <!-- LOCATION SECTION - LILLE M1 -->
         <section class="location">
-            <div class="section-content location-grid">
-                <div class="location-info">
-                    <div class="kicker">Our place</div>
-                    <h2>
-                        Un écrin,<br>
-                        <span>une présence.</span>
-                    </h2>
-                    <p class="location-description">
-                        À Lille Fives, notre atelier vous accueille dans un espace
-                        où la création prend le temps qu'elle mérite, au cœur d'un quartier vivant et inspirant.
-                    </p>
-                    <div class="address-card">
-                        <p class="address-line">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--studio-gold)"
-                                stroke-width="1.5">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                                <circle cx="12" cy="10" r="3" />
-                            </svg>
-
-                            45 Rue Malsence, 59000 Lille
-                        </p>
-                        <p class="address-line">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--studio-gold)"
-                                stroke-width="1.5">
-                                <rect x="2" y="4" width="20" height="16" rx="2" />
-                                <path d="m22 7-10 7L2 7" />
-                            </svg>
-                            hello@womaths.studio
-                        </p>
-                        <p class="address-line">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--studio-gold)"
-                                stroke-width="1.5">
-                                <path
-                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-                            </svg>
-                            +33 3 20 00 00 00
-                        </p>
-                    </div>
-
-                    <!-- TRANSPORTS AVEC M1 BADGE SUBTIL -->
-                    <div class="transport-info">
-                        <div class="metro-badge">M1</div>
-                        <div class="transport-detail">
-                            <span>Station Fives</span>
-                            <span>À 5 min à pied</span>
-                        </div>
-                    </div>
-
-                    <div class="transport-note">
-                        <p>Accès facile depuis la station Fives (M1).</p>
-                    </div>
-
-                    <a href="https://maps.google.com/?q=45+Rue+Malsence+59000+Lille" target="_blank" class="btn-map">
-                        Get directions →
-                    </a>
+          <div class="section-content location-grid">
+            <div class="location-info">
+              <div class="kicker reveal" data-animation="fadeUp">Our place</div>
+              <h2 class="reveal" data-animation="fadeUp" class="delay-100">
+                Un écrin,<br>
+                <span>une présence.</span>
+              </h2>
+              <p class="location-description reveal" data-animation="fadeUp" class="delay-200">
+                À Lille Fives, notre atelier vous accueille dans un espace
+                où la création prend le temps qu'elle mérite, au cœur d'un quartier vivant et inspirant.
+              </p>
+              <div class="address-card reveal" data-animation="fadeLeft" class="delay-300">
+                <p class="address-line">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--studio-gold)" stroke-width="1.5">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  45 Rue Malsence, 59000 Lille
+                </p>
+                <p class="address-line">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--studio-gold)" stroke-width="1.5">
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="m22 7-10 7L2 7" />
+                  </svg>
+                  hello@womaths.studio
+                </p>
+                <p class="address-line">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--studio-gold)" stroke-width="1.5">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                  +33 3 20 00 00 00
+                </p>
+              </div>
+              <div class="transport-info reveal" data-animation="fadeUp" class="delay-400">
+                <div class="metro-badge">M1</div>
+                <div class="transport-detail">
+                  <span>Station Fives</span>
+                  <span>À 5 min à pied</span>
                 </div>
-
-                <div class="map-container">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2530.5678901234567!2d3.071234567890123!3d50.623456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c2d5b5b5b5b5b5%3A0x4a4a4a4a4a4a4a4a!2s45%20Rue%20Malsence%2C%2059000%20Lille!5e0!3m2!1sfr!2sfr!4v1700000000000!5m2!1sfr!2sfr"
-                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
-                    </iframe>
-                    <div class="map-overlay"></div>
-                </div>
+              </div>
+              <div class="transport-note reveal" data-animation="fadeIn" class="delay-500">
+                <p>Accès facile depuis la station Fives (M1).</p>
+              </div>
+              <a href="https://maps.google.com/?q=45+Rue+Malsence+59000+Lille" target="_blank" class="btn-map reveal" data-animation="fadeUp" class="delay-600">
+                Get directions →
+              </a>
             </div>
+            <div class="map-container reveal" data-animation="fadeRight" class="delay-200">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2530.5678901234567!2d3.071234567890123!3d50.623456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c2d5b5b5b5b5b5%3A0x4a4a4a4a4a4a4a4a!2s45%20Rue%20Malsence%2C%2059000%20Lille!5e0!3m2!1sfr!2sfr!4v1700000000000!5m2!1sfr!2sfr"
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+              </iframe>
+              <div class="map-overlay"></div>
+            </div>
+          </div>
         </section>
+      
         <!-- FAQ -->
         <section class="faq">
-            <div class="section-content faq-grid">
-                <div class="faq-title">
-                    <div class="kicker">Common questions</div>
-                    <h2>
-                        Réponses<br>
-                        <span>claires.</span>
-                    </h2>
-                    <div class="line-gold" style="margin-top: 1.5rem;"></div>
-                </div>
-                <div class="faq-list">
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4>Combien coûte un site web ?</h4>
-                            <span>+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <div class="faq-answer-inner">
-                                Chaque projet est unique. Nos tarifs commencent à 3 500€ pour un site vitrine, jusqu'à
-                                15 000€ pour une plateforme sur mesure. Un devis personnalisé est établi après notre
-                                première rencontre.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4>Quel est le délai de création ?</h4>
-                            <span>+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <div class="faq-answer-inner">
-                                Comptez 4 à 8 semaines selon la complexité du projet. Nous privilégions la qualité et
-                                les allers-retours itératifs pour garantir un résultat à votre image.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4>Proposez-vous un accompagnement après le lancement ?</h4>
-                            <span>+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <div class="faq-answer-inner">
-                                Oui, nous proposons des forfaits de maintenance et d'évolution. Votre site doit vivre
-                                avec vous.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <h4>Est-ce que mon site sera responsive ?</h4>
-                            <span>+</span>
-                        </div>
-                        <div class="faq-answer">
-                            <div class="faq-answer-inner">
-                                Absolument. Chaque site que nous créons est pensé mobile-first et testé sur tous les
-                                supports.
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          <div class="section-content faq-grid">
+            <div class="faq-title">
+              <div class="kicker reveal" data-animation="fadeUp">Common questions</div>
+              <h2 class="reveal" data-animation="fadeUp" class="delay-100">
+                Réponses<br>
+                <span>claires.</span>
+              </h2>
+              <div class="line-gold reveal" data-animation="fadeIn" class="delay-200" style="margin-top: 1.5rem;"></div>
             </div>
+            <div class="faq-list">
+              <div class="faq-item reveal" data-animation="fadeRight" class="delay-100">
+                <div class="faq-question">
+                  <h4>Combien coûte un site web ?</h4>
+                  <span>+</span>
+                </div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">
+                    Chaque projet est unique. Nos tarifs commencent à 3 500€ pour un site vitrine, jusqu'à 15 000€ pour une plateforme sur mesure. Un devis personnalisé est établi après notre première rencontre.
+                  </div>
+                </div>
+              </div>
+              <div class="faq-item reveal" data-animation="fadeRight" class="delay-200">
+                <div class="faq-question">
+                  <h4>Quel est le délai de création ?</h4>
+                  <span>+</span>
+                </div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">
+                    Comptez 4 à 8 semaines selon la complexité du projet. Nous privilégions la qualité et les allers-retours itératifs pour garantir un résultat à votre image.
+                  </div>
+                </div>
+              </div>
+              <div class="faq-item reveal" data-animation="fadeRight" class="delay-300">
+                <div class="faq-question">
+                  <h4>Proposez-vous un accompagnement après le lancement ?</h4>
+                  <span>+</span>
+                </div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">
+                    Oui, nous proposons des forfaits de maintenance et d'évolution. Votre site doit vivre avec vous.
+                  </div>
+                </div>
+              </div>
+              <div class="faq-item reveal" data-animation="fadeRight" class="delay-400">
+                <div class="faq-question">
+                  <h4>Est-ce que mon site sera responsive ?</h4>
+                  <span>+</span>
+                </div>
+                <div class="faq-answer">
+                  <div class="faq-answer-inner">
+                    Absolument. Chaque site que nous créons est pensé mobile-first et testé sur tous les supports.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
-
+      
         <!-- CONTACT + FORMULAIRE -->
-        <section class="contact">
-            <div class="section-content contact-grid">
-                <div class="contact-info">
-                    <div class="kicker">Let's talk</div>
-                    <h2>
-                        Une idée,<br>
-                        <span>un échange.</span>
-                    </h2>
-                    <div class="contact-details">
-                        <p><strong>Email</strong> hello@womaths.studio</p>
-                        <p><strong>Téléphone</strong> +33 1 42 96 58 00</p>
-                        <p><strong>Disponibilité</strong> Lundi - Vendredi, 9h - 18h</p>
-                    </div>
-                    <div class="line-gold" style="margin-top: 1.5rem;"></div>
-                </div>
-
-                <form action="#" method="POST" class="form">
-                    <div class="form-group">
-                        <input type="text" name="nom" placeholder="Nom & prénom" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" name="email" placeholder="Email" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="tel" name="telephone" placeholder="Téléphone">
-                    </div>
-                    <div class="form-group">
-                        <select name="projet">
-                            <option value="" disabled selected>Type de projet</option>
-                            <option value="vitrine">Site vitrine</option>
-                            <option value="ecommerce">Site e-commerce</option>
-                            <option value="application">Application web</option>
-                            <option value="autre">Autre</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <textarea name="message" rows="3" placeholder="Votre message..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit">Envoyer →</button>
-                    <p class="form-note">Votre projet est confidentiel. Réponse sous 48h.</p>
-                </form>
+        <section id="contact" class="contact">
+          <div class="section-content contact-grid">
+            <div class="contact-info">
+              <div class="kicker reveal" data-animation="fadeUp">Let's talk</div>
+              <h2 class="reveal" data-animation="fadeUp" class="delay-100">
+                Une idée,<br>
+                <span>un échange.</span>
+              </h2>
+              <div class="contact-details reveal" data-animation="fadeUp" class="delay-200">
+                <p><strong>Email</strong> hello@womaths.studio</p>
+                <p><strong>Téléphone</strong> +33 1 42 96 58 00</p>
+                <p><strong>Disponibilité</strong> Lundi - Vendredi, 9h - 18h</p>
+              </div>
+              <div class="line-gold reveal" data-animation="fadeIn" class="delay-300" style="margin-top: 1.5rem;"></div>
             </div>
+      
+            <form action="#" method="POST" class="form reveal" data-animation="fadeRight" class="delay-100">
+              <div class="form-group">
+                <input type="text" name="nom" placeholder="Nom & prénom" required>
+              </div>
+              <div class="form-group">
+                <input type="email" name="email" placeholder="Email" required>
+              </div>
+              <div class="form-group">
+                <input type="tel" name="telephone" placeholder="Téléphone">
+              </div>
+              <div class="form-group">
+                <select name="projet">
+                  <option value="" disabled selected>Type de projet</option>
+                  <option value="vitrine">Site vitrine</option>
+                  <option value="ecommerce">Site e-commerce</option>
+                  <option value="application">Application web</option>
+                  <option value="autre">Autre</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <textarea name="message" rows="3" placeholder="Votre message..." required></textarea>
+              </div>
+              <button type="submit" class="btn-submit">Envoyer →</button>
+              <p class="form-note">Votre projet est confidentiel. Réponse sous 48h.</p>
+            </form>
+          </div>
         </section>
-
+      
         <!-- THOUGHTS - SECTION -->
         <section class="thoughts">
-            <div class="section-content">
-                <div class="kicker">Notes & thoughts</div>
-                <h2>
-                    Quelques<br>
-                    <span>réflexions.</span>
-                </h2>
-                <div class="thoughts-list">
-                    <a href="#" class="thought-item">
-                        <span class="thought-title">Pourquoi le web a besoin de silence</span>
-                        <span class="thought-arrow">→</span>
-                    </a>
-                    <a href="#" class="thought-item">
-                        <span class="thought-title">3 choses que j'ai apprises en commençant</span>
-                        <span class="thought-arrow">→</span>
-                    </a>
-                    <a href="#" class="thought-item">
-                        <span class="thought-title">Le luxe silencieux : ma philosophie du web</span>
-                        <span class="thought-arrow">→</span>
-                    </a>
-                </div>
-                <div class="thoughts-more">
-                    <a href="#" class="btn-outline">Voir toutes les notes →</a>
-                </div>
+          <div class="section-content">
+            <div class="kicker reveal" data-animation="fadeUp">Notes & thoughts</div>
+            <h2 class="reveal" data-animation="fadeUp" class="delay-100">
+              Quelques<br>
+              <span>réflexions.</span>
+            </h2>
+            <div class="thoughts-list">
+              <a href="#" class="thought-item reveal" data-animation="fadeLeft" class="delay-100">
+                <span class="thought-title">Pourquoi le web a besoin de silence</span>
+                <span class="thought-arrow">→</span>
+              </a>
+              <a href="#" class="thought-item reveal" data-animation="fadeLeft" class="delay-200">
+                <span class="thought-title">3 choses que j'ai apprises en commençant</span>
+                <span class="thought-arrow">→</span>
+              </a>
+              <a href="#" class="thought-item reveal" data-animation="fadeLeft" class="delay-300">
+                <span class="thought-title">Le luxe silencieux : ma philosophie du web</span>
+                <span class="thought-arrow">→</span>
+              </a>
             </div>
+            <div class="thoughts-more reveal" data-animation="fadeUp" class="delay-400">
+              <a href="#" class="btn-outline">Voir toutes les notes →</a>
+            </div>
+          </div>
         </section>
-
+      
         <!-- FOOTER SECTION -->
         <section class="footer">
-            <div class="section-content footer-content">
-                <div class="footer-logo">Womaths Studio</div>
-
-                <!-- RÉSEAUX SOCIAUX -->
-                <div class="footer-social">
-                    <a href="https://instagram.com/womaths.studio" target="_blank" class="social-icon"
-                        aria-label="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://linkedin.com/company/womaths-studio" target="_blank" class="social-icon"
-                        aria-label="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="https://wa.me/33600000000" target="_blank" class="social-icon" aria-label="WhatsApp">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                    <a href="mailto:hello@womaths.studio" class="social-icon" aria-label="Email">
-                        <i class="far fa-envelope"></i>
-                    </a>
-                </div>
-
-                <div class="footer-links">
-                    <a href="#">Mentions légales</a>
-                    <a href="#">Confidentialité</a>
-                    <a href="#">CGV</a>
-                    <a href="#">hello@womaths.studio</a>
-                </div>
-                <div class="footer-copyright">
-                    © 2026 Womaths Studio — Création de sites web sur mesure
-                </div>
+          <div class="section-content footer-content">
+            <div class="footer-logo reveal" data-animation="fadeUp">Womaths Studio</div>
+      
+            <div class="footer-social reveal" data-animation="scaleIn" class="delay-100">
+              <a href="https://instagram.com/womaths.studio" target="_blank" class="social-icon" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="https://linkedin.com/company/womaths-studio" target="_blank" class="social-icon" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="https://wa.me/33600000000" target="_blank" class="social-icon" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+              <a href="mailto:hello@womaths.studio" class="social-icon" aria-label="Email">
+                <i class="far fa-envelope"></i>
+              </a>
             </div>
+      
+            <div class="footer-links reveal" data-animation="fadeUp" class="delay-200">
+              <a href="#">Mentions légales</a>
+              <a href="#">Confidentialité</a>
+              <a href="#">CGV</a>
+              <a href="#">hello@womaths.studio</a>
+            </div>
+            <div class="footer-copyright reveal" data-animation="fadeIn" class="delay-300">
+              © 2026 Womaths Studio — Création de sites web sur mesure
+            </div>
+          </div>
         </section>
-
-    </div>
-
+      
+      </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
@@ -2113,6 +2536,94 @@
                 end: "bottom top",
                 scrub: 1.2,
                 container: container
+            }
+        });
+
+        /* ============================================
+   ANIMATIONS AU SCROLL - REVEAL ELEMENTS
+   ============================================ */
+document.addEventListener('DOMContentLoaded', () => {
+  const revealElements = document.querySelectorAll('.reveal');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const element = entry.target;
+        const animation = element.dataset.animation || 'fadeUp';
+        
+        switch(animation) {
+          case 'fadeUp':
+            element.classList.add('animate-fadeUp');
+            break;
+          case 'fadeIn':
+            element.classList.add('animate-fadeIn');
+            break;
+          case 'fadeLeft':
+            element.classList.add('animate-fadeLeft');
+            break;
+          case 'fadeRight':
+            element.classList.add('animate-fadeRight');
+            break;
+          case 'scaleIn':
+            element.classList.add('animate-scaleIn');
+            break;
+        }
+        
+        observer.unobserve(element);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+  
+  revealElements.forEach(el => observer.observe(el));
+});
+
+        /* ============================================
+        MENU HAMBURGER
+        ============================================ */
+
+        const hamburger = document.getElementById('hamburger');
+        const navMobile = document.getElementById('navMobile');
+        const body = document.body;
+
+        // Créer l'overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'overlay';
+        body.appendChild(overlay);
+
+        function openMenu() {
+            hamburger.classList.add('active');
+            navMobile.classList.add('active');
+            overlay.classList.add('active');
+            body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            hamburger.classList.remove('active');
+            navMobile.classList.remove('active');
+            overlay.classList.remove('active');
+            body.style.overflow = '';
+        }
+
+        hamburger.addEventListener('click', () => {
+            if (navMobile.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        // Fermer le menu en cliquant sur l'overlay
+        overlay.addEventListener('click', closeMenu);
+
+        // Fermer le menu en cliquant sur un lien
+        document.querySelectorAll('.nav-mobile-link').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // Fermer le menu si la fenêtre est redimensionnée au-delà du breakpoint mobile
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && navMobile.classList.contains('active')) {
+                closeMenu();
             }
         });
 
