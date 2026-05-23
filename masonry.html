@@ -202,55 +202,99 @@
             margin: 24px auto 0;
         }
     
-        /* ============================================
-           GALERIE (MASONRY STYLE)
-           ============================================ */
-        .grid {
-            display: grid;
-            gap: 24px;
-            width: 100%;
-        }
+/* ============================================
+   GALERIE STYLE MASONRY (PINTEREST)
+   ============================================ */
+
+/* Conteneur principal */
+.grid {
+    width: 100%;
+    column-count: 3;      /* 3 colonnes sur desktop */
+    column-gap: 24px;
+}
+
+/* Chaque image (évite la coupure) */
+.grid-item {
+    break-inside: avoid;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+    background: #0a0a0a;
+    cursor: pointer;
+    border-radius: 0;
+}
+
+.grid-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.7s ease;
+}
+
+.grid-item:hover img {
+    transform: scale(1.02);
+}
+
+/* Overlay au survol */
+.grid-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+    padding: 30px 16px 16px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.grid-item:hover .grid-overlay {
+    opacity: 1;
+}
+
+.grid-overlay .category {
+    color: #d4af37;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+}
+
+/* ===== RESPONSIVE MASONRY ===== */
+
+/* Mobile : 2 colonnes */
+@media (max-width: 640px) {
+    .grid {
+        column-count: 2;
+        column-gap: 16px;
+    }
     
-        .grid-item {
-            position: relative;
-            overflow: hidden;
-            background: #0a0a0a;
-            cursor: pointer;
-        }
-    
-        .grid-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.7s ease;
-        }
-    
-        .grid-item:hover img {
-            transform: scale(1.02);
-        }
-    
-        /* Overlay au survol */
-        .grid-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
-            padding: 30px 16px 16px;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-        }
-    
-        .grid-item:hover .grid-overlay {
-            opacity: 1;
-        }
-    
-        .grid-overlay .category {
-            color: #d4af37;
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-        }
+    .grid-item {
+        margin-bottom: 16px;
+    }
+}
+
+/* Tablette : 2 ou 3 colonnes */
+@media (min-width: 641px) and (max-width: 1024px) {
+    .grid {
+        column-count: 2;
+        column-gap: 24px;
+    }
+}
+
+/* Petit desktop : 3 colonnes */
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .grid {
+        column-count: 3;
+        column-gap: 24px;
+    }
+}
+
+/* Grand desktop : 4 colonnes */
+@media (min-width: 1281px) {
+    .grid {
+        column-count: 4;
+        column-gap: 28px;
+    }
+}
     
         /* ============================================
            SECTION À PROPOS
@@ -709,6 +753,8 @@
         body.menu-open {
             overflow: hidden;
         }
+
+        
     </style>
 </head>
 
