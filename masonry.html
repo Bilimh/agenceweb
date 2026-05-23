@@ -6,7 +6,6 @@
     <title>KProduction • Studio photographique</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,200;14..32,300;14..32,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
@@ -42,23 +41,23 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 20px 24px;
+            padding: 24px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
             background: transparent;
-            transition: all 0.3s ease;
+            transition: background 0.5s ease, backdrop-filter 0.5s ease;
         }
 
         .navbar.scrolled {
-            background: rgba(5,5,5,0.9);
-            backdrop-filter: blur(10px);
+            background: rgba(5,5,5,0.85);
+            backdrop-filter: blur(12px);
         }
 
         .logo {
             font-size: 1rem;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             font-weight: 300;
             color: #fff;
             text-decoration: none;
@@ -70,21 +69,21 @@
 
         .nav-links {
             display: flex;
-            gap: 28px;
+            gap: 36px;
         }
 
         .nav-links a {
             color: #fff;
             text-decoration: none;
             font-size: 0.7rem;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             font-weight: 300;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s ease;
         }
 
         .nav-links a:hover {
-            opacity: 0.6;
+            opacity: 0.5;
         }
 
         /* Hero Section */
@@ -116,39 +115,39 @@
         }
 
         .hero-content h1 {
-            font-size: clamp(2rem, 8vw, 4rem);
+            font-size: clamp(2rem, 7vw, 4rem);
             font-weight: 300;
-            letter-spacing: clamp(4px, 2vw, 10px);
-            margin-bottom: 20px;
+            letter-spacing: clamp(6px, 2vw, 12px);
+            margin-bottom: 24px;
             color: #fff;
         }
 
         .hero-content .subtitle {
             font-size: 0.7rem;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             text-transform: uppercase;
             color: #d4af37;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
 
         .hero-line {
-            width: 50px;
+            width: 60px;
             height: 1px;
             background: #d4af37;
-            margin: 0 auto 28px;
+            margin: 0 auto 32px;
         }
 
         .btn-luxury {
             display: inline-block;
-            padding: 12px 32px;
-            border: 1px solid rgba(255,255,255,0.3);
+            padding: 14px 36px;
+            border: 1px solid rgba(255,255,255,0.25);
             background: transparent;
             color: #fff;
             text-decoration: none;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             font-size: 0.65rem;
             text-transform: uppercase;
-            transition: all 0.4s ease;
+            transition: all 0.5s ease;
             cursor: pointer;
         }
 
@@ -160,7 +159,7 @@
 
         /* Sections */
         .section {
-            padding: 80px 24px;
+            padding: 100px 24px;
             max-width: 1400px;
             margin: 0 auto;
             width: 100%;
@@ -168,26 +167,26 @@
 
         .section-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 70px;
         }
 
         .section-header h2 {
             font-size: clamp(1.8rem, 5vw, 2.5rem);
             font-weight: 300;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
         }
 
         .divider-gold {
-            width: 50px;
+            width: 60px;
             height: 1px;
             background: #d4af37;
-            margin: 20px auto 0;
+            margin: 24px auto 0;
         }
 
         /* Galerie */
         .grid {
             display: grid;
-            gap: 20px;
+            gap: 24px;
             width: 100%;
         }
 
@@ -196,17 +195,19 @@
             overflow: hidden;
             background: #0a0a0a;
             cursor: pointer;
+            opacity: 0;
+            transform: translateY(30px);
         }
 
         .grid-item img {
             width: 100%;
             height: auto;
             display: block;
-            transition: transform 0.5s ease;
+            transition: transform 0.7s ease;
         }
 
         .grid-item:hover img {
-            transform: scale(1.03);
+            transform: scale(1.02);
         }
 
         .grid-overlay {
@@ -214,10 +215,10 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
             padding: 30px 16px 16px;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s ease;
             pointer-events: none;
         }
 
@@ -225,30 +226,26 @@
             opacity: 1;
         }
 
-        .grid-item.active .grid-overlay {
-            opacity: 1;
-        }
-
         .grid-overlay .category {
             color: #d4af37;
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             letter-spacing: 2px;
         }
 
         /* Responsive grid */
         @media (max-width: 640px) {
-            .grid { grid-template-columns: 1fr; gap: 16px; }
-            .section { padding: 60px 20px; }
-            .navbar { padding: 16px 20px; }
+            .grid { grid-template-columns: 1fr; gap: 20px; }
+            .section { padding: 70px 20px; }
+            .navbar { padding: 18px 24px; }
             .nav-links { display: none; }
         }
 
         @media (min-width: 641px) and (max-width: 1024px) {
-            .grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
         }
 
         @media (min-width: 1025px) {
-            .grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+            .grid { grid-template-columns: repeat(3, 1fr); gap: 28px; }
         }
 
         /* Lightbox */
@@ -258,14 +255,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(5, 5, 5, 0.98);
             z-index: 2000;
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.4s ease, visibility 0.4s ease;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
             cursor: pointer;
         }
 
@@ -285,18 +282,17 @@
             max-width: 100%;
             max-height: 90vh;
             object-fit: contain;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
 
         .lightbox-caption {
             position: absolute;
-            bottom: -40px;
+            bottom: -45px;
             left: 0;
             right: 0;
             text-align: center;
             color: #d4af37;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
         }
 
@@ -305,14 +301,14 @@
             top: 24px;
             right: 32px;
             color: #fff;
-            font-size: 2rem;
+            font-size: 1.8rem;
             cursor: pointer;
             transition: opacity 0.3s ease;
             z-index: 2001;
         }
 
         .lightbox-close:hover {
-            opacity: 0.6;
+            opacity: 0.5;
         }
 
         .lightbox-prev,
@@ -321,70 +317,52 @@
             top: 50%;
             transform: translateY(-50%);
             color: #fff;
-            font-size: 2rem;
+            font-size: 1.8rem;
             cursor: pointer;
             padding: 20px;
             transition: opacity 0.3s ease;
             z-index: 2001;
         }
 
-        .lightbox-prev {
-            left: 20px;
-        }
-
-        .lightbox-next {
-            right: 20px;
-        }
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
 
         .lightbox-prev:hover,
-        .lightbox-next:hover {
-            opacity: 0.6;
-        }
+        .lightbox-next:hover { opacity: 0.5; }
 
         @media (max-width: 768px) {
-            .lightbox-prev,
-            .lightbox-next {
-                font-size: 1.5rem;
-                padding: 12px;
-            }
-            .lightbox-close {
-                top: 16px;
-                right: 20px;
-                font-size: 1.5rem;
-            }
-            .lightbox-caption {
-                bottom: -30px;
-                font-size: 0.65rem;
-            }
+            .lightbox-prev, .lightbox-next { font-size: 1.2rem; padding: 12px; }
+            .lightbox-close { top: 16px; right: 20px; font-size: 1.3rem; }
+            .lightbox-caption { bottom: -35px; font-size: 0.6rem; letter-spacing: 2px; }
         }
 
         /* À propos */
         .about-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 80px;
             align-items: center;
         }
 
         .about-text p {
-            font-size: 0.9rem;
-            line-height: 1.7;
+            font-size: 0.95rem;
+            line-height: 1.8;
             color: #ccc;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .about-signature {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: #d4af37;
-            margin-top: 24px;
+            margin-top: 32px;
         }
 
         .about-image img {
             width: 100%;
             height: auto;
-            filter: grayscale(0.3);
-            transition: filter 0.4s ease;
+            filter: grayscale(0.4);
+            transition: filter 0.6s ease;
         }
 
         .about-image img:hover {
@@ -395,45 +373,47 @@
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 80px;
         }
 
         .contact-info h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
+            font-size: 1.4rem;
+            margin-bottom: 24px;
             color: #d4af37;
+            font-weight: 300;
         }
 
         .contact-info p {
             color: #aaa;
-            line-height: 1.6;
-            margin-bottom: 24px;
+            line-height: 1.7;
+            margin-bottom: 28px;
         }
 
         .contact-detail {
-            margin: 20px 0;
+            margin: 24px 0;
         }
 
         .contact-detail i {
             color: #d4af37;
-            width: 28px;
-            margin-right: 8px;
+            width: 30px;
+            margin-right: 10px;
         }
 
         .form-group {
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 14px 0;
+            padding: 16px 0;
             background: transparent;
             border: none;
             border-bottom: 1px solid #333;
             color: #fff;
             font-size: 0.85rem;
             font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s ease;
         }
 
         .form-group input:focus,
@@ -449,12 +429,12 @@
         button[type="submit"] {
             background: transparent;
             border: 1px solid #d4af37;
-            padding: 12px 32px;
+            padding: 14px 38px;
             color: #d4af37;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             font-size: 0.65rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         button[type="submit"]:hover {
@@ -464,16 +444,16 @@
 
         /* Footer */
         .footer {
-            padding: 50px 24px 30px;
-            border-top: 1px solid rgba(212,175,55,0.15);
+            padding: 60px 24px 35px;
+            border-top: 1px solid rgba(212,175,55,0.12);
             text-align: center;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 28px;
-            margin-bottom: 32px;
+            gap: 32px;
+            margin-bottom: 35px;
         }
 
         .social-links a {
@@ -488,7 +468,7 @@
 
         .copyright {
             font-size: 0.65rem;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             color: #555;
         }
 
@@ -496,7 +476,7 @@
             .about-container,
             .contact-grid {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 50px;
             }
         }
 
@@ -521,7 +501,7 @@
         <video class="hero-video-bg" autoplay muted loop playsinline>
             <source src="./images/kprod.mp4" type="video/mp4">
         </video>
-        <div class="hero-content" data-aos="fade-up" data-aos-duration="1200">
+        <div class="hero-content">
             <div class="subtitle">KProduction Studio</div>
             <h1>L'ART DE L'INSTANT</h1>
             <div class="hero-line"></div>
@@ -530,7 +510,7 @@
     </section>
 
     <section id="galerie" class="section">
-        <div class="section-header" data-aos="fade-up">
+        <div class="section-header">
             <h2>Portfolio</h2>
             <div class="divider-gold"></div>
         </div>
@@ -539,32 +519,32 @@
 
     <section id="a-propos" class="section">
         <div class="about-container">
-            <div class="about-text" data-aos="fade-right">
-                <h2 style="margin-bottom: 20px;">Khalil <span style="color:#d4af37;">Diaw</span></h2>
+            <div class="about-text">
+                <h2 style="margin-bottom: 24px;">Khalil <span style="color:#d4af37;">Diaw</span></h2>
                 <p>Photographe plasticien basé entre Paris et Marrakech. Diplômé des Beaux-Arts, KProduction capture l'essence des corps, des lumières et des silences.</p>
                 <p>Collaborations avec les plus grandes maisons de luxe : <strong>CHANEL, DIOR, HERMÈS</strong>. Son travail est exposé à la Fondation Cartier.</p>
                 <div class="about-signature">— K. Diaw</div>
             </div>
-            <div class="about-image" data-aos="fade-left">
+            <div class="about-image">
                 <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?w=800&h=1000&fit=crop" alt="Portrait photographe">
             </div>
         </div>
     </section>
 
     <section id="contact" class="section">
-        <div class="section-header" data-aos="fade-up">
+        <div class="section-header">
             <h2>Réservez votre séance</h2>
             <div class="divider-gold"></div>
         </div>
         <div class="contact-grid">
-            <div class="contact-info" data-aos="fade-right">
+            <div class="contact-info">
                 <h3>Studio KProduction</h3>
                 <p>Paris VIII • Marrakech Guéliz<br>Sur rendez-vous exclusif.</p>
                 <div class="contact-detail"><i class="fas fa-phone-alt"></i> +33 1 23 45 67 89</div>
                 <div class="contact-detail"><i class="far fa-envelope"></i> contact@kproduction.art</div>
                 <div class="contact-detail"><i class="fab fa-instagram"></i> @kproduction.studio</div>
             </div>
-            <div data-aos="fade-left">
+            <div>
                 <form id="contactForm">
                     <div class="form-group">
                         <input type="text" placeholder="Nom & prénom" required>
@@ -590,7 +570,7 @@
         <div class="copyright">© 2026 KPRODUCTION — Tous droits réservés</div>
     </footer>
 
-    <!-- Lightbox HTML -->
+    <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
         <div class="lightbox-close" id="lightboxClose">&times;</div>
         <div class="lightbox-prev" id="lightboxPrev">&#10094;</div>
@@ -601,14 +581,103 @@
         </div>
     </div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <script>
-        // Initialisation AOS
-        AOS.init({ duration: 800, once: true });
-
+        // ========== GSAP ANIMATIONS (100% luxe) ==========
+        
+        // Hero Timeline - Signature Cartier/Rolex
+        const heroTl = gsap.timeline({ defaults: { duration: 1.2, ease: "power2.out" } });
+        
+        heroTl.from(".logo", { y: -30, opacity: 0, duration: 0.8 })
+              .from(".nav-links a", { y: -20, opacity: 0, stagger: 0.08, duration: 0.6 }, "-=0.4")
+              .from(".hero-content .subtitle", { y: 30, opacity: 0 })
+              .from(".hero-content h1", { y: 40, opacity: 0 }, "-=0.8")
+              .from(".hero-line", { scaleX: 0, transformOrigin: "center" }, "-=0.6")
+              .from(".btn-luxury", { y: 20, opacity: 0, duration: 0.8 }, "-=0.4");
+        
+        // ScrollTrigger pour les sections
+        gsap.utils.toArray(".section").forEach(section => {
+            gsap.from(section, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 85%",
+                    end: "bottom 20%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 40,
+                opacity: 0,
+                duration: 1,
+                ease: "power2.out"
+            });
+        });
+        
+        // Animation spécifique pour le header de section
+        gsap.utils.toArray(".section-header").forEach(header => {
+            gsap.from(header, {
+                scrollTrigger: {
+                    trigger: header,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 25,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power2.out"
+            });
+        });
+        
+        // Animation des images à propos
+        gsap.from(".about-image", {
+            scrollTrigger: {
+                trigger: ".about-container",
+                start: "top 80%",
+                toggleActions: "play none none reverse"
+            },
+            x: 40,
+            opacity: 0,
+            duration: 1,
+            ease: "power2.out"
+        });
+        
+        gsap.from(".about-text", {
+            scrollTrigger: {
+                trigger: ".about-container",
+                start: "top 80%",
+                toggleActions: "play none none reverse"
+            },
+            x: -40,
+            opacity: 0,
+            duration: 1,
+            ease: "power2.out"
+        });
+        
+        // Animation du formulaire et contact
+        gsap.from(".contact-info", {
+            scrollTrigger: {
+                trigger: ".contact-grid",
+                start: "top 80%",
+                toggleActions: "play none none reverse"
+            },
+            x: -30,
+            opacity: 0,
+            duration: 0.9,
+            ease: "power2.out"
+        });
+        
+        gsap.from(".contact-grid form", {
+            scrollTrigger: {
+                trigger: ".contact-grid",
+                start: "top 80%",
+                toggleActions: "play none none reverse"
+            },
+            x: 30,
+            opacity: 0,
+            duration: 0.9,
+            ease: "power2.out"
+        });
+        
         // Navbar scroll effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
@@ -618,7 +687,7 @@
                 navbar.classList.remove('scrolled');
             }
         });
-
+        
         // Données des images
         const images = [
             { src: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1200&h=1800&fit=crop", cat: "Mode • Automne 2025" },
@@ -631,13 +700,14 @@
             { src: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&h=2700&fit=crop", cat: "Couture • Défilé" },
             { src: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=1200&h=1275&fit=crop", cat: "Noir & Blanc • Émotion" }
         ];
-
+        
         // Génération de la galerie
         const grid = document.getElementById('gallery-grid');
         
-        images.forEach(img => {
+        images.forEach((img, idx) => {
             const item = document.createElement('div');
             item.className = 'grid-item';
+            item.setAttribute('data-index', idx);
             item.setAttribute('data-src', img.src);
             item.setAttribute('data-cat', img.cat);
             item.innerHTML = `
@@ -648,17 +718,35 @@
             `;
             grid.appendChild(item);
         });
-
-        // ========== LIGHTBOX ==========
+        
+        // Animation des images de la galerie au scroll
+        const gridItems = document.querySelectorAll('.grid-item');
+        
+        gridItems.forEach((item, index) => {
+            gsap.to(item, {
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                delay: index * 0.05,
+                ease: "power2.out"
+            });
+        });
+        
+        // Lightbox
         const lightbox = document.getElementById('lightbox');
         const lightboxImage = document.getElementById('lightboxImage');
         const lightboxCaption = document.getElementById('lightboxCaption');
         const lightboxClose = document.getElementById('lightboxClose');
         const lightboxPrev = document.getElementById('lightboxPrev');
         const lightboxNext = document.getElementById('lightboxNext');
-
+        
         let currentIndex = 0;
-
+        
         function openLightbox(index) {
             currentIndex = index;
             const img = images[currentIndex];
@@ -667,48 +755,40 @@
             lightbox.classList.add('active');
             document.body.classList.add('lightbox-open');
         }
-
+        
         function closeLightbox() {
             lightbox.classList.remove('active');
             document.body.classList.remove('lightbox-open');
         }
-
+        
         function showPrev() {
             currentIndex = (currentIndex - 1 + images.length) % images.length;
             const img = images[currentIndex];
             lightboxImage.src = img.src;
             lightboxCaption.textContent = img.cat;
         }
-
+        
         function showNext() {
             currentIndex = (currentIndex + 1) % images.length;
             const img = images[currentIndex];
             lightboxImage.src = img.src;
             lightboxCaption.textContent = img.cat;
         }
-
-        // Événements Lightbox
+        
         lightboxClose.addEventListener('click', closeLightbox);
         lightboxPrev.addEventListener('click', showPrev);
         lightboxNext.addEventListener('click', showNext);
-
-        // Fermer au clic sur le fond
+        
         lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
+            if (e.target === lightbox) closeLightbox();
         });
-
-        // Navigation au clavier
+        
         document.addEventListener('keydown', (e) => {
             if (!lightbox.classList.contains('active')) return;
             if (e.key === 'Escape') closeLightbox();
             if (e.key === 'ArrowLeft') showPrev();
             if (e.key === 'ArrowRight') showNext();
         });
-
-        // Attacher le clic sur chaque image de la galerie
-        const gridItems = document.querySelectorAll('.grid-item');
         
         gridItems.forEach((item, idx) => {
             item.addEventListener('click', (e) => {
@@ -717,12 +797,8 @@
                 openLightbox(idx);
             });
         });
-
-        // Pour mobile : toggle l'overlay sans ouvrir lightbox
-        // (optionnel: on garde l'ouverture du lightbox au clic)
-        // Sur mobile, le lightbox s'ouvre aussi (comportement normal)
-
-        // Smooth scroll pour les liens de navigation
+        
+        // Smooth scroll navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
@@ -734,27 +810,12 @@
                 }
             });
         });
-
+        
         // Formulaire
         document.getElementById('contactForm').addEventListener('submit', (e) => {
             e.preventDefault();
             alert('Merci pour votre message. KProduction vous répondra sous 48h.');
             e.target.reset();
-        });
-
-        // Animation GSAP
-        gsap.from('.hero-content h1', {
-            duration: 1.2,
-            y: 80,
-            opacity: 0,
-            ease: 'power3.out'
-        });
-        
-        gsap.from('.hero-content .subtitle', {
-            duration: 0.8,
-            y: 40,
-            opacity: 0,
-            delay: 0.3
         });
     </script>
 </body>
