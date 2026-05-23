@@ -21,7 +21,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-    
+
         body {
             background-color: #050505;
             font-family: 'Inter', sans-serif;
@@ -30,11 +30,11 @@
             overflow-x: hidden;
             width: 100%;
         }
-    
+
         body.lightbox-open {
             overflow: hidden;
         }
-    
+
         /* ============================================
            TYPOGRAPHIE LUXE
            ============================================ */
@@ -46,7 +46,7 @@
             font-weight: 300;
             letter-spacing: 2px;
         }
-    
+
         /* ============================================
            NAVIGATION DESKTOP
            ============================================ */
@@ -63,13 +63,13 @@
             background: transparent;
             transition: background 0.5s ease, backdrop-filter 0.5s ease;
         }
-    
+
         /* Navbar au scroll (effet glassmorphism) */
         .navbar.scrolled {
             background: rgba(5, 5, 5, 0.85);
             backdrop-filter: blur(12px);
         }
-    
+
         .logo {
             font-size: 1rem;
             letter-spacing: 5px;
@@ -77,16 +77,16 @@
             color: #fff;
             text-decoration: none;
         }
-    
+
         .logo span {
             color: #d4af37;
         }
-    
+
         .nav-links {
             display: flex;
             gap: 36px;
         }
-    
+
         .nav-links a {
             color: #fff;
             text-decoration: none;
@@ -96,11 +96,11 @@
             font-weight: 300;
             transition: opacity 0.4s ease;
         }
-    
+
         .nav-links a:hover {
             opacity: 0.5;
         }
-    
+
         /* ============================================
            HERO SECTION (VIDEO + TITRE)
            ============================================ */
@@ -113,7 +113,7 @@
             position: relative;
             overflow: hidden;
         }
-    
+
         .hero-video-bg {
             position: absolute;
             top: 0;
@@ -124,13 +124,13 @@
             z-index: 0;
             filter: brightness(0.5);
         }
-    
+
         .hero-content {
             text-align: center;
             z-index: 2;
             padding: 20px;
         }
-    
+
         .hero-content h1 {
             font-size: clamp(2rem, 7vw, 4rem);
             font-weight: 300;
@@ -138,7 +138,7 @@
             margin-bottom: 24px;
             color: #fff;
         }
-    
+
         .hero-content .subtitle {
             font-size: 0.7rem;
             letter-spacing: 5px;
@@ -146,14 +146,14 @@
             color: #d4af37;
             margin-bottom: 28px;
         }
-    
+
         .hero-line {
             width: 60px;
             height: 1px;
             background: #d4af37;
             margin: 0 auto 32px;
         }
-    
+
         .btn-luxury {
             display: inline-block;
             padding: 14px 36px;
@@ -167,13 +167,13 @@
             transition: all 0.5s ease;
             cursor: pointer;
         }
-    
+
         .btn-luxury:hover {
             background: #d4af37;
             color: #050505;
             border-color: #d4af37;
         }
-    
+
         /* ============================================
            SECTIONS GÉNÉRALES
            ============================================ */
@@ -183,119 +183,120 @@
             margin: 0 auto;
             width: 100%;
         }
-    
+
         .section-header {
             text-align: center;
             margin-bottom: 70px;
         }
-    
+
         .section-header h2 {
             font-size: clamp(1.8rem, 5vw, 2.5rem);
             font-weight: 300;
             letter-spacing: 4px;
         }
-    
+
         .divider-gold {
             width: 60px;
             height: 1px;
             background: #d4af37;
             margin: 24px auto 0;
         }
-    
-/* ============================================
+
+        /* ============================================
    GALERIE STYLE MASONRY (PINTEREST)
    ============================================ */
 
-/* Conteneur principal */
-.grid {
-    width: 100%;
-    column-count: 3;      /* 3 colonnes sur desktop */
-    column-gap: 24px;
-}
+        /* Conteneur principal */
+        .grid {
+            width: 100%;
+            column-count: 3;
+            /* 3 colonnes sur desktop */
+            column-gap: 24px;
+        }
 
-/* Chaque image (évite la coupure) */
-.grid-item {
-    break-inside: avoid;
-    margin-bottom: 24px;
-    position: relative;
-    overflow: hidden;
-    background: #0a0a0a;
-    cursor: pointer;
-    border-radius: 0;
-}
+        /* Chaque image (évite la coupure) */
+        .grid-item {
+            break-inside: avoid;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+            background: #0a0a0a;
+            cursor: pointer;
+            border-radius: 0;
+        }
 
-.grid-item img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.7s ease;
-}
+        .grid-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.7s ease;
+        }
 
-.grid-item:hover img {
-    transform: scale(1.02);
-}
+        .grid-item:hover img {
+            transform: scale(1.02);
+        }
 
-/* Overlay au survol */
-.grid-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
-    padding: 30px 16px 16px;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-}
+        /* Overlay au survol */
+        .grid-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+            padding: 30px 16px 16px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
 
-.grid-item:hover .grid-overlay {
-    opacity: 1;
-}
+        .grid-item:hover .grid-overlay {
+            opacity: 1;
+        }
 
-.grid-overlay .category {
-    color: #d4af37;
-    font-size: 0.7rem;
-    letter-spacing: 2px;
-}
+        .grid-overlay .category {
+            color: #d4af37;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+        }
 
-/* ===== RESPONSIVE MASONRY ===== */
+        /* ===== RESPONSIVE MASONRY ===== */
 
-/* Mobile : 2 colonnes */
-@media (max-width: 640px) {
-    .grid {
-        column-count: 2;
-        column-gap: 16px;
-    }
-    
-    .grid-item {
-        margin-bottom: 16px;
-    }
-}
+        /* Mobile : 2 colonnes */
+        @media (max-width: 640px) {
+            .grid {
+                column-count: 2;
+                column-gap: 16px;
+            }
 
-/* Tablette : 2 ou 3 colonnes */
-@media (min-width: 641px) and (max-width: 1024px) {
-    .grid {
-        column-count: 2;
-        column-gap: 24px;
-    }
-}
+            .grid-item {
+                margin-bottom: 16px;
+            }
+        }
 
-/* Petit desktop : 3 colonnes */
-@media (min-width: 1025px) and (max-width: 1280px) {
-    .grid {
-        column-count: 3;
-        column-gap: 24px;
-    }
-}
+        /* Tablette : 2 ou 3 colonnes */
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .grid {
+                column-count: 2;
+                column-gap: 24px;
+            }
+        }
 
-/* Grand desktop : 4 colonnes */
-@media (min-width: 1281px) {
-    .grid {
-        column-count: 4;
-        column-gap: 28px;
-    }
-}
-    
+        /* Petit desktop : 3 colonnes */
+        @media (min-width: 1025px) and (max-width: 1280px) {
+            .grid {
+                column-count: 3;
+                column-gap: 24px;
+            }
+        }
+
+        /* Grand desktop : 4 colonnes */
+        @media (min-width: 1281px) {
+            .grid {
+                column-count: 4;
+                column-gap: 28px;
+            }
+        }
+
         /* ============================================
            SECTION À PROPOS
            ============================================ */
@@ -305,32 +306,32 @@
             gap: 80px;
             align-items: center;
         }
-    
+
         .about-text p {
             font-size: 0.95rem;
             line-height: 1.8;
             color: #ccc;
             margin-bottom: 24px;
         }
-    
+
         .about-signature {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.6rem;
             color: #d4af37;
             margin-top: 32px;
         }
-    
+
         .about-image img {
             width: 100%;
             height: auto;
             filter: grayscale(0.4);
             transition: filter 0.6s ease;
         }
-    
+
         .about-image img:hover {
             filter: grayscale(0);
         }
-    
+
         /* ============================================
            SECTION CONTACT
            ============================================ */
@@ -339,35 +340,35 @@
             grid-template-columns: 1fr 1fr;
             gap: 80px;
         }
-    
+
         .contact-info h3 {
             font-size: 1.4rem;
             margin-bottom: 24px;
             color: #d4af37;
             font-weight: 300;
         }
-    
+
         .contact-info p {
             color: #aaa;
             line-height: 1.7;
             margin-bottom: 28px;
         }
-    
+
         .contact-detail {
             margin: 24px 0;
         }
-    
+
         .contact-detail i {
             color: #d4af37;
             width: 30px;
             margin-right: 10px;
         }
-    
+
         /* Formulaire */
         .form-group {
             margin-bottom: 28px;
         }
-    
+
         .form-group input,
         .form-group textarea {
             width: 100%;
@@ -380,17 +381,17 @@
             font-family: 'Inter', sans-serif;
             transition: border-color 0.3s ease;
         }
-    
+
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
             border-bottom-color: #d4af37;
         }
-    
+
         .form-group textarea {
             resize: none;
         }
-    
+
         button[type="submit"] {
             background: transparent;
             border: 1px solid #d4af37;
@@ -401,12 +402,12 @@
             cursor: pointer;
             transition: all 0.4s ease;
         }
-    
+
         button[type="submit"]:hover {
             background: #d4af37;
             color: #050505;
         }
-    
+
         /* ============================================
            FOOTER
            ============================================ */
@@ -415,30 +416,30 @@
             border-top: 1px solid rgba(212, 175, 55, 0.12);
             text-align: center;
         }
-    
+
         .social-links {
             display: flex;
             justify-content: center;
             gap: 32px;
             margin-bottom: 35px;
         }
-    
+
         .social-links a {
             color: #fff;
             font-size: 1.1rem;
             transition: color 0.3s ease;
         }
-    
+
         .social-links a:hover {
             color: #d4af37;
         }
-    
+
         .copyright {
             font-size: 0.65rem;
             letter-spacing: 2px;
             color: #555;
         }
-    
+
         /* ============================================
            LIGHTBOX (GALERIE POPUP)
            ============================================ */
@@ -458,25 +459,25 @@
             transition: opacity 0.5s ease, visibility 0.5s ease;
             cursor: pointer;
         }
-    
+
         .lightbox.active {
             opacity: 1;
             visibility: visible;
         }
-    
+
         .lightbox-content {
             max-width: 90vw;
             max-height: 90vh;
             position: relative;
             cursor: default;
         }
-    
+
         .lightbox-content img {
             max-width: 100%;
             max-height: 90vh;
             object-fit: contain;
         }
-    
+
         .lightbox-caption {
             position: absolute;
             bottom: -45px;
@@ -488,7 +489,7 @@
             letter-spacing: 3px;
             text-transform: uppercase;
         }
-    
+
         .lightbox-close {
             position: absolute;
             top: 24px;
@@ -499,11 +500,11 @@
             transition: opacity 0.3s ease;
             z-index: 2001;
         }
-    
+
         .lightbox-close:hover {
             opacity: 0.5;
         }
-    
+
         .lightbox-prev,
         .lightbox-next {
             position: absolute;
@@ -516,20 +517,20 @@
             transition: opacity 0.3s ease;
             z-index: 2001;
         }
-    
+
         .lightbox-prev {
             left: 20px;
         }
-    
+
         .lightbox-next {
             right: 20px;
         }
-    
+
         .lightbox-prev:hover,
         .lightbox-next:hover {
             opacity: 0.5;
         }
-    
+
         /* ============================================
            MENU MOBILE LUXE
            ============================================ */
@@ -544,7 +545,7 @@
             z-index: 1002;
             position: relative;
         }
-    
+
         .menu-toggle span {
             display: block;
             width: 100%;
@@ -552,20 +553,20 @@
             background: #fff;
             transition: all 0.3s ease;
         }
-    
+
         /* Animation du hamburger vers croix */
         .menu-toggle.active span:nth-child(1) {
             transform: rotate(45deg) translate(6px, 6px);
         }
-    
+
         .menu-toggle.active span:nth-child(2) {
             opacity: 0;
         }
-    
+
         .menu-toggle.active span:nth-child(3) {
             transform: rotate(-45deg) translate(6px, -6px);
         }
-    
+
         /* Overlay du menu mobile */
         .mobile-menu {
             position: fixed;
@@ -583,23 +584,23 @@
             justify-content: center;
             padding: 40px;
         }
-    
+
         .mobile-menu.active {
             right: 0;
         }
-    
+
         .mobile-menu-container {
             text-align: center;
             width: 100%;
         }
-    
+
         .mobile-nav-links {
             display: flex;
             flex-direction: column;
             gap: 32px;
             margin-bottom: 60px;
         }
-    
+
         .mobile-nav-links a {
             color: #fff;
             text-decoration: none;
@@ -613,17 +614,17 @@
             animation: mobileLinkFadeIn 0.5s forwards;
             animation-delay: calc(0.1s * var(--i, 0));
         }
-    
+
         .mobile-nav-links a:hover {
             color: #d4af37;
         }
-    
+
         .mobile-social {
             display: flex;
             justify-content: center;
             gap: 32px;
         }
-    
+
         .mobile-social a {
             color: #888;
             font-size: 1.2rem;
@@ -633,11 +634,11 @@
             animation: mobileLinkFadeIn 0.5s forwards;
             animation-delay: calc(0.1s * var(--i, 4));
         }
-    
+
         .mobile-social a:hover {
             color: #d4af37;
         }
-    
+
         /* Animation d'entrée des liens */
         @keyframes mobileLinkFadeIn {
             to {
@@ -645,67 +646,67 @@
                 transform: translateY(0);
             }
         }
-    
+
         /* ============================================
            RESPONSIVE DESIGN
            ============================================ */
-        
+
         /* Mobile (max-width: 640px) */
         @media (max-width: 640px) {
             .grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-    
+
             .section {
                 padding: 70px 20px;
             }
-    
+
             .navbar {
                 padding: 18px 24px;
             }
         }
-    
+
         /* Mobile & Tablette (max-width: 768px) */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
             }
-    
+
             .menu-toggle {
                 display: flex;
             }
-    
+
             .navbar {
                 padding: 18px 24px;
             }
-    
+
             .about-container,
             .contact-grid {
                 grid-template-columns: 1fr;
                 gap: 50px;
             }
-    
+
             /* Lightbox responsive */
             .lightbox-prev,
             .lightbox-next {
                 font-size: 1.2rem;
                 padding: 12px;
             }
-    
+
             .lightbox-close {
                 top: 16px;
                 right: 20px;
                 font-size: 1.3rem;
             }
-    
+
             .lightbox-caption {
                 bottom: -35px;
                 font-size: 0.6rem;
                 letter-spacing: 2px;
             }
         }
-    
+
         /* Tablette (641px - 1024px) */
         @media (min-width: 641px) and (max-width: 1024px) {
             .grid {
@@ -713,7 +714,7 @@
                 gap: 24px;
             }
         }
-    
+
         /* Desktop (min-width: 1025px) */
         @media (min-width: 1025px) {
             .grid {
@@ -721,16 +722,16 @@
                 gap: 28px;
             }
         }
-    
+
         /* ============================================
            UTILITAIRES & ANIMATIONS GSAP
            ============================================ */
-        
+
         /* Évite le highlight bleu au clic sur mobile */
         .grid-item {
             -webkit-tap-highlight-color: transparent;
         }
-    
+
         /* Cache initial des éléments du hero (animés par GSAP) */
         .logo,
         .nav-links a,
@@ -741,20 +742,18 @@
             opacity: 0;
             transform: translateY(30px);
         }
-    
+
         /* Transition douce pour la section à propos */
         .about-text,
         .about-image {
             transition: transform 0.3s ease-out, opacity 0.3s ease-out;
             will-change: transform, opacity;
         }
-    
+
         /* Empêche le scroll quand le menu mobile est ouvert */
         body.menu-open {
             overflow: hidden;
         }
-
-        
     </style>
 </head>
 
@@ -795,7 +794,7 @@
     </nav>
 
     <section id="accueil" class="hero">
-        <video class="hero-video-bg" autoplay muted loop playsinline>
+        <video class="hero-video-bg" autoplay muted loop playsinline webkit-playsinline>
             <source src="./images/kprod.mp4" type="video/mp4">
         </video>
         <div class="hero-content">
