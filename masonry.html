@@ -2,16 +2,11 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>KProduction • Studio photographique de luxe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>KProduction • Studio photographique</title>
     
-    <!-- Polices d'exception -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,200;14..32,300;14..32,400;14..32,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-    
-    <!-- AOS (Animate on Scroll) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,200;14..32,300;14..32,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
@@ -26,37 +21,15 @@
             font-family: 'Inter', sans-serif;
             color: #e5e5e5;
             line-height: 1.4;
-            overflow-x: hidden;
+            overflow-x: hidden;  /* ← Correction overflow */
+            width: 100%;
         }
 
-        /* Typographie luxe */
+        /* Typographie */
         h1, h2, h3, .serif {
             font-family: 'Cormorant Garamond', serif;
             font-weight: 300;
             letter-spacing: 2px;
-        }
-
-        /* Curseur personnalisé (option luxe) */
-        .cursor-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #d4af37;
-            position: fixed;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease;
-        }
-
-        .cursor-outline {
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            position: fixed;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            transition: all 0.15s ease;
         }
 
         /* Navigation */
@@ -65,18 +38,24 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 32px 64px;
+            padding: 24px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            mix-blend-mode: difference;
             background: transparent;
+            backdrop-filter: blur(0px);
+            transition: backdrop-filter 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(5,5,5,0.8);
+            backdrop-filter: blur(10px);
         }
 
         .logo {
-            font-size: 1.2rem;
-            letter-spacing: 6px;
+            font-size: 1rem;
+            letter-spacing: 4px;
             font-weight: 300;
             color: #fff;
             text-decoration: none;
@@ -88,26 +67,23 @@
 
         .nav-links {
             display: flex;
-            gap: 48px;
+            gap: 32px;
         }
 
         .nav-links a {
             color: #fff;
             text-decoration: none;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: 300;
             transition: opacity 0.3s ease;
         }
 
-        .nav-links a:hover {
-            opacity: 0.6;
-        }
-
         /* Hero Section */
         .hero {
             height: 100vh;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -133,37 +109,37 @@
         }
 
         .hero-content h1 {
-            font-size: 5rem;
+            font-size: clamp(2rem, 8vw, 4rem);
             font-weight: 300;
-            letter-spacing: 12px;
-            margin-bottom: 24px;
+            letter-spacing: clamp(4px, 2vw, 10px);
+            margin-bottom: 20px;
             color: #fff;
         }
 
         .hero-content .subtitle {
-            font-size: 0.9rem;
-            letter-spacing: 6px;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
             text-transform: uppercase;
             color: #d4af37;
-            margin-bottom: 32px;
+            margin-bottom: 24px;
         }
 
         .hero-line {
-            width: 60px;
+            width: 50px;
             height: 1px;
             background: #d4af37;
-            margin: 0 auto 32px;
+            margin: 0 auto 28px;
         }
 
         .btn-luxury {
             display: inline-block;
-            padding: 14px 36px;
+            padding: 12px 32px;
             border: 1px solid rgba(255,255,255,0.3);
             background: transparent;
             color: #fff;
             text-decoration: none;
             letter-spacing: 3px;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             transition: all 0.4s ease;
         }
@@ -174,51 +150,43 @@
             border-color: #d4af37;
         }
 
-        /* Section générale */
+        /* Sections */
         .section {
-            padding: 120px 64px;
-            max-width: 1600px;
+            padding: 80px 24px;
+            max-width: 1400px;
             margin: 0 auto;
+            width: 100%;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 60px;
         }
 
         .section-header h2 {
-            font-size: 2.8rem;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
             font-weight: 300;
-            letter-spacing: 4px;
-            color: #fff;
-        }
-
-        .section-header .section-sub {
-            color: #888;
-            font-size: 0.75rem;
             letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-top: 12px;
         }
 
         .divider-gold {
             width: 50px;
             height: 1px;
             background: #d4af37;
-            margin: 24px auto 0;
+            margin: 20px auto 0;
         }
 
-        /* Galerie Masonry */
+        /* Galerie Masonry - Version stable */
         .grid {
+            width: 100%;
             margin: 0 auto;
         }
 
         .grid-item {
-            width: 340px;
+            width: calc(33.333% - 16px);
             margin-bottom: 24px;
             position: relative;
             overflow: hidden;
-            cursor: pointer;
             background: #0a0a0a;
         }
 
@@ -226,13 +194,11 @@
             width: 100%;
             height: auto;
             display: block;
-            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            filter: grayscale(0.3);
+            transition: transform 0.5s ease;
         }
 
         .grid-item:hover img {
-            transform: scale(1.06);
-            filter: grayscale(0);
+            transform: scale(1.03);
         }
 
         .grid-overlay {
@@ -240,10 +206,10 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            padding: 30px 20px 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 30px 16px 16px;
             opacity: 0;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.3s ease;
         }
 
         .grid-item:hover .grid-overlay {
@@ -252,87 +218,104 @@
 
         .grid-overlay .category {
             color: #d4af37;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             letter-spacing: 2px;
+        }
+
+        /* Mobile : 2 colonnes */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 20px 24px;
+            }
+            .nav-links {
+                display: none;
+            }
+            .section {
+                padding: 60px 20px;
+            }
+            .grid-item {
+                width: calc(50% - 10px);
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Desktop : 3 colonnes */
+        @media (min-width: 769px) and (max-width: 1200px) {
+            .grid-item {
+                width: calc(33.333% - 16px);
+            }
+        }
+
+        /* Grand desktop : 4 colonnes */
+        @media (min-width: 1201px) {
+            .grid-item {
+                width: calc(25% - 18px);
+            }
         }
 
         /* À propos */
         .about-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            gap: 60px;
             align-items: center;
         }
 
         .about-text p {
-            font-size: 1rem;
-            line-height: 1.8;
-            font-weight: 300;
+            font-size: 0.9rem;
+            line-height: 1.7;
             color: #ccc;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .about-signature {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: #d4af37;
-            margin-top: 32px;
+            margin-top: 24px;
         }
 
         .about-image img {
             width: 100%;
             height: auto;
-            filter: grayscale(0.5);
-            transition: all 0.5s ease;
+            filter: grayscale(0.3);
         }
 
-        .about-image img:hover {
-            filter: grayscale(0);
-        }
-
-        /* Formulaire de contact */
+        /* Contact */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            gap: 60px;
         }
 
         .contact-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 24px;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
             color: #d4af37;
         }
 
-        .contact-info p {
-            margin-bottom: 32px;
-            line-height: 1.6;
-            color: #aaa;
-        }
-
         .contact-detail {
-            margin: 24px 0;
+            margin: 20px 0;
         }
 
         .contact-detail i {
             color: #d4af37;
-            width: 30px;
+            width: 28px;
         }
 
         .form-group {
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 16px 0;
+            padding: 14px 0;
             background: transparent;
             border: none;
             border-bottom: 1px solid #333;
             color: #fff;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            transition: border-color 0.3s ease;
+            font-size: 0.85rem;
         }
 
         .form-group input:focus,
@@ -341,20 +324,15 @@
             border-bottom-color: #d4af37;
         }
 
-        .form-group textarea {
-            resize: none;
-            min-height: 100px;
-        }
-
         button[type="submit"] {
             background: transparent;
             border: 1px solid #d4af37;
-            padding: 14px 36px;
+            padding: 12px 32px;
             color: #d4af37;
             letter-spacing: 3px;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
         }
 
         button[type="submit"]:hover {
@@ -364,7 +342,7 @@
 
         /* Footer */
         .footer {
-            padding: 60px 64px 30px;
+            padding: 50px 24px 30px;
             border-top: 1px solid rgba(212,175,55,0.2);
             text-align: center;
         }
@@ -372,13 +350,13 @@
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 32px;
-            margin-bottom: 40px;
+            gap: 28px;
+            margin-bottom: 32px;
         }
 
         .social-links a {
             color: #fff;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             transition: color 0.3s ease;
         }
 
@@ -387,31 +365,24 @@
         }
 
         .copyright {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             letter-spacing: 1px;
             color: #555;
         }
 
-        @media (max-width: 1024px) {
-            .section { padding: 80px 32px; }
-            .about-container, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-            .grid-item { width: calc(50% - 12px); }
-            .navbar { padding: 24px 32px; }
-            .hero-content h1 { font-size: 2.8rem; letter-spacing: 6px; }
-        }
-
+        /* Responsive général */
         @media (max-width: 768px) {
-            .grid-item { width: 98%; }
-            .nav-links { display: none; }
+            .about-container,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <a href="#" class="logo">K<span>PRODUCTION</span></a>
         <div class="nav-links">
             <a href="#accueil">Accueil</a>
@@ -420,22 +391,22 @@
             <a href="#contact">Contact</a>
         </div>
     </nav>
+
     <section id="accueil" class="hero">
         <video class="hero-video-bg" autoplay muted loop playsinline>
             <source src="https://cdn.pixabay.com/video/2022/04/19/114714-703682608_tiny.mp4" type="video/mp4">
         </video>
-        <div class="hero-content" data-aos="fade-up" data-aos-duration="1500">
+        <div class="hero-content" data-aos="fade-up" data-aos-duration="1200">
             <div class="subtitle">KProduction Studio</div>
             <h1>L'ART DE L'INSTANT</h1>
             <div class="hero-line"></div>
-            <a href="#galerie" class="btn-luxury">Explorer la collection</a>
+            <a href="#galerie" class="btn-luxury">Explorer</a>
         </div>
     </section>
 
     <section id="galerie" class="section">
         <div class="section-header" data-aos="fade-up">
             <h2>Portfolio</h2>
-            <div class="section-sub">Œuvres récentes</div>
             <div class="divider-gold"></div>
         </div>
         <div class="grid" id="masonry-grid"></div>
@@ -444,27 +415,25 @@
     <section id="a-propos" class="section">
         <div class="about-container">
             <div class="about-text" data-aos="fade-right">
-                <h2 style="margin-bottom: 24px;">Khalil <span style="color:#d4af37;">Diaw</span></h2>
-                <p>Photographe plasticien basé entre Paris et Marrakech. Diplômé des Beaux-Arts, KProduction capte l’essence des corps, des lumières et des silences. Chaque image raconte une histoire intemporelle.</p>
-                <p>Collaborations avec les plus grandes maisons de luxe : <strong>CHANEL, DIOR, HERMÈS, BALENCIAGA.</strong> Son travail est exposé à la Fondation Cartier et au Musée Yves Saint Laurent.</p>
+                <h2 style="margin-bottom: 20px;">Khalil <span style="color:#d4af37;">Diaw</span></h2>
+                <p>Photographe plasticien basé entre Paris et Marrakech. Chaque image raconte une histoire intemporelle.</p>
+                <p>Collaborations avec CHANEL, DIOR, HERMÈS.</p>
                 <div class="about-signature">— K. Diaw</div>
             </div>
             <div class="about-image" data-aos="fade-left">
-                <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?w=800&h=1000&fit=crop" alt="Portrait photographe">
+                <img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?w=800&h=1000&fit=crop" alt="Portrait">
             </div>
         </div>
     </section>
 
     <section id="contact" class="section">
         <div class="section-header" data-aos="fade-up">
-            <h2>Réservez votre séance</h2>
-            <div class="section-sub">Créons ensemble votre légende</div>
+            <h2>Contact</h2>
             <div class="divider-gold"></div>
         </div>
         <div class="contact-grid">
             <div class="contact-info" data-aos="fade-right">
                 <h3>Studio KProduction</h3>
-                <p>Paris VIII • Marrakech Guéliz<br>Sur rendez-vous exclusif.</p>
                 <div class="contact-detail"><i class="fas fa-phone-alt"></i> +33 1 23 45 67 89</div>
                 <div class="contact-detail"><i class="far fa-envelope"></i> contact@kproduction.art</div>
                 <div class="contact-detail"><i class="fab fa-instagram"></i> @kproduction.studio</div>
@@ -472,13 +441,13 @@
             <div data-aos="fade-left">
                 <form id="contactForm">
                     <div class="form-group">
-                        <input type="text" placeholder="Nom & prénom" required>
+                        <input type="text" placeholder="Nom" required>
                     </div>
                     <div class="form-group">
                         <input type="email" placeholder="Email" required>
                     </div>
                     <div class="form-group">
-                        <textarea placeholder="Votre projet, vos attentes..."></textarea>
+                        <textarea placeholder="Message" rows="3"></textarea>
                     </div>
                     <button type="submit">Envoyer</button>
                 </form>
@@ -492,10 +461,9 @@
             <a href="#"><i class="fab fa-behance"></i></a>
             <a href="#"><i class="fab fa-vimeo-v"></i></a>
         </div>
-        <div class="copyright">© 2026 KPRODUCTION — Tous droits réservés. LUXURY PHOTOGRAPHY STUDIO</div>
+        <div class="copyright">© 2026 KPRODUCTION</div>
     </footer>
 
-    <!-- Librairies -->
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -503,66 +471,23 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
-        // Initialisation AOS
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 100
+        AOS.init({ duration: 800, once: true });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        // Curseur personnalisé
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorOutline = document.querySelector('.cursor-outline');
-
-        window.addEventListener('mousemove', (e) => {
-            cursorDot.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
-            cursorOutline.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
-        });
-
-        // GSAP Animations
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Animation hero text
-        gsap.from('.hero-content h1', {
-            duration: 1.5,
-            y: 100,
-            opacity: 0,
-            ease: 'power3.out'
-        });
-
-        gsap.from('.hero-content .subtitle', {
-            duration: 1.2,
-            y: 50,
-            opacity: 0,
-            delay: 0.3
-        });
-
-        // Animation sur les sections au scroll
-        gsap.utils.toArray('.section').forEach(section => {
-            gsap.from(section, {
-                scrollTrigger: {
-                    trigger: section,
-                    start: 'top 80%',
-                    end: 'bottom 20%',
-                    toggleActions: 'play none none reverse'
-                },
-                opacity: 0,
-                y: 60,
-                duration: 1
-            });
-        });
-
-        // Données images hautes résolutions (libres de droit)
+        // Images pour la galerie
         const images = [
-            { src: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&h=1200&fit=crop", cat: "Mode" },
-            { src: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&h=900&fit=crop", cat: "Portrait" },
-            { src: "https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=800&h=1400&fit=crop", cat: "Studio" },
-            { src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&h=1000&fit=crop", cat: "Luxe" },
-            { src: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&h=700&fit=crop", cat: "Voyage" },
-            { src: "https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?w=800&h=1300&fit=crop", cat: "Architecture" },
-            { src: "https://images.unsplash.com/photo-1517976487492-5750f3195933?w=800&h=1100&fit=crop", cat: "Beauté" },
-            { src: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&h=1800&fit=crop", cat: "Couture" },
-            { src: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=800&h=850&fit=crop", cat: "Noir & Blanc" }
+            { src: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&h=900&fit=crop", cat: "Mode" },
+            { src: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600&h=700&fit=crop", cat: "Portrait" },
+            { src: "https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=600&h=1000&fit=crop", cat: "Studio" },
+            { src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&h=800&fit=crop", cat: "Luxe" },
+            { src: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600&h=550&fit=crop", cat: "Voyage" },
+            { src: "https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?w=600&h=900&fit=crop", cat: "Architecture" },
+            { src: "https://images.unsplash.com/photo-1517976487492-5750f3195933?w=600&h=850&fit=crop", cat: "Beauté" },
+            { src: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&h=1200&fit=crop", cat: "Couture" }
         ];
 
         const grid = document.getElementById('masonry-grid');
@@ -578,22 +503,27 @@
             grid.appendChild(item);
         });
 
-        // Masonry + imagesLoaded
-        const msnry = new Masonry(grid, {
-            itemSelector: '.grid-item',
-            columnWidth: '.grid-item',
-            gutter: 24,
-            fitWidth: true
-        });
+        // Masonry avec recalcule au resize
+        let msnry;
+        function initMasonry() {
+            if (msnry) msnry.destroy();
+            msnry = new Masonry(grid, {
+                itemSelector: '.grid-item',
+                columnWidth: '.grid-item',
+                gutter: 20,
+                fitWidth: true,
+                transitionDuration: 0
+            });
+            imagesLoaded(grid, () => msnry.layout());
+        }
 
-        imagesLoaded(grid, () => msnry.layout());
+        initMasonry();
+        window.addEventListener('resize', () => setTimeout(initMasonry, 200));
 
-        window.addEventListener('resize', () => msnry.layout());
-
-        // Formulaire simple alert
+        // Formulaire
         document.getElementById('contactForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Merci pour votre message. KProduction vous répondra sous 48h.');
+            alert('Merci. KProduction vous répondra sous 48h.');
             e.target.reset();
         });
     </script>
