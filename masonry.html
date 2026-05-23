@@ -25,6 +25,10 @@
             width: 100%;
         }
 
+        body.lightbox-open {
+            overflow: hidden;
+        }
+
         /* Typographie */
         h1, h2, h3, .serif {
             font-family: 'Cormorant Garamond', serif;
@@ -180,7 +184,7 @@
             margin: 20px auto 0;
         }
 
-        /* Galerie - Version sans Masonry (plus stable) */
+        /* Galerie */
         .grid {
             display: grid;
             gap: 20px;
@@ -205,7 +209,6 @@
             transform: scale(1.03);
         }
 
-        /* Overlay au survol (desktop) / au clic (mobile via JS) */
         .grid-overlay {
             position: absolute;
             bottom: 0;
@@ -232,34 +235,126 @@
             letter-spacing: 2px;
         }
 
-        /* Responsive grid columns */
+        /* Responsive grid */
         @media (max-width: 640px) {
-            .grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-            .section {
-                padding: 60px 20px;
-            }
-            .navbar {
-                padding: 16px 20px;
-            }
-            .nav-links {
-                display: none;
-            }
+            .grid { grid-template-columns: 1fr; gap: 16px; }
+            .section { padding: 60px 20px; }
+            .navbar { padding: 16px 20px; }
+            .nav-links { display: none; }
         }
 
         @media (min-width: 641px) and (max-width: 1024px) {
-            .grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
         }
 
         @media (min-width: 1025px) {
-            .grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 24px;
+            .grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            cursor: pointer;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            position: relative;
+            cursor: default;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: #d4af37;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 24px;
+            right: 32px;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            z-index: 2001;
+        }
+
+        .lightbox-close:hover {
+            opacity: 0.6;
+        }
+
+        .lightbox-prev,
+        .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 20px;
+            transition: opacity 0.3s ease;
+            z-index: 2001;
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        .lightbox-prev:hover,
+        .lightbox-next:hover {
+            opacity: 0.6;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-prev,
+            .lightbox-next {
+                font-size: 1.5rem;
+                padding: 12px;
+            }
+            .lightbox-close {
+                top: 16px;
+                right: 20px;
+                font-size: 1.5rem;
+            }
+            .lightbox-caption {
+                bottom: -30px;
+                font-size: 0.65rem;
             }
         }
 
@@ -397,7 +492,6 @@
             color: #555;
         }
 
-        /* Responsive général */
         @media (max-width: 768px) {
             .about-container,
             .contact-grid {
@@ -406,7 +500,6 @@
             }
         }
 
-        /* Suppression de tout comportement de clic bizarre */
         .grid-item {
             -webkit-tap-highlight-color: transparent;
         }
@@ -497,6 +590,17 @@
         <div class="copyright">© 2026 KPRODUCTION — Tous droits réservés</div>
     </footer>
 
+    <!-- Lightbox HTML -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-close" id="lightboxClose">&times;</div>
+        <div class="lightbox-prev" id="lightboxPrev">&#10094;</div>
+        <div class="lightbox-next" id="lightboxNext">&#10095;</div>
+        <div class="lightbox-content">
+            <img id="lightboxImage" src="" alt="">
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -517,15 +621,15 @@
 
         // Données des images
         const images = [
-            { src: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&h=1200&fit=crop", cat: "Mode" },
-            { src: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&h=900&fit=crop", cat: "Portrait" },
-            { src: "https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=800&h=1400&fit=crop", cat: "Studio" },
-            { src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&h=1000&fit=crop", cat: "Luxe" },
-            { src: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&h=700&fit=crop", cat: "Voyage" },
-            { src: "https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?w=800&h=1300&fit=crop", cat: "Architecture" },
-            { src: "https://images.unsplash.com/photo-1517976487492-5750f3195933?w=800&h=1100&fit=crop", cat: "Beauté" },
-            { src: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&h=1800&fit=crop", cat: "Couture" },
-            { src: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=800&h=850&fit=crop", cat: "Noir & Blanc" }
+            { src: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1200&h=1800&fit=crop", cat: "Mode • Automne 2025" },
+            { src: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=1200&h=1350&fit=crop", cat: "Portrait • Série Intime" },
+            { src: "https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=1200&h=2100&fit=crop", cat: "Studio • Noir & Blanc" },
+            { src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=1200&h=1500&fit=crop", cat: "Luxe • Haute Joaillerie" },
+            { src: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=1200&h=1050&fit=crop", cat: "Voyage • Marrakech" },
+            { src: "https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?w=1200&h=1950&fit=crop", cat: "Architecture • Brutalisme" },
+            { src: "https://images.unsplash.com/photo-1517976487492-5750f3195933?w=1200&h=1650&fit=crop", cat: "Beauté • Campaign" },
+            { src: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&h=2700&fit=crop", cat: "Couture • Défilé" },
+            { src: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=1200&h=1275&fit=crop", cat: "Noir & Blanc • Émotion" }
         ];
 
         // Génération de la galerie
@@ -534,6 +638,8 @@
         images.forEach(img => {
             const item = document.createElement('div');
             item.className = 'grid-item';
+            item.setAttribute('data-src', img.src);
+            item.setAttribute('data-cat', img.cat);
             item.innerHTML = `
                 <img src="${img.src}" loading="lazy" alt="${img.cat}">
                 <div class="grid-overlay">
@@ -543,38 +649,86 @@
             grid.appendChild(item);
         });
 
-        // Pour mobile : afficher l'overlay au clic (et pas au survol)
+        // ========== LIGHTBOX ==========
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        const lightboxClose = document.getElementById('lightboxClose');
+        const lightboxPrev = document.getElementById('lightboxPrev');
+        const lightboxNext = document.getElementById('lightboxNext');
+
+        let currentIndex = 0;
+
+        function openLightbox(index) {
+            currentIndex = index;
+            const img = images[currentIndex];
+            lightboxImage.src = img.src;
+            lightboxCaption.textContent = img.cat;
+            lightbox.classList.add('active');
+            document.body.classList.add('lightbox-open');
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.classList.remove('lightbox-open');
+        }
+
+        function showPrev() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            const img = images[currentIndex];
+            lightboxImage.src = img.src;
+            lightboxCaption.textContent = img.cat;
+        }
+
+        function showNext() {
+            currentIndex = (currentIndex + 1) % images.length;
+            const img = images[currentIndex];
+            lightboxImage.src = img.src;
+            lightboxCaption.textContent = img.cat;
+        }
+
+        // Événements Lightbox
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightboxPrev.addEventListener('click', showPrev);
+        lightboxNext.addEventListener('click', showNext);
+
+        // Fermer au clic sur le fond
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Navigation au clavier
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') showPrev();
+            if (e.key === 'ArrowRight') showNext();
+        });
+
+        // Attacher le clic sur chaque image de la galerie
         const gridItems = document.querySelectorAll('.grid-item');
         
-        gridItems.forEach(item => {
-            item.addEventListener('click', function(e) {
-                // Ne pas faire de scroll bizarre
+        gridItems.forEach((item, idx) => {
+            item.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                
-                // Pour mobile : toggle l'overlay
-                if (window.innerWidth <= 768) {
-                    // Fermer les autres
-                    gridItems.forEach(other => {
-                        if (other !== this) other.classList.remove('active');
-                    });
-                    this.classList.toggle('active');
-                }
+                openLightbox(idx);
             });
         });
 
-        // Fermer l'overlay si on clique ailleurs (mobile)
-        document.body.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768 && !e.target.closest('.grid-item')) {
-                gridItems.forEach(item => item.classList.remove('active'));
-            }
-        });
+        // Pour mobile : toggle l'overlay sans ouvrir lightbox
+        // (optionnel: on garde l'ouverture du lightbox au clic)
+        // Sur mobile, le lightbox s'ouvre aussi (comportement normal)
 
         // Smooth scroll pour les liens de navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
@@ -588,7 +742,7 @@
             e.target.reset();
         });
 
-        // Animation GSAP simple
+        // Animation GSAP
         gsap.from('.hero-content h1', {
             duration: 1.2,
             y: 80,
