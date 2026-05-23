@@ -195,8 +195,6 @@
             overflow: hidden;
             background: #0a0a0a;
             cursor: pointer;
-            opacity: 0;
-            transform: translateY(30px);
         }
 
         .grid-item img {
@@ -205,7 +203,6 @@
             display: block;
             transition: transform 0.7s ease;
         }
-
         .grid-item:hover img {
             transform: scale(1.02);
         }
@@ -483,6 +480,24 @@
         .grid-item {
             -webkit-tap-highlight-color: transparent;
         }
+        /* Cache seulement les éléments du hero au chargement */
+/* Cache UNIQUEMENT les éléments du hero */
+.logo,
+.nav-links a,
+.hero-content .subtitle,
+.hero-content h1,
+.hero-line,
+.btn-luxury {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* Transition douce pour la section à propos */
+.about-text, .about-image {
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    will-change: transform, opacity;
+}
+
     </style>
 </head>
 <body>
@@ -583,127 +598,25 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
+    
     <script>
-        // ========== GSAP ANIMATIONS (100% luxe) ==========
-        
-        // Hero Timeline - Signature Cartier/Rolex
-        const heroTl = gsap.timeline({ defaults: { duration: 1.2, ease: "power2.out" } });
-        
-        heroTl.from(".logo", { y: -30, opacity: 0, duration: 0.8 })
-              .from(".nav-links a", { y: -20, opacity: 0, stagger: 0.08, duration: 0.6 }, "-=0.4")
-              .from(".hero-content .subtitle", { y: 30, opacity: 0 })
-              .from(".hero-content h1", { y: 40, opacity: 0 }, "-=0.8")
-              .from(".hero-line", { scaleX: 0, transformOrigin: "center" }, "-=0.6")
-              .from(".btn-luxury", { y: 20, opacity: 0, duration: 0.8 }, "-=0.4");
-        
-        // ScrollTrigger pour les sections
-        gsap.utils.toArray(".section").forEach(section => {
-            gsap.from(section, {
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top 85%",
-                    end: "bottom 20%",
-                    toggleActions: "play none none reverse"
-                },
-                y: 40,
-                opacity: 0,
-                duration: 1,
-                ease: "power2.out"
-            });
-        });
-        
-        // Animation spécifique pour le header de section
-        gsap.utils.toArray(".section-header").forEach(header => {
-            gsap.from(header, {
-                scrollTrigger: {
-                    trigger: header,
-                    start: "top 85%",
-                    toggleActions: "play none none reverse"
-                },
-                y: 25,
-                opacity: 0,
-                duration: 0.8,
-                ease: "power2.out"
-            });
-        });
-        
-        // Animation des images à propos
-        gsap.from(".about-image", {
-            scrollTrigger: {
-                trigger: ".about-container",
-                start: "top 80%",
-                toggleActions: "play none none reverse"
-            },
-            x: 40,
-            opacity: 0,
-            duration: 1,
-            ease: "power2.out"
-        });
-        
-        gsap.from(".about-text", {
-            scrollTrigger: {
-                trigger: ".about-container",
-                start: "top 80%",
-                toggleActions: "play none none reverse"
-            },
-            x: -40,
-            opacity: 0,
-            duration: 1,
-            ease: "power2.out"
-        });
-        
-        // Animation du formulaire et contact
-        gsap.from(".contact-info", {
-            scrollTrigger: {
-                trigger: ".contact-grid",
-                start: "top 80%",
-                toggleActions: "play none none reverse"
-            },
-            x: -30,
-            opacity: 0,
-            duration: 0.9,
-            ease: "power2.out"
-        });
-        
-        gsap.from(".contact-grid form", {
-            scrollTrigger: {
-                trigger: ".contact-grid",
-                start: "top 80%",
-                toggleActions: "play none none reverse"
-            },
-            x: 30,
-            opacity: 0,
-            duration: 0.9,
-            ease: "power2.out"
-        });
-        
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-        
-        // Données des images
+        // ========== 1. D'ABORD, GÉNÉRER LA GALERIE ==========
         const images = [
-            { src: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1200&h=1800&fit=crop", cat: "Mode • Automne 2025" },
-            { src: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=1200&h=1350&fit=crop", cat: "Portrait • Série Intime" },
-            { src: "https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=1200&h=2100&fit=crop", cat: "Studio • Noir & Blanc" },
-            { src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=1200&h=1500&fit=crop", cat: "Luxe • Haute Joaillerie" },
-            { src: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=1200&h=1050&fit=crop", cat: "Voyage • Marrakech" },
-            { src: "https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?w=1200&h=1950&fit=crop", cat: "Architecture • Brutalisme" },
-            { src: "https://images.unsplash.com/photo-1517976487492-5750f3195933?w=1200&h=1650&fit=crop", cat: "Beauté • Campaign" },
-            { src: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&h=2700&fit=crop", cat: "Couture • Défilé" },
-            { src: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=1200&h=1275&fit=crop", cat: "Noir & Blanc • Émotion" }
+            { src: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&h=1200&fit=crop", cat: "Mode • Automne 2025" },
+            { src: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&h=900&fit=crop", cat: "Portrait • Série Intime" },
+            { src: "https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=800&h=1400&fit=crop", cat: "Studio • Noir & Blanc" },
+            { src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&h=1000&fit=crop", cat: "Luxe • Haute Joaillerie" },
+            { src: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&h=700&fit=crop", cat: "Voyage • Marrakech" },
+            { src: "https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?w=800&h=1300&fit=crop", cat: "Architecture • Brutalisme" },
+            { src: "https://images.unsplash.com/photo-1517976487492-5750f3195933?w=800&h=1100&fit=crop", cat: "Beauté • Campaign" },
+            { src: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&h=1800&fit=crop", cat: "Couture • Défilé" },
+            { src: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=800&h=850&fit=crop", cat: "Noir & Blanc • Émotion" }
         ];
-        
-        // Génération de la galerie
+    
         const grid = document.getElementById('gallery-grid');
         
+        // Vider et remplir la grille
+        grid.innerHTML = '';
         images.forEach((img, idx) => {
             const item = document.createElement('div');
             item.className = 'grid-item';
@@ -718,35 +631,153 @@
             `;
             grid.appendChild(item);
         });
+    
+        // ========== 2. ENSUITE, INITIALISER GSAP ==========
         
-        // Animation des images de la galerie au scroll
-        const gridItems = document.querySelectorAll('.grid-item');
+        // Cache des éléments du hero (évite clignotement)
+        gsap.set(".logo, .nav-links a, .hero-content .subtitle, .hero-content h1, .hero-line, .btn-luxury", {
+            opacity: 0,
+            y: 30
+        });
+    
+        // Hero Timeline (rapide et élégante)
+        const heroTl = gsap.timeline({ defaults: { duration: 0.4, ease: "power2.out" } });
         
-        gridItems.forEach((item, index) => {
-            gsap.to(item, {
+        heroTl.to(".logo", { opacity: 1, y: 0, duration: 0.4 })
+              .to(".nav-links a", { opacity: 1, y: 0, stagger: 0.05, duration: 0.35 }, "-=0.25")
+              .to(".hero-content .subtitle", { opacity: 1, y: 0, duration: 0.4 })
+              .to(".hero-content h1", { opacity: 1, y: 0, duration: 0.5 }, "-=0.3")
+              .to(".hero-line", { opacity: 1, y: 0, duration: 0.35, scaleX: 1, transformOrigin: "center" }, "-=0.25")
+              .to(".btn-luxury", { opacity: 1, y: 0, duration: 0.4 }, "-=0.2");
+    
+        // ========== 3. SCROLLTRIGGER (après création des images) ==========
+        
+        // Attendre que les images soient chargées
+        setTimeout(() => {
+            // Sections
+            gsap.utils.toArray(".section").forEach(section => {
+                gsap.from(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 85%",
+                        end: "bottom 20%",
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 30,
+                    opacity: 0,
+                    duration: 0.7,
+                    ease: "power2.out"
+                });
+            });
+    
+            // Section headers
+            gsap.utils.toArray(".section-header").forEach(header => {
+                gsap.from(header, {
+                    scrollTrigger: {
+                        trigger: header,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 20,
+                    opacity: 0,
+                    duration: 0.6,
+                    ease: "power2.out"
+                });
+            });
+    
+            // Images de la galerie (animation individuelle)
+            const gridItems = document.querySelectorAll('.grid-item');
+            gridItems.forEach((item, index) => {
+                gsap.from(item, {
+                    scrollTrigger: {
+                        trigger: item,
+                        start: "top 90%",
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 30,
+                    opacity: 0,
+                    duration: 0.5,
+                    delay: index * 0.03,
+                    ease: "power2.out"
+                });
+            });
+    
+// ========== SECTION À PROPOS - EFFET REVEAL LUXE ==========
+
+// État initial
+gsap.set(".about-text, .about-image", {
+    y: 70,
+    opacity: 0
+});
+
+// Animation avec ScrollTrigger
+const aboutItems = document.querySelectorAll(".about-text, .about-image");
+
+aboutItems.forEach((item, index) => {
+    gsap.to(item, {
+        scrollTrigger: {
+            trigger: item,
+            start: "top 85%",
+            end: "bottom 40%",
+            toggleActions: "play none none reverse"
+        },
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        delay: index * 0.2,  // Texte d'abord (0s), image ensuite (0.2s)
+        ease: "power3.out"
+    });
+});
+    
+            // Contact
+            gsap.from(".contact-info", {
                 scrollTrigger: {
-                    trigger: item,
-                    start: "top 85%",
+                    trigger: ".contact-grid",
+                    start: "top 80%",
                     toggleActions: "play none none reverse"
                 },
-                y: 0,
-                opacity: 1,
-                duration: 0.8,
-                delay: index * 0.05,
+                x: -25,
+                opacity: 0,
+                duration: 0.6,
                 ease: "power2.out"
             });
+            
+            gsap.from(".contact-grid form", {
+                scrollTrigger: {
+                    trigger: ".contact-grid",
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                },
+                x: 25,
+                opacity: 0,
+                duration: 0.6,
+                ease: "power2.out"
+            });
+    
+            // Rafraîchir ScrollTrigger
+            ScrollTrigger.refresh();
+        }, 100);
+    
+        // ========== 4. NAVBAR SCROLL EFFECT ==========
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
         });
-        
-        // Lightbox
+    
+        // ========== 5. LIGHTBOX ==========
         const lightbox = document.getElementById('lightbox');
         const lightboxImage = document.getElementById('lightboxImage');
         const lightboxCaption = document.getElementById('lightboxCaption');
         const lightboxClose = document.getElementById('lightboxClose');
         const lightboxPrev = document.getElementById('lightboxPrev');
         const lightboxNext = document.getElementById('lightboxNext');
-        
+    
         let currentIndex = 0;
-        
+    
         function openLightbox(index) {
             currentIndex = index;
             const img = images[currentIndex];
@@ -755,50 +786,63 @@
             lightbox.classList.add('active');
             document.body.classList.add('lightbox-open');
         }
-        
+    
         function closeLightbox() {
             lightbox.classList.remove('active');
             document.body.classList.remove('lightbox-open');
         }
-        
+    
         function showPrev() {
             currentIndex = (currentIndex - 1 + images.length) % images.length;
             const img = images[currentIndex];
             lightboxImage.src = img.src;
             lightboxCaption.textContent = img.cat;
         }
-        
+    
         function showNext() {
             currentIndex = (currentIndex + 1) % images.length;
             const img = images[currentIndex];
             lightboxImage.src = img.src;
             lightboxCaption.textContent = img.cat;
         }
-        
+    
         lightboxClose.addEventListener('click', closeLightbox);
         lightboxPrev.addEventListener('click', showPrev);
         lightboxNext.addEventListener('click', showNext);
-        
+    
         lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) closeLightbox();
         });
-        
+    
         document.addEventListener('keydown', (e) => {
             if (!lightbox.classList.contains('active')) return;
             if (e.key === 'Escape') closeLightbox();
             if (e.key === 'ArrowLeft') showPrev();
             if (e.key === 'ArrowRight') showNext();
         });
-        
-        gridItems.forEach((item, idx) => {
-            item.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                openLightbox(idx);
+    
+        // Attacher les événements de clic après création des images
+        function attachLightboxEvents() {
+            const gridItems = document.querySelectorAll('.grid-item');
+            gridItems.forEach((item, idx) => {
+                // Supprimer les anciens événements pour éviter les doublons
+                item.removeEventListener('click', item._lightboxHandler);
+                // Créer le nouveau handler
+                const handler = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openLightbox(idx);
+                };
+                item._lightboxHandler = handler;
+                item.addEventListener('click', handler);
             });
-        });
-        
-        // Smooth scroll navigation
+        }
+    
+        // Attacher les événements immédiatement et après un délai
+        attachLightboxEvents();
+        setTimeout(attachLightboxEvents, 200);
+    
+        // ========== 6. SMOOTH SCROLL ==========
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
@@ -810,12 +854,20 @@
                 }
             });
         });
-        
-        // Formulaire
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Merci pour votre message. KProduction vous répondra sous 48h.');
-            e.target.reset();
+    
+        // ========== 7. FORMULAIRE ==========
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Merci pour votre message. KProduction vous répondra sous 48h.');
+                e.target.reset();
+            });
+        }
+    
+        // ========== 8. RÉINITIALISATION AU REDIMENSIONNEMENT ==========
+        window.addEventListener('resize', () => {
+            ScrollTrigger.refresh();
         });
     </script>
 </body>
